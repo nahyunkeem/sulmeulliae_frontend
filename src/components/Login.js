@@ -3,7 +3,7 @@ import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 function Login({ setLoggedIn, setUsername }) {
-    const [username, setUsernameInput] = useState('');
+    const [usernameInput, setUsernameInput] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -12,17 +12,17 @@ function Login({ setLoggedIn, setUsername }) {
         event.preventDefault();
 
         // 로그인 API 호출
-        api.post('/accounts/signin/', { username, password })
+        api.post('/accounts/signin/', { username: usernameInput, password })
             .then((response) => {
-                console.log(response.data);  // 응답 데이터 확인
-
                 if (response.data.access) {
                     // 토큰을 localStorage에 저장
                     localStorage.setItem('accessToken', response.data.access);
                     localStorage.setItem('refreshToken', response.data.refresh);
+                    localStorage.setItem('username', usernameInput);  // 사용자명도 localStorage에 저장
+                    localStorage.setItem('userId', response.data.user_id);
 
-                    // 사용자명 저장 및 로그인 상태 업데이트
-                    setUsername(username);  // App.js로 사용자명 전달
+                    // 상태 업데이트 및 페이지 이동
+                    setUsername(usernameInput);
                     setLoggedIn(true);
                     navigate('/');
                 } else {
@@ -43,7 +43,7 @@ function Login({ setLoggedIn, setUsername }) {
                     <label>아이디</label>
                     <input
                         type="text"
-                        value={username}
+                        value={usernameInput}
                         onChange={(e) => setUsernameInput(e.target.value)}
                         required
                     />

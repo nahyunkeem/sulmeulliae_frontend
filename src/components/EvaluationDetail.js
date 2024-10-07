@@ -66,7 +66,10 @@ function EvaluationDetail({ username, userId }) {
                 </div>
             )}
             <p>주종 | {evaluation.category}</p>
+            <p>규격 | {evaluation.size}</p>
             <p>ABV | {evaluation.ABV}%</p>
+            <p>원산지 | {evaluation.origin}</p>
+            <p>주재료 | {evaluation.ingredient}</p>
             <p>평점 | {evaluation.avg_rating}</p>
             <p>{evaluation.content}</p>
             <p>좋아요 | {likeCount}</p>

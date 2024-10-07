@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 
-function ReviewList({ evaluationId, username }) {
+function ReviewList({ evaluationId, username, userId }) {
     const [reviews, setReviews] = useState([]);
     const [editingReviewId, setEditingReviewId] = useState(null);  // 수정 중인 리뷰 ID
     const [editContent, setEditContent] = useState('');  // 수정 중인 리뷰 내용
@@ -10,12 +10,16 @@ function ReviewList({ evaluationId, username }) {
     useEffect(() => {
         api.get(`/evaluations/${evaluationId}/review/`)
             .then((response) => {
-                setReviews(response.data);
+                const updatedReviews = response.data.map(review => ({
+                    ...review,
+                    liked: review.likes.includes(Number(userId))  // likes 배열에 userId가 있는지 확인
+                }));
+                setReviews(updatedReviews);
             })
             .catch((error) => {
                 console.error('리뷰 로드 중 에러 발생:', error);
             });
-    }, [evaluationId]);
+    }, [evaluationId, userId]);
 
     const handleEditClick = (review) => {
         setEditingReviewId(review.id);
@@ -55,6 +59,35 @@ function ReviewList({ evaluationId, username }) {
         }
     };
 
+    const toggleReviewLike = (reviewId) => {
+        // 리뷰 좋아요 상태 토글을 위한 POST 요청
+        api.post(`/evaluations/review/${reviewId}/like/`)
+            .then(() => {
+                // 좋아요 상태 변경 후 리뷰 데이터를 다시 불러옴
+                if (userId) {
+                    api.get(`/evaluations/${evaluationId}/review/`)
+                        .then((response) => {
+                            setReviews(reviews.map((review) => {
+                                if (review.id === reviewId) {
+                                    return {
+                                        ...review,
+                                        like_count: review.liked ? review.like_count - 1 : review.like_count + 1,  // 좋아요 수 변경
+                                        liked: !review.liked  // 좋아요 상태 토글
+                                    };
+                                }
+                                return review;
+                            }));
+                        })
+                        .catch((error) => {
+                            console.error('리뷰 다시 로드 중 에러 발생:', error);
+                        });
+                    }
+            })
+            .catch((error) => {
+                console.error('좋아요 상태 변경 중 에러 발생:', error);
+            });
+    };  
+
     return (
         <div>
             <h2>리뷰</h2>
@@ -85,10 +118,19 @@ function ReviewList({ evaluationId, username }) {
                                     <div>{review.author}</div>
                                     <div>{review.content}</div>
                                     <div>{review.rating} / 5</div>
-                                    {review.author === username && (
+                                    <div>좋아요 | {review.like_count}</div>
+                                    {review.author === username ? (
                                         <div>
+                                            {/* 본인이 작성한 리뷰일 경우 수정 및 삭제 버튼 */}
                                             <button onClick={() => handleEditClick(review)}>수정</button>
                                             <button onClick={() => handleDelete(review.id)}>삭제</button>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            {/* 본인이 작성하지 않은 리뷰일 경우 좋아요 버튼 */}
+                                            <button onClick={() => toggleReviewLike(review.id)}>
+                                                {review.liked ? '좋아요 취소' : '좋아요'}
+                                            </button>
                                         </div>
                                     )}
                                 </div>

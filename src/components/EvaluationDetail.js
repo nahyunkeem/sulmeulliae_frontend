@@ -74,7 +74,7 @@ function EvaluationDetail({ username, userId }) {
             <button onClick={toggleLike}>
                 {liked ? '좋아요 취소' : '좋아요'}
             </button>
-            <ReviewList evaluationId={id} username={username}/>
+            <ReviewList evaluationId={id} username={username} userId={userId}/>
             <ReviewForm evaluationId={id} />
         </div>
     );

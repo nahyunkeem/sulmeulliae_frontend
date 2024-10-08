@@ -12,7 +12,6 @@ function EvaluationDetail({ username, userId }) {
 
     useEffect(() => {
         if (userId) {
-        // 평가 상세 정보를 가져오는 API 호출
             api.get(`/evaluations/${id}/`)
                 .then((response) => {
                     setEvaluation(response.data);
@@ -29,22 +28,22 @@ function EvaluationDetail({ username, userId }) {
             }
     }, [id, userId]);
 
-    const toggleLike = () => {
-        // 좋아요 상태 토글을 위한 POST 요청
-        api.post(`/evaluations/${id}/like/`)
-            .then((response) => {
-                if (response.status === 200) {
-                    setLiked(true);  // 좋아요 추가
-                    setLikeCount(prevLikeCount => prevLikeCount + 1);
-                } else if (response.status === 204) {
-                    setLiked(false);  // 좋아요 취소
-                    setLikeCount(prevLikeCount => prevLikeCount - 1); 
-                }
-            })
-            .catch((error) => {
-                console.error('좋아요 상태 변경 중 에러 발생:', error);
-            });
-    };
+        const toggleLike = () => {
+            // 좋아요 상태 토글을 위한 POST 요청
+            api.post(`/evaluations/${id}/like/`)
+                .then((response) => {
+                    if (response.status === 200) {
+                        setLiked(true);  // 좋아요 추가
+                        setLikeCount(prevLikeCount => prevLikeCount + 1);
+                    } else if (response.status === 204) {
+                        setLiked(false);  // 좋아요 취소
+                        setLikeCount(prevLikeCount => prevLikeCount - 1); 
+                    }
+                })
+                .catch((error) => {
+                    console.error('좋아요 상태 변경 중 에러 발생:', error);
+                });
+        };
 
     if (!evaluation) {
         return <p>로그인 후 이용해주세요</p>;

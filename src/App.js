@@ -9,6 +9,8 @@ import FreeBoard from './components/FreeBoard';
 import QuestionBoard from './components/QuestionBoard';
 import DiscussionBoard from './components/DiscussionBoard';
 import DrinkMateBoard from './components/DrinkMateBoard';
+import CommunityDetail from './components/CommunityDetail'; 
+import CreatePost from './components/CreatePost';
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
@@ -67,6 +69,8 @@ function App() {
                     <Route path="/community/question" element={<QuestionBoard />} />
                     <Route path="/community/discussion" element={<DiscussionBoard />} />
                     <Route path="/community/drinkmate" element={<DrinkMateBoard />} />
+                    <Route path="/community/:id" element={<CommunityDetail username={username} userId={userId}/>} />
+                    <Route path="/community/create" element={<CreatePost />} />
                     </Routes>
             </div>
         </Router>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../services/api';
 
 function DiscussionBoard() {
@@ -8,7 +9,7 @@ function DiscussionBoard() {
         // 토론 게시판 카테고리로 게시물 요청
         api.get('/community/')
             .then((response) => {
-                setPosts(response.data.results);
+                setPosts(response.data);
             })
             .catch((error) => {
                 console.error('토론 게시판 로드 중 에러 발생:', error);
@@ -18,13 +19,16 @@ function DiscussionBoard() {
     return (
         <div>
             <h2>토론 게시판</h2>
+            <Link to="/community/create">
+                <button>글 작성</button>
+            </Link>
             {posts.length > 0 ? (
                 <ul>
                     {posts
                         .filter((post) => post.category === 8)
                         .map((post) => (
                         <li key={post.id}>
-                            <h3>{post.author} | {post.title}</h3>
+                            <Link to={`/community/${post.id}`}>{post.author} | {post.title}</Link>
                         </li>
                     ))}
                 </ul>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8000/api/v1',  // 백엔드 API URL
+    baseURL: 'http://api.sulmeulliae.com/api/v1',  // 백엔드 API URL
     headers: {
         'Content-Type': 'application/json',
     },

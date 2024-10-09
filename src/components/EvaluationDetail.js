@@ -57,7 +57,7 @@ function EvaluationDetail({ username, userId }) {
                     {evaluation.images.map((imageObj, index) => (
                         <img 
                             key={index} 
-                            src={`http://localhost:8000${imageObj.image}`}
+                            src={`https://api.sulmeulliae.com${imageObj.image}`}
                             alt={`evaluation ${index}`} 
                             style={{ maxWidth: '100%', margin: '10px 0' }} 
                         />

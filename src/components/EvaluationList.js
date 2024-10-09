@@ -22,7 +22,6 @@ function EvaluationList() {
             <ul>
                 {evaluations.map((evaluation) => (
                     <li key={evaluation.id}>
-                        {/* 링크로 평가 상세 페이지로 이동 */}
                         <Link to={`/evaluations/${evaluation.id}`}>{evaluation.title}</Link>
                     </li>
                 ))}

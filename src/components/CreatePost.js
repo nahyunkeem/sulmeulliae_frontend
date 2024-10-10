@@ -36,13 +36,13 @@ function CreatePost() {
         })
         .then(response => {
             console.log('게시글 작성 성공:', response.data);
-            if (category === '9') {
+            if (category === '3') {
                 navigate('/community/freeboard/');
-            } else if (category === '8') {
+            } else if (category === '5') {
                 navigate('/community/discussion/');
-            } else if (category === '7') {
-                navigate('/community/drinkmate/');
             } else if (category === '6') {
+                navigate('/community/drinkmate/');
+            } else if (category === '4') {
                 navigate('/community/question/');
             }
         })
@@ -87,10 +87,10 @@ function CreatePost() {
                     <label>카테고리:</label>
                     <select value={category} onChange={(e) => setCategory(e.target.value)} required>
                         <option value="">선택</option>
-                        <option value="9">자유 게시판</option>
-                        <option value="8">토론 게시판</option>
-                        <option value="7">술 메이트 게시판</option>
-                        <option value="6">질문 게시판</option>
+                        <option value="4">자유 게시판</option>
+                        <option value="5">토론 게시판</option>
+                        <option value="6">술 메이트 게시판</option>
+                        <option value="4">질문 게시판</option>
                     </select>
                 </div>
 

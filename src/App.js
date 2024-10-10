@@ -11,6 +11,7 @@ import DiscussionBoard from './components/DiscussionBoard';
 import DrinkMateBoard from './components/DrinkMateBoard';
 import CommunityDetail from './components/CommunityDetail'; 
 import CreatePost from './components/CreatePost';
+import ChatBot from './components/ChatBot';
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
@@ -48,6 +49,7 @@ function App() {
                         <Link to="/community/drinkmate">술 메이트 게시판 |</Link>
                         {loggedIn ? (
                             <>
+                                <Link to="/chatbot">술추천챗봇</Link>
                                 <span>{username}님</span>
                                 <button onClick={handleLogout}>로그아웃</button>
                             </>
@@ -71,6 +73,7 @@ function App() {
                     <Route path="/community/drinkmate" element={<DrinkMateBoard />} />
                     <Route path="/community/:id" element={<CommunityDetail username={username} userId={userId}/>} />
                     <Route path="/community/create" element={<CreatePost />} />
+                    <Route path="/chatbot" element={<ChatBot />} />
                     </Routes>
             </div>
         </Router>

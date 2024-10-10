@@ -19,3 +19,82 @@ nav span {
 button {
     margin-left: 10px;  /* 로그아웃 버튼에 약간의 간격 추가 */
 }
+
+/* chatbot */
+/* 전체 채팅 컨테이너 */
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 600px;
+}
+
+/* 채팅 메시지 영역 */
+.chat-messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column; /* 위에서부터 아래로 쌓이도록 설정 */
+}
+
+/* 사용자 말풍선 (오른쪽) */
+.chat-message.user {
+    background-color: #ffe600; /* 노란색 */
+    color: black;
+    align-self: flex-end; /* 오른쪽 정렬 */
+    padding: 8px 12px;
+    border-radius: 10px 10px 0 10px;
+    margin: 3px 0;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* 챗봇 말풍선 (왼쪽) */
+.chat-message.bot {
+    background-color: #e0e0e0; /* 회색 */
+    color: black;
+    align-self: flex-start; /* 왼쪽 정렬 */
+    padding: 8px 12px;
+    border-radius: 10px 10px 10px 0;
+    margin: 3px 0;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* 입력 영역 */
+.chat-input-form {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: white;
+}
+
+.chat-input-form input {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.chat-input-form button {
+    background-color: #ffd600;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+}
+
+.chat-input-form button:hover {
+    background-color: #ffcd00;
+}

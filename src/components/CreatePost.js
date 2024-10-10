@@ -87,7 +87,7 @@ function CreatePost() {
                     <label>카테고리:</label>
                     <select value={category} onChange={(e) => setCategory(e.target.value)} required>
                         <option value="">선택</option>
-                        <option value="4">자유 게시판</option>
+                        <option value="3">자유 게시판</option>
                         <option value="5">토론 게시판</option>
                         <option value="6">술 메이트 게시판</option>
                         <option value="4">질문 게시판</option>

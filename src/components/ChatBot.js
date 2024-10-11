@@ -46,7 +46,7 @@ function ChatBot() {
             setMessages((prevMessages) => [...prevMessages, botMessage]);
         })
         .catch((error) => {
-            const errorMessage = { sender: 'bot', text: '문제가 발생했습니다. 다시 시도해 주세요.' };
+            const errorMessage = { sender: 'bot', text: '포인트가 부족합니다. 내일 추천해드릴게요.' };
             setMessages((prevMessages) => [...prevMessages, errorMessage]);
         })
         .finally(() => {

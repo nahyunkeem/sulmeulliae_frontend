@@ -126,3 +126,95 @@ button {
         transform: rotate(360deg);
     }
 }
+
+/* ChatRoom 관련 스타일 */
+.chatroom-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chatroom-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+}
+
+.chatroom-messages {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.chatroom-message {
+    margin-bottom: 10px;
+}
+
+.self-message {
+    text-align: right;
+    color: #007bff;
+}
+
+.other-message {
+    text-align: left;
+    color: #000;
+}
+
+.chatroom-input {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.chatroom-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chatroom-input button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chatroom-input button:hover {
+    background-color: #0056b3;
+}
+
+.delete-room-button, .leave-room-button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.leave-room-button {
+    background-color: #6c757d;
+}
+
+.delete-room-button:hover, .leave-room-button:hover {
+    background-color: #bd2130;
+}
+
+.leave-room-button:hover {
+    background-color: #5a6268;
+}

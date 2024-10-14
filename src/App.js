@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';  // useState를 추가
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 import EvaluationList from './components/EvaluationList';
@@ -12,6 +12,8 @@ import DrinkMateBoard from './components/DrinkMateBoard';
 import CommunityDetail from './components/CommunityDetail'; 
 import CreatePost from './components/CreatePost';
 import ChatBot from './components/ChatBot';
+import ChatRoom from './components/ChatRoom';
+import CreateChat from './components/CreateChat';
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
@@ -33,8 +35,11 @@ function App() {
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
+        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
         setLoggedIn(false);
         setUsername('');
+        setUserId(null);
     };
 
     return (
@@ -66,15 +71,17 @@ function App() {
                     <Route path="/" element={<EvaluationList />} />
                     <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/evaluations/:id" element={<EvaluationDetail username={username} userId={userId}/>} />
+                    <Route path="/evaluations/:id" element={<EvaluationDetail username={username} userId={userId} />} />
                     <Route path="/community/freeboard" element={<FreeBoard />} />
                     <Route path="/community/question" element={<QuestionBoard />} />
                     <Route path="/community/discussion" element={<DiscussionBoard />} />
                     <Route path="/community/drinkmate" element={<DrinkMateBoard />} />
-                    <Route path="/community/:id" element={<CommunityDetail username={username} userId={userId}/>} />
+                    <Route path="/community/:id" element={<CommunityDetail username={username} userId={userId} />} />
                     <Route path="/community/create" element={<CreatePost />} />
                     <Route path="/chatbot" element={<ChatBot />} />
-                    </Routes>
+                    <Route path="/chat/:roomId" element={<ChatRoom username={username} userId={userId} />} /> 
+                    <Route path="/chat/createchat" element={<CreateChat />} />
+                </Routes>
             </div>
         </Router>
     );

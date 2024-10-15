@@ -25,7 +25,7 @@ function DiscussionBoard() {
             {posts.length > 0 ? (
                 <ul>
                     {posts
-                        .filter((post) => post.category === 8)
+                        .filter((post) => post.category === 5)
                         .map((post) => (
                         <li key={post.id}>
                             <Link to={`/community/${post.id}`}>{post.author} | {post.title}</Link>

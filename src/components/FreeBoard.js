@@ -25,7 +25,7 @@ function FreeBoard() {
             {posts.length > 0 ? (
                 <ul>
                     {posts
-                        .filter((post) => post.category === 9)
+                        .filter((post) => post.category === 3)
                         .map((post) => (
                         <li key={post.id}>
                             <Link to={`/community/${post.id}`}>{post.author} | {post.title}</Link>

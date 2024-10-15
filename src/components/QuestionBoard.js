@@ -25,7 +25,7 @@ function QuestionBoard() {
             {posts.length > 0 ? (
                 <ul>
                     {posts
-                        .filter((post) => post.category === 6)
+                        .filter((post) => post.category === 4)
                         .map((post) => (
                         <li key={post.id}>
                             <Link to={`/community/${post.id}`}>{post.author} | {post.title}</Link>

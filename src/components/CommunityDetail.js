@@ -58,7 +58,7 @@ function CommunityDetail({ username, userId }) {
                     {post.community_image.map((imageObj, index) => (
                         <img 
                             key={index} 
-                            src={`http://localhost:8000${imageObj.image_url}`}  // image_url 필드를 사용
+                            src={`https://api.sulmeulliae.com${imageObj.image_url}`}  // image_url 필드를 사용
                             alt={`community-post-${index}`} 
                             style={{ maxWidth: '100%', margin: '10px 0' }}
                         />

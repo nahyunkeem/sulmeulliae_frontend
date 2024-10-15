@@ -14,6 +14,10 @@ import CreatePost from './components/CreatePost';
 import ChatBot from './components/ChatBot';
 import ChatRoom from './components/ChatRoom';
 import CreateChat from './components/CreateChat';
+import UserProfile from './components/UserProfile'; 
+import UserProfileEdit from './components/UserProfileEdit';
+import UserPasswordChange from './components/UserPasswordChange';
+import UserWithdraw from './components/UserWithdraw';
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
@@ -54,8 +58,10 @@ function App() {
                         <Link to="/community/drinkmate">술 메이트 게시판 |</Link>
                         {loggedIn ? (
                             <>
-                                <Link to="/chatbot">술추천챗봇</Link>
-                                <span>{username}님</span>
+                                <Link to="/chatbot">술추천챗봇 |</Link>
+                                <Link to={`/profile/${username}`}>
+                                    <span>{username}님</span>
+                                </Link>
                                 <button onClick={handleLogout}>로그아웃</button>
                             </>
                         ) : (
@@ -81,6 +87,10 @@ function App() {
                     <Route path="/chatbot" element={<ChatBot />} />
                     <Route path="/chat/:roomId" element={<ChatRoom username={username} userId={userId} />} /> 
                     <Route path="/chat/createchat" element={<CreateChat />} />
+                    <Route path="/profile/:username" element={<UserProfile username={username} />} />
+                    <Route path="/accounts/edit" element={<UserProfileEdit />} />
+                    <Route path="/accounts/password" element={<UserPasswordChange />} />
+                    <Route path="/accounts/withdraw" element={<UserWithdraw />} />
                 </Routes>
             </div>
         </Router>

@@ -26,7 +26,7 @@ function ChatRoom() {
             });
 
         // WebSocket 연결 시도
-        const chatSocket = new WebSocket(`wss://www.api.sulmeulliae.com/ws/chat/${roomId}/`);
+        const chatSocket = new WebSocket(`wss://api.sulmeulliae.com/ws/chat/${roomId}/`);
         socketRef.current = chatSocket;
 
         // WebSocket 연결이 성공했을 때

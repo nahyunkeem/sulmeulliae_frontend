@@ -24,7 +24,7 @@ function UserProfile() {
         <div>
             <h2>회원 정보</h2>
             <img
-                src={userProfile.profile_image ? `https://api.sulmeulliae.com${userProfile.profile_image}` : 'https://api.sulmeulliae.com/media/profile_images/default_profile.jpeg'}
+                src={userProfile.profile_image ? `https://api.sulmeulliae.com${userProfile.profile_image}` : 'https://api.sulmeulliae.com/media/profile_images/default-profile.jpeg'}
                 alt="프로필 이미지"
                 style={{ width: '150px', height: '150px', borderRadius: '50%' }}
             />

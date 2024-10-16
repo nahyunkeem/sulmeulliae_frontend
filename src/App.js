@@ -1,74 +1,117 @@
-const styles = {
-    app: {
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '20px',
-    },
-    nav: {
-        backgroundColor: '#3c6255',
-        padding: '15px',
-        textAlign: 'center',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between', // 좌우 정렬
-    },
-    logoContainer: {
-        display: 'flex',
-        alignItems: 'center', // 로고와 텍스트 수직 정렬
-    },
-    logo: {
-        height: '60px', // 로고 이미지 크기
-        marginRight: '10px', // 로고와 텍스트 사이 여백
-    },
-    logoText: {
-        color: '#f0e5d1',
-        fontSize: '24px', // 텍스트 크기
-        fontWeight: 'bold', // 텍스트 굵기
-    },
-    link: {
-        margin: '0 10px',
-        color: '#f0e5d1',
-        textDecoration: 'none',
-        fontWeight: 'bold',
-    },
-    span: {
-        color: '#f0e5d1',
-        marginRight: '10px',
-    },
-    button: {
-        backgroundColor: '#ffd700',
-        border: 'none',
-        padding: '10px 20px',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        fontWeight: 'bold',
-        color: '#3c6255',
-        marginLeft: '10px',
-    },
-    footer: {
-        backgroundColor: '#3c6255',
-        color: '#f0e5d1',
-        textAlign: 'center',
-        padding: '15px',
-        marginTop: 'auto',
-        borderTop: '1px solid #ffd700',
-    },
-    footerLink: {
-        color: '#ffd700',
-        textDecoration: 'none',
-    },
-    body: {
-        paddingTop: '20px',
-    },
-};
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import EvaluationList from './components/EvaluationList';
+import EvaluationDetail from './components/EvaluationDetail'; 
+import Login from './components/Login';
+import Signup from './components/Signup';
+import FreeBoard from './components/FreeBoard';
+import QuestionBoard from './components/QuestionBoard';
+import DiscussionBoard from './components/DiscussionBoard';
+import DrinkMateBoard from './components/DrinkMateBoard';
+import CommunityDetail from './components/CommunityDetail'; 
+import CreatePost from './components/CreatePost';
+import ChatBot from './components/ChatBot';
+import ChatRoom from './components/ChatRoom';
+import CreateChat from './components/CreateChat';
+import UserProfile from './components/UserProfile'; 
+import UserProfileEdit from './components/UserProfileEdit';
+import UserPasswordChange from './components/UserPasswordChange';
+import UserWithdraw from './components/UserWithdraw';
+import LogoutButton from './components/LogoutButton';
+import './App.css';
 
 function App() {
+    const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
+    const [username, setUsername] = useState('');
+    const [userId, setUserId] = useState(null);
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        const storedUserId = localStorage.getItem('userId');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+        if (storedUserId) {
+            setUserId(storedUserId);  // userId 상태 설정
+        }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
+        setLoggedIn(false);
+        setUsername('');
+        setUserId(null);
+    };
+
+    const styles = {
+        app: {
+            maxWidth: '1200px',
+            margin: '0 auto',
+            padding: '20px',
+        },
+        nav: {
+            backgroundColor: '#3c6255',
+            padding: '15px',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between', // 좌우 정렬
+        },
+        logo: {
+            height: '60px', // 로고 이미지 크기
+            marginRight: '10px', // 로고와 텍스트 사이 여백
+        },
+        logoText: {
+            color: '#f0e5d1',
+            fontSize: '24px', 
+            fontWeight: 'bold',
+        },
+        link: {
+            margin: '0 10px',
+            color: '#f0e5d1',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+        },
+        span: {
+            color: '#f0e5d1',
+            marginRight: '10px',
+        },
+        button: {
+            backgroundColor: '#ffd700',
+            border: 'none',
+            padding: '10px 20px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            color: '#3c6255',
+            marginLeft: '10px',
+        },
+        footer: {
+            backgroundColor: '#3c6255',
+            color: '#f0e5d1',
+            textAlign: 'center',
+            padding: '15px',
+            marginTop: 'auto',
+            borderTop: '1px solid #ffd700',
+        },
+        footerLink: {
+            color: '#ffd700',
+            textDecoration: 'none',
+        },
+        body: {
+            paddingTop: '20px',
+        }
+    };
+
     return (
         <Router>
             <div style={styles.body}>
                 <header>
                     <nav style={styles.nav}>
-                        {/* 로고와 텍스트를 포함하는 컨테이너 */}
+                        {/* 로고 이미지 추가 */}
                         <div style={styles.logoContainer}>
                             <Link to="/">
                                 <img src="/images/logo.png" alt="Sulmeulliae Logo" style={styles.logo} />
@@ -132,3 +175,4 @@ function App() {
 }
 
 export default App;
+

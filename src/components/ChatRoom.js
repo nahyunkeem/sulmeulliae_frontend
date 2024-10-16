@@ -130,14 +130,16 @@ function ChatRoom() {
             backgroundColor: '#fff',
             borderRadius: '10px',
             marginBottom: '20px',
+            display: 'flex',
+            flexDirection: 'column',
         },
         chatMessage: {
-            display: 'inline-block',
+            display: 'flex',
+            maxWidth: '60%',  // 최대 너비 설정
             wordBreak: 'break-word',  // 긴 단어도 말줄임
             padding: '10px',
             borderRadius: '10px',
-            marginBottom: '15px',  // 말풍선 사이의 간격을 넓힘
-            maxWidth: '60%',  // 최대 너비 설정
+            marginBottom: '10px',
         },
         selfMessage: {
             marginLeft: 'auto',
@@ -235,3 +237,4 @@ function ChatRoom() {
 }
 
 export default ChatRoom;
+

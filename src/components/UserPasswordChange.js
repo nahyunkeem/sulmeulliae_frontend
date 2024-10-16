@@ -40,6 +40,7 @@ function UserPasswordChange() {
             backgroundColor: '#faf4e1',
             borderRadius: '10px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+            boxSizing: 'border-box',  // 패딩을 포함한 너비 계산
         },
         heading: {
             textAlign: 'center',
@@ -57,11 +58,12 @@ function UserPasswordChange() {
             color: '#333',
         },
         input: {
-            width: '100%',
+            width: 'calc(100% - 20px)',  // 패딩을 고려한 너비 설정
             padding: '10px',
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
+            boxSizing: 'border-box',
         },
         button: {
             width: '100%',
@@ -111,4 +113,3 @@ function UserPasswordChange() {
 }
 
 export default UserPasswordChange;
-

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../services/api';
+import api from '../services.api';
 import { useNavigate } from 'react-router-dom';
 
 function UserDelete() {
@@ -8,18 +8,15 @@ function UserDelete() {
     const navigate = useNavigate();
 
     const handleDeleteAccount = () => {
-        // 회원탈퇴 API로 DELETE 요청
         api.delete('/accounts/', {
             data: { password: password },
         })
         .then(() => {
             alert('회원탈퇴가 완료되었습니다.');
-            // 로컬스토리지의 로그인 정보 삭제
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('username');
             localStorage.removeItem('userId');
-            // 회원탈퇴 후 메인페이지로 이동
             navigate('/');
         })
         .catch((error) => {
@@ -36,6 +33,7 @@ function UserDelete() {
             backgroundColor: '#faf4e1',
             borderRadius: '10px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+            boxSizing: 'border-box',  // 패딩 포함하여 컨테이너 설정
         },
         heading: {
             textAlign: 'center',
@@ -44,12 +42,13 @@ function UserDelete() {
             color: '#333',
         },
         input: {
-            width: '100%',
+            width: 'calc(100% - 20px)',  // 패딩을 고려하여 너비 설정
             padding: '10px',
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
             marginBottom: '20px',
+            boxSizing: 'border-box',
         },
         button: {
             width: '100%',

@@ -128,7 +128,7 @@ function ChatBot() {
             borderRadius: '50%',
             width: '40px',
             height: '40px',
-            animation: 'spin 1s linear infinite',
+            animation: 'spin 1s linear infinite',  // 애니메이션 적용
         },
         '@keyframes spin': {
             from: { transform: 'rotate(0deg)' },
@@ -181,4 +181,3 @@ function ChatBot() {
 }
 
 export default ChatBot;
-

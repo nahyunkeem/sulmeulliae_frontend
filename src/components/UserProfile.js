@@ -23,7 +23,9 @@ function UserProfile() {
     return (
         <div>
             <h2>회원 정보</h2>
-            <img src={userProfile.profile_image ? `https://api.sulmeulliae.com${userProfile.profile_image}` : "{% static 'default-profile.jpeg' %}"} alt="프로필 이미지"
+            <img 
+                src={`https://api.sulmeulliae.com${userProfile.profile_image}`}
+                alt="프로필 이미지" 
                 style={{ width: '150px', height: '150px', borderRadius: '50%' }} // 프로필 이미지 스타일 설정
             />
             <p>이름: {userProfile.fullname}</p>

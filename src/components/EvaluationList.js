@@ -16,20 +16,66 @@ function EvaluationList() {
             });
     }, []);
 
+    // 인라인 스타일 정의
+    const styles = {
+        container: {
+            padding: '20px',
+            backgroundColor: '#faf4e1',
+        },
+        heading: {
+            fontSize: '2rem',
+            color: '#3c6255',
+            textAlign: 'center',
+            marginBottom: '20px',
+        },
+        list: {
+            listStyleType: 'none',
+            padding: 0,
+        },
+        listItem: {
+            marginBottom: '20px',
+            border: '1px solid #ddd',
+            borderRadius: '10px',
+            padding: '15px',
+            backgroundColor: '#fff',
+            transition: 'transform 0.2s',
+        },
+        listItemHover: {
+            transform: 'scale(1.02)',
+        },
+        image: {
+            maxWidth: '100%',
+            height: 'auto',
+            marginBottom: '10px',
+            borderRadius: '10px',
+        },
+        link: {
+            fontSize: '1.5rem',
+            color: '#3c6255',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+        },
+        linkHover: {
+            color: '#ffd700',
+        }
+    };
+
     return (
-        <div>
-            <h1>주류평가목록</h1>
-            <ul>
+        <div style={styles.container}>
+            <h1 style={styles.heading}>주류평가목록</h1>
+            <ul style={styles.list}>
                 {evaluations.map((evaluation, index) => (
-                    <li key={evaluation.id}>
+                    <li key={evaluation.id} style={styles.listItem}>
                         {evaluation.images && evaluation.images[0] && (
-                            <img 
-                                src={`https://api.sulmeulliae.com${evaluation.images[0].image}`} 
-                                alt={`evaluation ${index}`} 
-                                style={{ maxWidth: '100%', margin: '10px 0' }} 
+                            <img
+                                src={`https://api.sulmeulliae.com${evaluation.images[0].image}`}
+                                alt={`evaluation ${index}`}
+                                style={styles.image}
                             />
                         )}
-                        <Link to={`/evaluations/${evaluation.id}`}>{evaluation.title}</Link>
+                        <Link to={`/evaluations/${evaluation.id}`} style={styles.link}>
+                            {evaluation.title}
+                        </Link>
                     </li>
                 ))}
             </ul>

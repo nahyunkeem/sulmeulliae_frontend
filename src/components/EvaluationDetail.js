@@ -25,7 +25,7 @@ function EvaluationDetail({ username, userId }) {
                 .catch((error) => {
                     console.error('에러 발생:', error);
                 });
-            }
+        }
     }, [id, userId]);
 
     const toggleLike = () => {
@@ -52,12 +52,12 @@ function EvaluationDetail({ username, userId }) {
     // 스타일 정의
     const styles = {
         container: {
-            width: '100%', // 너비를 전체 화면으로 설정
-            margin: '50px auto', // 네브바와 간격을 주기 위해 margin-top을 50px로 설정
+            width: '100%', // 전체 너비
+            margin: '50px auto', // 네브바와 간격
             padding: '20px',
             border: '1px solid #ddd',
             borderRadius: '10px',
-            backgroundColor: '#faf4e1', // EvaluationList와 동일한 배경색
+            backgroundColor: '#faf4e1', // 일관된 배경색
         },
         title: {
             fontSize: '2rem',
@@ -72,30 +72,31 @@ function EvaluationDetail({ username, userId }) {
             gap: '10px', // 이미지 간 간격
         },
         image: {
-            width: '200px', // 고정된 이미지 크기
-            height: '200px',
-            objectFit: 'contain', // 이미지가 짤리지 않도록
+            width: '300px', // 이미지 크기 확대
+            height: '300px',
+            objectFit: 'contain', // 이미지가 짤리지 않도록 설정
             marginBottom: '15px',
             borderRadius: '10px',
         },
         details: {
+            textAlign: 'center', // 가운데 정렬
             marginBottom: '10px',
             color: '#555',
         },
         button: {
             display: 'block',
-            width: '100%',
+            width: '150px', // 버튼 크기 조절
             padding: '10px',
-            backgroundColor: liked ? '#f44336' : '#4caf50',
+            backgroundColor: '#ff1744', // 빨간색으로 변경
             color: '#fff',
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
             fontWeight: 'bold',
-            marginBottom: '15px',
+            margin: '15px auto', // 가운데 정렬
         },
         buttonHover: {
-            backgroundColor: liked ? '#e57373' : '#66bb6a',
+            backgroundColor: '#d50000', // Hover 시 조금 더 진한 빨간색
         },
         likeInfo: {
             textAlign: 'center',
@@ -139,4 +140,3 @@ function EvaluationDetail({ username, userId }) {
 }
 
 export default EvaluationDetail;
-

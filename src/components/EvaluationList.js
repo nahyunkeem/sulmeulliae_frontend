@@ -38,15 +38,18 @@ function EvaluationList() {
         listItem: {
             border: '1px solid #ddd',
             borderRadius: '10px',
-            padding: '15px',
             backgroundColor: '#fff',
             transition: 'transform 0.2s',
             textAlign: 'center',
+            padding: '10px',
+            display: 'flex',
+            flexDirection: 'column', // 이미지와 제목을 세로로 배치
+            alignItems: 'center', // 수평 가운데 정렬
         },
         image: {
             width: '150px', // 고정된 이미지 크기
             height: '150px',
-            objectFit: 'cover', // 이미지 크기에 맞게 조정
+            objectFit: 'cover', // 이미지가 잘리지 않고 전체에 맞도록 설정
             marginBottom: '10px',
             borderRadius: '10px',
             cursor: 'pointer',
@@ -56,9 +59,7 @@ function EvaluationList() {
             color: '#000', // 제목을 검정색으로 변경
             textDecoration: 'none',
             fontWeight: 'bold',
-        },
-        linkHover: {
-            color: '#ffd700',
+            marginTop: '10px', // 제목을 이미지 아래에 배치
         }
     };
 

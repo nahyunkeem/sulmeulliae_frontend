@@ -56,6 +56,13 @@ function App() {
             backgroundColor: '#3c6255',
             padding: '15px',
             textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between', // 좌우 정렬
+        },
+        logo: {
+            height: '40px', // 로고 이미지 크기
+            marginRight: '20px', // 로고와 메뉴 사이 여백
         },
         link: {
             margin: '0 10px',
@@ -99,25 +106,31 @@ function App() {
             <div style={styles.body}>
                 <header>
                     <nav style={styles.nav}>
-                        <Link to="/" style={styles.link}>홈 |</Link>
-                        <Link to="/community/freeboard" style={styles.link}>자유 게시판 |</Link>
-                        <Link to="/community/question" style={styles.link}>질문 게시판 |</Link>
-                        <Link to="/community/discussion" style={styles.link}>토론 게시판 |</Link>
-                        <Link to="/community/drinkmate" style={styles.link}>술 메이트 게시판 |</Link>
-                        {loggedIn ? (
-                            <>
-                                <Link to="/chatbot" style={styles.link}>술추천챗봇 |</Link>
-                                <Link to={`/profile/${username}`} style={styles.link}>
-                                    <span style={styles.span}>{username}님</span>
-                                </Link>
-                                <LogoutButton handleLogout={handleLogout} /> {/* 로그아웃 버튼 컴포넌트 사용 */}
-                            </>
-                        ) : (
-                            <>
-                                <Link to="/login" style={styles.link}>로그인</Link>
-                                <Link to="/signup" style={styles.link}>회원가입</Link>
-                            </>
-                        )}
+                        {/* 로고 이미지 추가 */}
+                        <Link to="/">
+                            <img src="/images/logo.png" alt="Sulmeulliae Logo" style={styles.logo} />
+                        </Link>
+                        <div>
+                            <Link to="/" style={styles.link}>홈 |</Link>
+                            <Link to="/community/freeboard" style={styles.link}>자유 게시판 |</Link>
+                            <Link to="/community/question" style={styles.link}>질문 게시판 |</Link>
+                            <Link to="/community/discussion" style={styles.link}>토론 게시판 |</Link>
+                            <Link to="/community/drinkmate" style={styles.link}>술 메이트 게시판 |</Link>
+                            {loggedIn ? (
+                                <>
+                                    <Link to="/chatbot" style={styles.link}>술추천챗봇 |</Link>
+                                    <Link to={`/profile/${username}`} style={styles.link}>
+                                        <span style={styles.span}>{username}님</span>
+                                    </Link>
+                                    <LogoutButton handleLogout={handleLogout} />
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/login" style={styles.link}>로그인</Link>
+                                    <Link to="/signup" style={styles.link}>회원가입</Link>
+                                </>
+                            )}
+                        </div>
                     </nav>
                 </header>
 

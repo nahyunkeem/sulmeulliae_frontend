@@ -36,6 +36,7 @@ function CreatePost() {
         })
         .then(response => {
             console.log('게시글 작성 성공:', response.data);
+            // 카테고리에 따라 해당 게시판으로 이동
             if (category === '3') {
                 navigate('/community/freeboard/');
             } else if (category === '5') {
@@ -51,41 +52,114 @@ function CreatePost() {
         });
     };
 
+    // 인라인 스타일 정의
+    const styles = {
+        formContainer: {
+            maxWidth: '600px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#f9f9f9',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        },
+        heading: {
+            fontSize: '2rem',
+            marginBottom: '20px',
+            textAlign: 'center',
+            color: '#333',
+        },
+        formGroup: {
+            marginBottom: '15px',
+        },
+        label: {
+            display: 'block',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            marginBottom: '5px',
+            color: '#333',
+        },
+        input: {
+            width: '100%',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ddd',
+            fontSize: '1rem',
+        },
+        textarea: {
+            width: '100%',
+            height: '150px',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ddd',
+            fontSize: '1rem',
+        },
+        select: {
+            width: '100%',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ddd',
+            fontSize: '1rem',
+        },
+        fileInput: {
+            width: '100%',
+            padding: '10px 0',
+        },
+        button: {
+            display: 'block',
+            width: '100%',
+            padding: '10px 15px',
+            backgroundColor: '#ff1744',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '1.2rem',
+            fontWeight: 'bold',
+            marginTop: '20px',
+        },
+        buttonHover: {
+            backgroundColor: '#d50000',
+        },
+    };
+
     return (
-        <div>
-            <h2>글 작성</h2>
+        <div style={styles.formContainer}>
+            <h2 style={styles.heading}>글 작성</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>제목:</label>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>제목:</label>
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
+                        style={styles.input}
                     />
                 </div>
 
-                <div>
-                    <label>내용:</label>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>내용:</label>
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         required
+                        style={styles.textarea}
                     />
                 </div>
 
-                <div>
-                    <label>이미지:</label>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>이미지:</label>
                     <input
                         type="file"
                         multiple  // 여러 이미지 선택 가능
                         onChange={handleImageChange}
+                        style={styles.fileInput}
                     />
                 </div>
 
-                <div>
-                    <label>카테고리:</label>
-                    <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>카테고리:</label>
+                    <select value={category} onChange={(e) => setCategory(e.target.value)} required style={styles.select}>
                         <option value="">선택</option>
                         <option value="3">자유 게시판</option>
                         <option value="5">토론 게시판</option>
@@ -94,7 +168,7 @@ function CreatePost() {
                     </select>
                 </div>
 
-                <button type="submit">작성</button>
+                <button type="submit" style={styles.button}>작성</button>
             </form>
         </div>
     );

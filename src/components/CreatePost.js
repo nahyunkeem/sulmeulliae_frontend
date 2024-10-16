@@ -41,8 +41,6 @@ function CreatePost() {
                 navigate('/community/freeboard/');
             } else if (category === '5') {
                 navigate('/community/discussion/');
-            } else if (category === '6') {
-                navigate('/community/drinkmate/');
             } else if (category === '4') {
                 navigate('/community/question/');
             }
@@ -52,50 +50,50 @@ function CreatePost() {
         });
     };
 
-    // 인라인 스타일 정의
+    // 인라인 스타일 정의 (자유게시판과 일관된 스타일)
     const styles = {
         formContainer: {
-            maxWidth: '600px',
+            maxWidth: '1200px',  // 컨테이너를 더 넓게 설정
             margin: '50px auto',
-            padding: '20px',
-            backgroundColor: '#f9f9f9',
+            padding: '30px',
+            backgroundColor: '#faf4e1',  // 자유게시판과 같은 배경색
             borderRadius: '10px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         },
         heading: {
-            fontSize: '2rem',
-            marginBottom: '20px',
+            fontSize: '2.5rem',
+            marginBottom: '30px',
             textAlign: 'center',
             color: '#333',
         },
         formGroup: {
-            marginBottom: '15px',
+            marginBottom: '20px',
         },
         label: {
             display: 'block',
-            fontSize: '1rem',
+            fontSize: '1.2rem',
             fontWeight: 'bold',
-            marginBottom: '5px',
+            marginBottom: '10px',
             color: '#333',
         },
         input: {
             width: '100%',
-            padding: '10px',
+            padding: '15px',
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
         },
         textarea: {
             width: '100%',
-            height: '150px',
-            padding: '10px',
+            height: '200px',
+            padding: '15px',
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
         },
         select: {
             width: '100%',
-            padding: '10px',
+            padding: '15px',
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
@@ -107,7 +105,7 @@ function CreatePost() {
         button: {
             display: 'block',
             width: '100%',
-            padding: '10px 15px',
+            padding: '15px',
             backgroundColor: '#ff1744',
             color: '#fff',
             border: 'none',
@@ -115,7 +113,7 @@ function CreatePost() {
             cursor: 'pointer',
             fontSize: '1.2rem',
             fontWeight: 'bold',
-            marginTop: '20px',
+            marginTop: '30px',
         },
         buttonHover: {
             backgroundColor: '#d50000',
@@ -163,7 +161,6 @@ function CreatePost() {
                         <option value="">선택</option>
                         <option value="3">자유 게시판</option>
                         <option value="5">토론 게시판</option>
-                        <option value="6">술 메이트 게시판</option>
                         <option value="4">질문 게시판</option>
                     </select>
                 </div>

@@ -36,6 +36,7 @@ function ReviewForm({ evaluationId }) {
             padding: '20px',
             backgroundColor: '#f9f9f9',
             borderRadius: '10px',
+            textAlign: 'center',  // 폼 전체 가운데 정렬
         },
         textarea: {
             width: '100%',
@@ -43,13 +44,15 @@ function ReviewForm({ evaluationId }) {
             marginBottom: '10px',
         },
         label: {
+            display: 'block',
             fontWeight: 'bold',
             marginBottom: '5px',
         },
         input: {
-            width: '100%',
+            width: '80px', // 평점 입력 칸 크기 조정
             marginBottom: '10px',
             padding: '8px',
+            textAlign: 'center',
         },
         button: {
             backgroundColor: '#ff1744',
@@ -58,6 +61,10 @@ function ReviewForm({ evaluationId }) {
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
+            marginTop: '10px',
+        },
+        buttonContainer: {
+            textAlign: 'center',  // 버튼을 가운데로 배치
         },
     };
 
@@ -83,7 +90,9 @@ function ReviewForm({ evaluationId }) {
                 />
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {success && <p style={{ color: 'green' }}>{success}</p>}
-                <button style={styles.button} type="submit">작성</button>
+                <div style={styles.buttonContainer}>
+                    <button style={styles.button} type="submit">작성</button>
+                </div>
             </form>
         </div>
     );

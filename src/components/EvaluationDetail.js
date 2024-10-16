@@ -46,18 +46,20 @@ function EvaluationDetail({ username, userId }) {
     };
 
     if (!evaluation) {
-        return <p>로그인 후 이용해주세요</p>;
+        return <p>게시물을 불러오는 중입니다...</p>;
     }
 
     // 스타일 정의
     const styles = {
         container: {
-            width: '100%', // 전체 너비
-            margin: '50px auto', // 네브바와 간격
+            maxWidth: '1200px', // 적절한 최대 너비 설정
+            width: '100%',
+            margin: '50px auto', // 중앙 정렬을 위한 자동 마진
             padding: '20px',
             border: '1px solid #ddd',
             borderRadius: '10px',
             backgroundColor: '#faf4e1', // 일관된 배경색
+            boxSizing: 'border-box', // 패딩을 포함해 너비 계산
         },
         title: {
             fontSize: '2rem',
@@ -140,3 +142,4 @@ function EvaluationDetail({ username, userId }) {
 }
 
 export default EvaluationDetail;
+

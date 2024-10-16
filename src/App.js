@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import EvaluationList from './components/EvaluationList';
-import EvaluationDetail from './components/EvaluationDetail';  // 평가 상세 페이지 컴포넌트
+import EvaluationDetail from './components/EvaluationDetail'; 
 import Login from './components/Login';
 import Signup from './components/Signup';
 import FreeBoard from './components/FreeBoard';
@@ -18,16 +17,15 @@ import UserProfile from './components/UserProfile';
 import UserProfileEdit from './components/UserProfileEdit';
 import UserPasswordChange from './components/UserPasswordChange';
 import UserWithdraw from './components/UserWithdraw';
+import LogoutButton from './components/LogoutButton';
 import './App.css';
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
     const [username, setUsername] = useState('');
     const [userId, setUserId] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
-        // localStorage에서 사용자명 불러오기
         const storedUsername = localStorage.getItem('username');
         const storedUserId = localStorage.getItem('userId');
         if (storedUsername) {
@@ -46,10 +44,8 @@ function App() {
         setLoggedIn(false);
         setUsername('');
         setUserId(null);
-        navigate('/');
     };
 
-    // 인라인 스타일 정의
     const styles = {
         app: {
             maxWidth: '1200px',
@@ -67,9 +63,6 @@ function App() {
             textDecoration: 'none',
             fontWeight: 'bold',
         },
-        linkHover: {
-            color: '#ffd700',
-        },
         span: {
             color: '#f0e5d1',
             marginRight: '10px',
@@ -84,9 +77,6 @@ function App() {
             color: '#3c6255',
             marginLeft: '10px',
         },
-        buttonHover: {
-            backgroundColor: '#e6c200',
-        },
         footer: {
             backgroundColor: '#3c6255',
             color: '#f0e5d1',
@@ -100,7 +90,7 @@ function App() {
             textDecoration: 'none',
         },
         body: {
-            paddingTop: '20px',  // 네브바와의 간격 조정
+            paddingTop: '20px',
         }
     };
 
@@ -120,7 +110,7 @@ function App() {
                                 <Link to={`/profile/${username}`} style={styles.link}>
                                     <span style={styles.span}>{username}님</span>
                                 </Link>
-                                <button style={styles.button} onClick={handleLogout}>로그아웃</button>
+                                <LogoutButton handleLogout={handleLogout} /> {/* 로그아웃 버튼 컴포넌트 사용 */}
                             </>
                         ) : (
                             <>
@@ -164,3 +154,4 @@ function App() {
 }
 
 export default App;
+

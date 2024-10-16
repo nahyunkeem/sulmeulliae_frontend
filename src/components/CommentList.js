@@ -58,10 +58,10 @@ function CommentList({ postId, username, userId }) {
     };
 
     const toggleCommentLike = (commentId) => {
-        // 리뷰 좋아요 상태 토글을 위한 POST 요청
+        // 댓글 좋아요 상태 토글을 위한 POST 요청
         api.post(`/community/comment/${commentId}/like/`)
             .then(() => {
-                // 좋아요 상태 변경 후 리뷰 데이터를 다시 불러옴
+                // 좋아요 상태 변경 후 댓글 데이터를 다시 불러옴
                 if (userId) {
                     api.get(`/community/${postId}/comment/`)
                         .then((response) => {
@@ -79,20 +79,60 @@ function CommentList({ postId, username, userId }) {
                         .catch((error) => {
                             console.error('댓글 다시 로드 중 에러 발생:', error);
                         });
-                    }
+                }
             })
             .catch((error) => {
                 console.error('좋아요 상태 변경 중 에러 발생:', error);
             });
-    };  
+    };
+
+    // 인라인 스타일 정의
+    const styles = {
+        commentContainer: {
+            marginTop: '30px',
+            padding: '20px',
+            backgroundColor: '#f9f9f9',
+            borderRadius: '10px',
+        },
+        commentList: {
+            listStyleType: 'none',
+            padding: 0,
+        },
+        commentItem: {
+            padding: '15px',
+            borderBottom: '1px solid #ddd',
+            marginBottom: '10px',
+        },
+        author: {
+            fontWeight: 'bold',
+            marginBottom: '5px',
+        },
+        likeCount: {
+            fontWeight: 'bold',
+            color: '#ff9800',
+            marginBottom: '5px',
+        },
+        buttons: {
+            marginTop: '10px',
+        },
+        button: {
+            marginRight: '10px',
+            backgroundColor: '#ff1744',
+            color: '#fff',
+            padding: '5px 10px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+        },
+    };
 
     return (
-        <div>
+        <div style={styles.commentContainer}>
             <h2>댓글</h2>
             {comments.length > 0 ? (
-                <ul>
+                <ul style={styles.commentList}>
                     {comments.map((comment) => (
-                        <li key={comment.id}>
+                        <li key={comment.id} style={styles.commentItem}>
                             {editingCommentId === comment.id ? (
                                 // 수정 모드: 해당 댓글만 수정 폼을 표시
                                 <div>
@@ -100,24 +140,24 @@ function CommentList({ postId, username, userId }) {
                                         value={editContent}
                                         onChange={(e) => setEditContent(e.target.value)}
                                     />
-                                    <button onClick={() => handleEditSubmit(comment.id)}>저장</button>
-                                    <button onClick={() => setEditingCommentId(null)}>취소</button>
+                                    <button style={styles.button} onClick={() => handleEditSubmit(comment.id)}>저장</button>
+                                    <button style={styles.button} onClick={() => setEditingCommentId(null)}>취소</button>
                                 </div>
                             ) : (
                                 // 기본 댓글 보기 모드
                                 <div>
-                                    <div>{comment.author} | {comment.content}</div>
-                                    <div>좋아요 | {comment.like_count}</div>
+                                    <div style={styles.author}>{comment.author} | {comment.content}</div>
+                                    <div style={styles.likeCount}>좋아요 | {comment.like_count}</div>
                                     {comment.author === username ? (
-                                        <div>
+                                        <div style={styles.buttons}>
                                             {/* 본인이 작성한 댓글일 경우 수정 및 삭제 버튼 */}
-                                            <button onClick={() => handleEditClick(comment)}>수정</button>
-                                            <button onClick={() => handleDelete(comment.id)}>삭제</button>
+                                            <button style={styles.button} onClick={() => handleEditClick(comment)}>수정</button>
+                                            <button style={styles.button} onClick={() => handleDelete(comment.id)}>삭제</button>
                                         </div>
                                     ) :(
-                                        <div>
-                                            {/* 본인이 작성하지 않은 리뷰일 경우 좋아요 버튼 */}
-                                            <button onClick={() => toggleCommentLike(comment.id)}>
+                                        <div style={styles.buttons}>
+                                            {/* 본인이 작성하지 않은 댓글일 경우 좋아요 버튼 */}
+                                            <button style={styles.button} onClick={() => toggleCommentLike(comment.id)}>
                                                 {comment.liked ? '좋아요 취소' : '좋아요'}
                                             </button>
                                         </div>

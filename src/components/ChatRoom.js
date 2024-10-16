@@ -132,22 +132,24 @@ function ChatRoom() {
             marginBottom: '20px',
         },
         chatMessage: {
-            display: 'flex',
-            marginBottom: '10px',
+            display: 'inline-block',
+            wordBreak: 'break-word',  // 긴 단어도 말줄임
+            padding: '10px',
+            borderRadius: '10px',
+            marginBottom: '15px',  // 말풍선 사이의 간격을 넓힘
+            maxWidth: '60%',  // 최대 너비 설정
         },
         selfMessage: {
             marginLeft: 'auto',
             backgroundColor: '#ffe600',
-            padding: '10px',
             borderRadius: '10px 10px 0 10px',
-            maxWidth: '60%',
+            textAlign: 'right',
         },
         otherMessage: {
             marginRight: 'auto',
             backgroundColor: '#f0f0f0',
-            padding: '10px',
             borderRadius: '10px 10px 10px 0',
-            maxWidth: '60%',
+            textAlign: 'left',
         },
         chatInputContainer: {
             display: 'flex',
@@ -199,8 +201,8 @@ function ChatRoom() {
                         key={index}
                         style={
                             message.username === currentUsername
-                                ? styles.selfMessage
-                                : styles.otherMessage
+                                ? { ...styles.chatMessage, ...styles.selfMessage }
+                                : { ...styles.chatMessage, ...styles.otherMessage }
                         }
                     >
                         {message.username ? <strong>{message.username}:</strong> : null} {message.message}

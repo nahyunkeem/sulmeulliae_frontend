@@ -21,7 +21,7 @@ function Signup() {
             [e.target.name]: e.target.value,
         });
     };
-
+    console.log(formData);
     const handleSubmit = (e) => {
         e.preventDefault();
 

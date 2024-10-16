@@ -43,18 +43,17 @@ function EvaluationList() {
             transition: 'transform 0.2s',
             textAlign: 'center',
         },
-        listItemHover: {
-            transform: 'scale(1.02)',
-        },
         image: {
-            maxWidth: '100%',
-            height: 'auto',
+            width: '150px', // 고정된 이미지 크기
+            height: '150px',
+            objectFit: 'cover', // 이미지 크기에 맞게 조정
             marginBottom: '10px',
             borderRadius: '10px',
+            cursor: 'pointer',
         },
         link: {
             fontSize: '1.2rem',
-            color: '#3c6255',
+            color: '#000', // 제목을 검정색으로 변경
             textDecoration: 'none',
             fontWeight: 'bold',
         },
@@ -69,13 +68,15 @@ function EvaluationList() {
             <ul style={styles.grid}>
                 {evaluations.map((evaluation, index) => (
                     <li key={evaluation.id} style={styles.listItem}>
-                        {evaluation.images && evaluation.images[0] && (
-                            <img
-                                src={`https://api.sulmeulliae.com${evaluation.images[0].image}`}
-                                alt={`evaluation ${index}`}
-                                style={styles.image}
-                            />
-                        )}
+                        <Link to={`/evaluations/${evaluation.id}`}>
+                            {evaluation.images && evaluation.images[0] && (
+                                <img
+                                    src={`https://api.sulmeulliae.com${evaluation.images[0].image}`}
+                                    alt={`evaluation ${index}`}
+                                    style={styles.image}
+                                />
+                            )}
+                        </Link>
                         <Link to={`/evaluations/${evaluation.id}`} style={styles.link}>
                             {evaluation.title}
                         </Link>

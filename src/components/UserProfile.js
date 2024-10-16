@@ -24,8 +24,8 @@ function UserProfile() {
         <div>
             <h2>회원 정보</h2>
             <img 
-                src={"{{ user.profile_image.url }}"}
-                alt="프로필 이미지" 
+                src={`https://api.sulmeulliae.com${userProfile.profile_image}`}
+                alt="프로필 이미지가 없습니다." 
                 style={{ width: '150px', height: '150px', borderRadius: '50%' }} // 프로필 이미지 스타일 설정
             />
             <p>이름: {userProfile.fullname}</p>

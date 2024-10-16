@@ -29,30 +29,61 @@ function ReviewForm({ evaluationId }) {
             });
     };
 
+    // 인라인 스타일 정의
+    const styles = {
+        formContainer: {
+            marginTop: '30px',
+            padding: '20px',
+            backgroundColor: '#f9f9f9',
+            borderRadius: '10px',
+        },
+        textarea: {
+            width: '100%',
+            height: '100px',
+            marginBottom: '10px',
+        },
+        label: {
+            fontWeight: 'bold',
+            marginBottom: '5px',
+        },
+        input: {
+            width: '100%',
+            marginBottom: '10px',
+            padding: '8px',
+        },
+        button: {
+            backgroundColor: '#ff1744',
+            color: '#fff',
+            padding: '10px 15px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+        },
+    };
+
     return (
-        <div>
-            <hr></hr>
+        <div style={styles.formContainer}>
             <h4>리뷰 작성</h4>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <textarea
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        required
-                    />
-                    <label>평점</label>
-                    <input
-                        type="number"
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                        min="0"
-                        max="5"
-                        required
-                    />
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
-                    {success && <p style={{ color: 'green' }}>{success}</p>}
-                    <button type="submit">작성</button>
-                </div>
+                <textarea
+                    style={styles.textarea}
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    required
+                />
+                <label style={styles.label}>평점</label>
+                <input
+                    style={styles.input}
+                    type="number"
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value)}
+                    min="0"
+                    max="5"
+                    required
+                />
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {success && <p style={{ color: 'green' }}>{success}</p>}
+                <button style={styles.button} type="submit">작성</button>
             </form>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../services/api';
+import api from '../services.api';
 
 function ReviewList({ evaluationId, username, userId }) {
     const [reviews, setReviews] = useState([]);
@@ -44,7 +44,7 @@ function ReviewList({ evaluationId, username, userId }) {
                 console.error('리뷰 수정 중 에러 발생:', error);
             });
     };
-    
+
     const handleDelete = (reviewId) => {
         const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
         if (confirmDelete) {
@@ -81,20 +81,60 @@ function ReviewList({ evaluationId, username, userId }) {
                         .catch((error) => {
                             console.error('리뷰 다시 로드 중 에러 발생:', error);
                         });
-                    }
+                }
             })
             .catch((error) => {
                 console.error('좋아요 상태 변경 중 에러 발생:', error);
             });
-    };  
+    };
+
+    // 인라인 스타일 정의
+    const styles = {
+        reviewContainer: {
+            marginTop: '30px',
+            padding: '20px',
+            backgroundColor: '#f9f9f9',
+            borderRadius: '10px',
+        },
+        reviewList: {
+            listStyleType: 'none',
+            padding: 0,
+        },
+        reviewItem: {
+            padding: '15px',
+            borderBottom: '1px solid #ddd',
+            marginBottom: '10px',
+        },
+        author: {
+            fontWeight: 'bold',
+            marginBottom: '5px',
+        },
+        rating: {
+            fontWeight: 'bold',
+            color: '#ff9800',
+            marginBottom: '5px',
+        },
+        buttons: {
+            marginTop: '10px',
+        },
+        button: {
+            marginRight: '10px',
+            backgroundColor: '#ff1744',
+            color: '#fff',
+            padding: '5px 10px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+        },
+    };
 
     return (
-        <div>
+        <div style={styles.reviewContainer}>
             <h2>리뷰</h2>
             {reviews.length > 0 ? (
-                <ul>
+                <ul style={styles.reviewList}>
                     {reviews.map((review) => (
-                        <li key={review.id}>
+                        <li key={review.id} style={styles.reviewItem}>
                             {editingReviewId === review.id ? (
                                 // 수정 모드
                                 <div>
@@ -109,26 +149,26 @@ function ReviewList({ evaluationId, username, userId }) {
                                         min="0"
                                         max="5"
                                     />
-                                    <button onClick={() => handleEditSubmit(review.id)}>저장</button>
-                                    <button onClick={() => setEditingReviewId(null)}>취소</button>
+                                    <button style={styles.button} onClick={() => handleEditSubmit(review.id)}>저장</button>
+                                    <button style={styles.button} onClick={() => setEditingReviewId(null)}>취소</button>
                                 </div>
                             ) : (
                                 // 기본 리뷰 보기 모드
                                 <div>
-                                    <div>{review.author}</div>
+                                    <div style={styles.author}>{review.author}</div>
                                     <div>{review.content}</div>
-                                    <div>{review.rating} / 5</div>
+                                    <div style={styles.rating}>{review.rating} / 5</div>
                                     <div>좋아요 | {review.like_count}</div>
                                     {review.author === username ? (
-                                        <div>
+                                        <div style={styles.buttons}>
                                             {/* 본인이 작성한 리뷰일 경우 수정 및 삭제 버튼 */}
-                                            <button onClick={() => handleEditClick(review)}>수정</button>
-                                            <button onClick={() => handleDelete(review.id)}>삭제</button>
+                                            <button style={styles.button} onClick={() => handleEditClick(review)}>수정</button>
+                                            <button style={styles.button} onClick={() => handleDelete(review.id)}>삭제</button>
                                         </div>
                                     ) : (
-                                        <div>
+                                        <div style={styles.buttons}>
                                             {/* 본인이 작성하지 않은 리뷰일 경우 좋아요 버튼 */}
-                                            <button onClick={() => toggleReviewLike(review.id)}>
+                                            <button style={styles.button} onClick={() => toggleReviewLike(review.id)}>
                                                 {review.liked ? '좋아요 취소' : '좋아요'}
                                             </button>
                                         </div>
@@ -146,4 +186,3 @@ function ReviewList({ evaluationId, username, userId }) {
 }
 
 export default ReviewList;
-

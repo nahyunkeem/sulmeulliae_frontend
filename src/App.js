@@ -60,14 +60,20 @@ function App() {
             alignItems: 'center',
             justifyContent: 'space-between', // 좌우 정렬
         },
+        logoContainer: {
+            display: 'flex',
+            alignItems: 'center', // 로고와 텍스트를 상하 중앙 정렬
+        },
         logo: {
             height: '60px', // 로고 이미지 크기
             marginRight: '10px', // 로고와 텍스트 사이 여백
         },
         logoText: {
             color: '#f0e5d1',
-            fontSize: '24px', 
-            fontWeight: 'bold',
+            fontSize: '24px', // 텍스트 크기
+            fontWeight: 'bold', // 텍스트 굵기
+            display: 'flex',
+            alignItems: 'center', // 텍스트 상하 중앙 정렬
         },
         link: {
             margin: '0 10px',
@@ -116,7 +122,7 @@ function App() {
                             <Link to="/">
                                 <img src="/images/logo.png" alt="Sulmeulliae Logo" style={styles.logo} />
                             </Link>
-                            <span style={styles.logoText}>Sulmeulliae</span> {/* 로고 옆에 텍스트 추가 */}
+                            <span style={styles.logoText}>Sulmeulliae</span> {/* 로고 옆에 텍스트 */}
                         </div>
                         <div>
                             <Link to="/" style={styles.link}>홈 |</Link>

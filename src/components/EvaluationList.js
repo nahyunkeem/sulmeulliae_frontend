@@ -28,17 +28,20 @@ function EvaluationList() {
             textAlign: 'center',
             marginBottom: '20px',
         },
-        list: {
+        grid: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(5, 1fr)', // 한 줄에 다섯 개씩
+            gap: '20px',
             listStyleType: 'none',
             padding: 0,
         },
         listItem: {
-            marginBottom: '20px',
             border: '1px solid #ddd',
             borderRadius: '10px',
             padding: '15px',
             backgroundColor: '#fff',
             transition: 'transform 0.2s',
+            textAlign: 'center',
         },
         listItemHover: {
             transform: 'scale(1.02)',
@@ -50,7 +53,7 @@ function EvaluationList() {
             borderRadius: '10px',
         },
         link: {
-            fontSize: '1.5rem',
+            fontSize: '1.2rem',
             color: '#3c6255',
             textDecoration: 'none',
             fontWeight: 'bold',
@@ -63,7 +66,7 @@ function EvaluationList() {
     return (
         <div style={styles.container}>
             <h1 style={styles.heading}>주류평가목록</h1>
-            <ul style={styles.list}>
+            <ul style={styles.grid}>
                 {evaluations.map((evaluation, index) => (
                     <li key={evaluation.id} style={styles.listItem}>
                         {evaluation.images && evaluation.images[0] && (

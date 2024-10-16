@@ -44,7 +44,7 @@ function UserProfile() {
             marginTop: '20px',
             display: 'flex',
             justifyContent: 'space-between',
-            gap: '10px',
+            gap: '5px',  // 버튼 간격을 더 가깝게 조정
         },
         button: {
             backgroundColor: '#ffd700',
@@ -54,7 +54,7 @@ function UserProfile() {
             cursor: 'pointer',
             fontWeight: 'bold',
             color: '#3c6255',
-            width: '100%',
+            flexGrow: 1,  // 버튼이 동일한 크기로 늘어납니다
         },
         buttonHover: {
             backgroundColor: '#e6c200',

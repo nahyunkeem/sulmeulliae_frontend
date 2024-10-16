@@ -10,7 +10,6 @@ function Signup() {
         username: '',
         password: '',
         email: '',  // 이메일 필드 추가
-        profile_image: null,
     });
     const [error, setError] = useState('');
     const navigate = useNavigate();

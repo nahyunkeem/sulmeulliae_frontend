@@ -17,6 +17,7 @@ import UserProfile from './components/UserProfile';
 import UserProfileEdit from './components/UserProfileEdit';
 import UserPasswordChange from './components/UserPasswordChange';
 import UserWithdraw from './components/UserWithdraw';
+import './App.css';
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
@@ -47,9 +48,6 @@ function App() {
 
     // 인라인 스타일 정의
     const styles = {
-        back: {
-            backgroundColor: '#3c6255',
-        },
         app: {
             maxWidth: '1200px',
             margin: '0 auto',
@@ -105,7 +103,6 @@ function App() {
 
     return (
         <Router>
-            <div style={styles.back}>
             <div style={styles.body}>
                 <header>
                     <nav style={styles.nav}>
@@ -158,7 +155,6 @@ function App() {
                         <Link to="/terms-of-service" style={styles.footerLink}>이용약관</Link>
                     </p>
                 </footer>
-            </div>
             </div>
         </Router>
     );

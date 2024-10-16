@@ -58,19 +58,100 @@ function ChatBot() {
         setInputMessage('');
     };
 
+    // 스타일 정의 (카카오톡 스타일 적용)
+    const styles = {
+        chatContainer: {
+            width: '100%',
+            maxWidth: '600px',
+            margin: '0 auto',
+            backgroundColor: '#f7f7f7',
+            border: '1px solid #ddd',
+            borderRadius: '10px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            height: '600px',
+            padding: '20px',
+        },
+        chatMessages: {
+            flexGrow: 1,
+            overflowY: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            paddingBottom: '20px',
+        },
+        chatMessage: {
+            display: 'inline-block',
+            maxWidth: '60%',
+            wordBreak: 'break-word',
+            padding: '10px',
+            borderRadius: '10px',
+            marginBottom: '10px',
+        },
+        userMessage: {
+            backgroundColor: '#ffe600',
+            alignSelf: 'flex-end',
+            borderRadius: '10px 10px 0 10px',
+        },
+        botMessage: {
+            backgroundColor: '#e0e0e0',
+            alignSelf: 'flex-start',
+            borderRadius: '10px 10px 10px 0',
+        },
+        chatInputForm: {
+            display: 'flex',
+        },
+        chatInput: {
+            flexGrow: 1,
+            padding: '10px',
+            borderRadius: '20px',
+            border: '1px solid #ddd',
+            marginRight: '10px',
+        },
+        sendButton: {
+            backgroundColor: '#ffd700',
+            border: 'none',
+            borderRadius: '20px',
+            padding: '10px 20px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+        },
+        chatLoading: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px 0',
+        },
+        spinner: {
+            border: '4px solid rgba(0, 0, 0, 0.1)',
+            borderLeftColor: '#ffcd00',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            animation: 'spin 1s linear infinite',
+        },
+    };
+
     return (
-        <div className="chat-container">
-            <div className="chat-messages">
+        <div style={styles.chatContainer}>
+            <div style={styles.chatMessages}>
                 {messages.map((msg, index) => (
-                    <div key={index} className={msg.sender === 'user' ? 'chat-message user' : 'chat-message bot'}>
+                    <div
+                        key={index}
+                        style={
+                            msg.sender === 'user'
+                                ? { ...styles.chatMessage, ...styles.userMessage }
+                                : { ...styles.chatMessage, ...styles.botMessage }
+                        }
+                    >
                         <p>{msg.text}</p>
                     </div>
                 ))}
 
                 {/* 로딩 중일 때 스피너 표시 */}
                 {loading && (
-                    <div className="chat-loading">
-                        <div className="spinner"></div> {/* 스피너 애니메이션 */}
+                    <div style={styles.chatLoading}>
+                        <div style={styles.spinner}></div>  {/* 스피너 애니메이션 */}
                     </div>
                 )}
 
@@ -78,19 +159,23 @@ function ChatBot() {
                 <div ref={messagesEndRef} />
             </div>
 
-            <form onSubmit={handleSubmit} className="chat-input-form">
+            <form onSubmit={handleSubmit} style={styles.chatInputForm}>
                 <input
                     type="text"
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     placeholder="추천을 위해 현재의 기분이나 최근에 맛있게 마신술을 입력해주세요..."
                     disabled={loading}  // 로딩 중 입력 필드 비활성화
+                    style={styles.chatInput}
                 />
-                <button type="submit" disabled={loading}>전송</button>  {/* 로딩 중 전송 버튼 비활성화 */}
+                <button type="submit" disabled={loading} style={styles.sendButton}>
+                    전송
+                </button>  {/* 로딩 중 전송 버튼 비활성화 */}
             </form>
         </div>
     );
 }
 
 export default ChatBot;
+
 

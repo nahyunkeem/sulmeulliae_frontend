@@ -44,7 +44,8 @@ function UserProfile() {
             marginTop: '20px',
             display: 'flex',
             justifyContent: 'space-between',
-            gap: '5px',  // 버튼 간격을 더 가깝게 조정
+            gap: '5px',  // 버튼 간격을 5px로 조정하여 더 가깝게 만듦
+            flexWrap: 'wrap',  // 버튼이 작은 화면에서도 잘 정렬되도록 함
         },
         button: {
             backgroundColor: '#ffd700',
@@ -54,7 +55,8 @@ function UserProfile() {
             cursor: 'pointer',
             fontWeight: 'bold',
             color: '#3c6255',
-            flexGrow: 1,  // 버튼이 동일한 크기로 늘어납니다
+            flex: 1,  // 버튼이 동일한 크기로 늘어나게 설정
+            marginBottom: '10px',  // 버튼 아래 여백 추가 (작은 화면일 때 사용)
         },
         buttonHover: {
             backgroundColor: '#e6c200',
@@ -92,3 +94,4 @@ function UserProfile() {
 }
 
 export default UserProfile;
+

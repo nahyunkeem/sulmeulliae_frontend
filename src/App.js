@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css'
 import EvaluationList from './components/EvaluationList';
 import EvaluationDetail from './components/EvaluationDetail';  // 평가 상세 페이지 컴포넌트
 import Login from './components/Login';
@@ -46,28 +45,67 @@ function App() {
         setUserId(null);
     };
 
+    const styles = {
+        app: {
+            maxWidth: '1200px',
+            margin: '0 auto',
+            padding: '20px',
+        },
+        nav: {
+            backgroundColor: '#3c6255',
+            padding: '15px',
+            textAlign: 'center',
+        },
+        link: {
+            margin: '0 10px',
+            color: '#f0e5d1',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+        },
+        linkHover: {
+            color: '#ffd700',
+        },
+        span: {
+            color: '#f0e5d1',
+            marginRight: '10px',
+        },
+        button: {
+            backgroundColor: '#ffd700',
+            border: 'none',
+            padding: '10px 20px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            color: '#3c6255',
+            marginLeft: '10px',
+        },
+        buttonHover: {
+            backgroundColor: '#e6c200',
+        },
+    };
+
     return (
         <Router>
-            <div className="App">
+            <div style={styles.app}>
                 <header>
-                    <nav>
-                        <Link to="/">홈 |</Link>
-                        <Link to="/community/freeboard">자유 게시판 |</Link>
-                        <Link to="/community/question">질문 게시판 |</Link>
-                        <Link to="/community/discussion">토론 게시판 |</Link>
-                        <Link to="/community/drinkmate">술 메이트 게시판 |</Link>
+                    <nav style={styles.nav}>
+                        <Link to="/" style={styles.link}>홈 |</Link>
+                        <Link to="/community/freeboard" style={styles.link}>자유 게시판 |</Link>
+                        <Link to="/community/question" style={styles.link}>질문 게시판 |</Link>
+                        <Link to="/community/discussion" style={styles.link}>토론 게시판 |</Link>
+                        <Link to="/community/drinkmate" style={styles.link}>술 메이트 게시판 |</Link>
                         {loggedIn ? (
                             <>
-                                <Link to="/chatbot">술추천챗봇 |</Link>
-                                <Link to={`/profile/${username}`}>
-                                    <span>{username}님</span>
+                                <Link to="/chatbot" style={styles.link}>술추천챗봇 |</Link>
+                                <Link to={`/profile/${username}`} style={styles.link}>
+                                    <span style={styles.span}>{username}님</span>
                                 </Link>
-                                <button onClick={handleLogout}>로그아웃</button>
+                                <button style={styles.button} onClick={handleLogout}>로그아웃</button>
                             </>
                         ) : (
                             <>
-                                <Link to="/login">로그인</Link>
-                                <Link to="/signup">회원가입</Link>
+                                <Link to="/login" style={styles.link}>로그인</Link>
+                                <Link to="/signup" style={styles.link}>회원가입</Link>
                             </>
                         )}
                     </nav>

@@ -1,191 +1,220 @@
-/* 기본 레이아웃 */
-body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: #faf4e1;
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-
-/* 전체 레이아웃을 중앙 정렬 */
-.App {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* 네비게이션 바 */
 nav {
-    background-color: #3c6255;
-    padding: 15px;
-    text-align: center;
+    margin-bottom: 20px;
 }
 
 nav a {
-    margin: 0 10px;
-    color: #f0e5d1;
+    margin-right: 10px;  /* 링크 사이에 간격을 줌 */
     text-decoration: none;
-    font-weight: bold;
+    color: blue;
 }
 
 nav a:hover {
-    color: #ffd700;
+    text-decoration: underline;
 }
 
 nav span {
-    color: #f0e5d1;
-    margin-right: 10px;
+    margin-right: 10px;  /* 사용자명과 로그아웃 버튼 간의 간격 추가 */
 }
 
 button {
-    background-color: #ffd700;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #3c6255;
-    margin-left: 10px;
+    margin-left: 10px;  /* 로그아웃 버튼에 약간의 간격 추가 */
 }
 
-button:hover {
-    background-color: #e6c200;
-}
-
-/* 히어로 섹션 */
-.hero {
-    background-color: #fff8dc;
-    padding: 50px 0;
-    text-align: center;
-}
-
-.hero h2 {
-    font-size: 2.5rem;
-    color: #3c6255;
-    margin-bottom: 10px;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    color: #6b705c;
-}
-
-.hero img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
-}
-
-/* Evaluation Section */
-.evaluations-section {
-    background-color: #f0e5d1;
-    padding: 40px 0;
-}
-
-.evaluation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.evaluation-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s;
-}
-
-.evaluation-card:hover {
-    transform: scale(1.05);
-}
-
-.evaluation-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.evaluation-card h3 {
-    padding: 15px;
-    font-size: 1.5rem;
-    color: #3c6255;
-}
-
-.evaluation-card p {
-    padding: 0 15px 15px;
-    color: #6b705c;
-}
-
-/* 챗봇 스타일 */
+/* chatbot */
+/* 전체 채팅 컨테이너 */
 .chat-container {
     width: 100%;
     max-width: 600px;
-    margin: 20px auto;
-    background-color: #fafafa;
+    margin: 0 auto;
+    background-color: #f7f7f7;
     border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 20px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 500px;
+    height: 600px;
 }
 
+/* 채팅 메시지 영역 */
 .chat-messages {
     flex-grow: 1;
+    padding: 10px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column; /* 위에서부터 아래로 쌓이도록 설정 */
 }
 
+/* 사용자 말풍선 (오른쪽) */
 .chat-message.user {
-    background-color: #ffe600;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    align-self: flex-end;
+    background-color: #ffe600; /* 노란색 */
+    color: black;
+    align-self: flex-end; /* 오른쪽 정렬 */
+    padding: 8px 12px;
+    border-radius: 10px 10px 0 10px;
+    margin: 3px 0;
+    max-width: 70%;
+    word-wrap: break-word;
 }
 
+/* 챗봇 말풍선 (왼쪽) */
 .chat-message.bot {
-    background-color: #f0e5d1;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    align-self: flex-start;
+    background-color: #e0e0e0; /* 회색 */
+    color: black;
+    align-self: flex-start; /* 왼쪽 정렬 */
+    padding: 8px 12px;
+    border-radius: 10px 10px 10px 0;
+    margin: 3px 0;
+    max-width: 70%;
+    word-wrap: break-word;
 }
 
+/* 입력 영역 */
 .chat-input-form {
     display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: white;
 }
 
 .chat-input-form input {
     flex-grow: 1;
-    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 20px;
+    padding: 10px;
     margin-right: 10px;
 }
 
 .chat-input-form button {
-    background-color: #ffd700;
+    background-color: #ffd600;
     border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+}
+
+.chat-input-form button:hover {
+    background-color: #ffcd00;
+}
+
+/* 로딩 스피너 스타일 */
+.chat-loading {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px; /* 스피너 높이 조절 */
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);  /* 스피너 테두리 */
+    border-left-color: rgb(165, 167, 168);  /* 스피너 회전 색 */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;  /* 회전 애니메이션 */
+    margin-left: 30px;
+}
+
+/* 스피너 회전 애니메이션 */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ChatRoom 관련 스타일 */
+.chatroom-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chatroom-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+}
+
+.chatroom-messages {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.chatroom-message {
+    margin-bottom: 10px;
+}
+
+.self-message {
+    text-align: right;
+    color: #007bff;
+}
+
+.other-message {
+    text-align: left;
+    color: #000;
+}
+
+.chatroom-input {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.chatroom-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chatroom-input button {
     padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.chat-input-form button:hover {
-    background-color: #e6c200;
+.chatroom-input button:hover {
+    background-color: #0056b3;
 }
 
-/* Footer */
-footer {
-    background-color: #3c6255;
-    color: #f0e5d1;
-    text-align: center;
-    padding: 20px;
+.delete-room-button, .leave-room-button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
 }
 
-footer p {
-    margin: 0;
-    font-size: 0.875rem;
+.leave-room-button {
+    background-color: #6c757d;
+}
+
+.delete-room-button:hover, .leave-room-button:hover {
+    background-color: #bd2130;
+}
+
+.leave-room-button:hover {
+    background-color: #5a6268;
 }

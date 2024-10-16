@@ -22,6 +22,12 @@ function EvaluationList() {
             <ul>
                 {evaluations.map((evaluation) => (
                     <li key={evaluation.id}>
+                        <img 
+                            key={index} 
+                            src={`https://api.sulmeulliae.com${imageObj.image}`}
+                            alt={`evaluation ${index}`} 
+                            style={{ maxWidth: '100%', margin: '10px 0' }} 
+                        />
                         <Link to={`/evaluations/${evaluation.id}`}>{evaluation.title}</Link>
                     </li>
                 ))}

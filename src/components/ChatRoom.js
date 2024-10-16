@@ -107,17 +107,107 @@ function ChatRoom() {
         navigate('/community/drinkmate');  // 나가기 버튼을 눌렀을 때 채팅방 목록으로 이동
     };
 
+    // 카카오톡 스타일 인라인 CSS
+    const styles = {
+        chatroomContainer: {
+            maxWidth: '800px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#faf4e1',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        },
+        chatroomTitle: {
+            fontSize: '2rem',
+            color: '#333',
+            textAlign: 'center',
+            marginBottom: '20px',
+        },
+        chatMessages: {
+            height: '400px',
+            overflowY: 'auto',
+            padding: '10px',
+            backgroundColor: '#fff',
+            borderRadius: '10px',
+            marginBottom: '20px',
+        },
+        chatMessage: {
+            display: 'flex',
+            marginBottom: '10px',
+        },
+        selfMessage: {
+            marginLeft: 'auto',
+            backgroundColor: '#ffe600',
+            padding: '10px',
+            borderRadius: '10px 10px 0 10px',
+            maxWidth: '60%',
+        },
+        otherMessage: {
+            marginRight: 'auto',
+            backgroundColor: '#f0f0f0',
+            padding: '10px',
+            borderRadius: '10px 10px 10px 0',
+            maxWidth: '60%',
+        },
+        chatInputContainer: {
+            display: 'flex',
+        },
+        chatInput: {
+            flexGrow: 1,
+            padding: '10px',
+            borderRadius: '20px',
+            border: '1px solid #ddd',
+            marginRight: '10px',
+        },
+        sendButton: {
+            backgroundColor: '#ffd700',
+            border: 'none',
+            borderRadius: '20px',
+            padding: '10px 20px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+        },
+        chatroomActions: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '20px',
+        },
+        leaveButton: {
+            backgroundColor: '#6c757d',
+            padding: '10px',
+            borderRadius: '5px',
+            color: '#fff',
+            border: 'none',
+            cursor: 'pointer',
+        },
+        deleteButton: {
+            backgroundColor: '#ff1744',
+            padding: '10px',
+            borderRadius: '5px',
+            color: '#fff',
+            border: 'none',
+            cursor: 'pointer',
+        },
+    };
+
     return (
-        <div className="chatroom-container">
-            <h2 className="chatroom-title">{roomName}</h2>  {/* roomName을 표시 */}
-            <div className="chatroom-messages">
+        <div style={styles.chatroomContainer}>
+            <h2 style={styles.chatroomTitle}>{roomName}</h2>
+            <div style={styles.chatMessages}>
                 {messages.map((message, index) => (
-                    <div key={index} className={`chatroom-message ${message.username === currentUsername ? 'self-message' : 'other-message'}`}>
+                    <div
+                        key={index}
+                        style={
+                            message.username === currentUsername
+                                ? styles.selfMessage
+                                : styles.otherMessage
+                        }
+                    >
                         {message.username ? <strong>{message.username}:</strong> : null} {message.message}
                     </div>
                 ))}
             </div>
-            <div className="chatroom-input">
+            <div style={styles.chatInputContainer}>
                 <input
                     type="text"
                     value={inputMessage}
@@ -128,14 +218,14 @@ function ChatRoom() {
                         }
                     }}
                     placeholder="메시지를 입력하세요..."
+                    style={styles.chatInput}
                 />
-                <button onClick={sendMessage}>전송</button>
+                <button onClick={sendMessage} style={styles.sendButton}>전송</button>
             </div>
-
-            <div className="chatroom-actions">
-                <button className="leave-room-button" onClick={handleLeaveRoom}>나가기</button>
+            <div style={styles.chatroomActions}>
+                <button style={styles.leaveButton} onClick={handleLeaveRoom}>나가기</button>
                 {createdBy === Number(currentUserId) && (
-                    <button className="delete-room-button" onClick={handleDeleteRoom}>채팅방 삭제</button>
+                    <button style={styles.deleteButton} onClick={handleDeleteRoom}>채팅방 삭제</button>
                 )}
             </div>
         </div>
@@ -143,4 +233,3 @@ function ChatRoom() {
 }
 
 export default ChatRoom;
-

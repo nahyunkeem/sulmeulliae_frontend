@@ -19,8 +19,12 @@ function EvaluationList() {
     // 인라인 스타일 정의
     const styles = {
         container: {
+            maxWidth: '1200px',
+            margin: '50px auto',
             padding: '20px',
             backgroundColor: '#faf4e1',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         },
         heading: {
             fontSize: '2rem',

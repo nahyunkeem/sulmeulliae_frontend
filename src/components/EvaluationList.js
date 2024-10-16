@@ -20,14 +20,15 @@ function EvaluationList() {
         <div>
             <h1>주류평가목록</h1>
             <ul>
-                {evaluations.map((evaluation) => (
+                {evaluations.map((evaluation, index) => (
                     <li key={evaluation.id}>
-                        <img 
-                            key={index} 
-                            src={`https://api.sulmeulliae.com${imageObj.image}`}
-                            alt={`evaluation ${index}`} 
-                            style={{ maxWidth: '100%', margin: '10px 0' }} 
-                        />
+                        {evaluation.images && evaluation.images[0] && (
+                            <img 
+                                src={`https://api.sulmeulliae.com${evaluation.images[0].image}`} 
+                                alt={`evaluation ${index}`} 
+                                style={{ maxWidth: '100%', margin: '10px 0' }} 
+                            />
+                        )}
                         <Link to={`/evaluations/${evaluation.id}`}>{evaluation.title}</Link>
                     </li>
                 ))}

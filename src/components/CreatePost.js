@@ -165,8 +165,8 @@ function CreatePost() {
                     <select value={category} onChange={(e) => setCategory(e.target.value)} required style={styles.select}>
                         <option value="">선택</option>
                         <option value="3">자유 게시판</option>
-                        <option value="5">토론 게시판</option>
-                        <option value="4">질문 게시판</option>
+                        <option value="3">토론 게시판</option>
+                        <option value="3">질문 게시판</option>
                     </select>
                 </div>
 

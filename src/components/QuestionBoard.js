@@ -81,7 +81,7 @@ function QuestionBoard() {
             {posts.length > 0 ? (
                 <ul style={styles.postList}>
                     {posts
-                        .filter((post) => post.category === 4) // 카테고리 4는 질문 게시판
+                        .filter((post) => post.category === 3) // 카테고리 4는 질문 게시판
                         .map((post) => (
                             <li key={post.id} style={styles.postItem}>
                                 <Link to={`/community/${post.id}`} style={styles.postLink}>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom'; // useParams로 username 받아오기
 import UserLikes from './UserLikes';
 
+
+
 function UserProfile() {
     const { username } = useParams(); // URL에서 username 받아오기
     const [userProfile, setUserProfile] = useState({});
@@ -18,16 +20,11 @@ function UserProfile() {
             });
     }, [username]); // username이 바뀔 때마다 API 요청
     
-    // profile_image가 있는지 확인하여 이미지 URL 설정
-    const profileImageSrc = userProfile.profile_image
-        ? `https://api.sulmeulliae.com${userProfile.profile_image}`
-        : 'https://api.sulmeulliae.com/media/profile_images/default_profile.jpeg';
-
     return (
         <div>
             <h2>회원 정보</h2>
             <img
-                src={profileImageSrc} // 미리 정의한 profileImageSrc 사용
+                src={userProfile.profile_image ? `https://api.sulmeulliae.com${userProfile.profile_image}` : 'https://api.sulmeulliae.com/media/profile_images/default-profile.jpeg'}
                 alt="프로필 이미지"
                 style={{ width: '150px', height: '150px', borderRadius: '50%' }}
             />

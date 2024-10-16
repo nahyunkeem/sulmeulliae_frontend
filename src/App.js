@@ -61,7 +61,7 @@ function App() {
             justifyContent: 'space-between', // 좌우 정렬
         },
         logo: {
-            height: '40px', // 로고 이미지 크기
+            height: '80px', // 로고 이미지 크기
             marginRight: '20px', // 로고와 메뉴 사이 여백
         },
         link: {

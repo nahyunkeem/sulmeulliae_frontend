@@ -44,7 +44,7 @@ function App() {
         setLoggedIn(false);
         setUsername('');
         setUserId(null);
-        window.location.reload();
+        navigate('/');
     };
 
     // 인라인 스타일 정의

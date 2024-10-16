@@ -41,7 +41,7 @@ function Signup() {
         formContainer: {
             maxWidth: '600px',
             margin: '50px auto',
-            padding: '20px',
+            padding: '40px',  // 컨테이너와 입력 필드 사이에 여백 추가
             backgroundColor: '#faf4e1',
             borderRadius: '10px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
@@ -165,3 +165,4 @@ function Signup() {
 }
 
 export default Signup;
+

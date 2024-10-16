@@ -23,10 +23,10 @@ function UserProfile() {
     return (
         <div>
             <h2>회원 정보</h2>
-            <img 
-                src={`https://api.sulmeulliae.com${userProfile.profile_image}`}
-                alt="프로필 이미지가 없습니다." 
-                style={{ width: '150px', height: '150px', borderRadius: '50%' }} // 프로필 이미지 스타일 설정
+            <img
+                src={userProfile.profile_image ? `https://api.sulmeulliae.com${userProfile.profile_image}` : 'https://api.sulmeulliae.com/media/profile_images/default_profile.jpeg'}
+                alt="프로필 이미지"
+                style={{ width: '150px', height: '150px', borderRadius: '50%' }}
             />
             <p>이름: {userProfile.fullname}</p>
             <p>닉네임: {userProfile.nickname}</p>

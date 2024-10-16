@@ -27,7 +27,7 @@ function Signup() {
         // 회원가입 API 호출
         api.post('/accounts/', formData)
             .then(() => {
-                alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
+                alert('회원가입이 완료되었습니다. 이메일 인증후 로그인해주세요!');
                 navigate('/login');
             })
             .catch((error) => {
@@ -147,7 +147,7 @@ function Signup() {
                     />
                 </div>
                 <div style={styles.formGroup}>
-                    <label style={styles.label}>이메일</label>
+                    <label style={styles.label}>이메일 (이메일 인증을 위해 정확한 이메일을 입력해주세요.)</label>
                     <input
                         type="email"
                         name="email"

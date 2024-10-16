@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import EvaluationList from './components/EvaluationList';
-import EvaluationDetail from './components/EvaluationDetail';  // 평가 상세 페이지 컴포넌트
+import EvaluationDetail from './components/EvaluationDetail';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import FreeBoard from './components/FreeBoard';
@@ -24,14 +24,13 @@ function App() {
     const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        // localStorage에서 사용자명 불러오기
         const storedUsername = localStorage.getItem('username');
         const storedUserId = localStorage.getItem('userId');
         if (storedUsername) {
             setUsername(storedUsername);
         }
         if (storedUserId) {
-            setUserId(storedUserId);  // userId 상태 설정
+            setUserId(storedUserId);  
         }
     }, []);
 
@@ -50,6 +49,9 @@ function App() {
             maxWidth: '1200px',
             margin: '0 auto',
             padding: '20px',
+            minHeight: 'calc(100vh - 60px)',  // 전체 화면에서 footer를 제외한 영역
+            display: 'flex',
+            flexDirection: 'column',
         },
         nav: {
             backgroundColor: '#3c6255',
@@ -81,6 +83,17 @@ function App() {
         },
         buttonHover: {
             backgroundColor: '#e6c200',
+        },
+        footer: {
+            backgroundColor: '#3c6255',
+            color: '#f0e5d1',
+            textAlign: 'center',
+            padding: '15px',
+            marginTop: 'auto',  // flex 컨테이너에서 footer를 하단에 위치
+        },
+        footerLink: {
+            color: '#f0e5d1',
+            textDecoration: 'none',
         },
     };
 
@@ -130,6 +143,15 @@ function App() {
                     <Route path="/accounts/password" element={<UserPasswordChange />} />
                     <Route path="/accounts/withdraw" element={<UserWithdraw />} />
                 </Routes>
+
+                {/* Footer 추가 */}
+                <footer style={styles.footer}>
+                    <p>© 2024 Sulmeulliae. All rights reserved.</p>
+                    <p>
+                        <Link to="/privacy-policy" style={styles.footerLink}>개인정보 처리방침</Link> |{' '}
+                        <Link to="/terms-of-service" style={styles.footerLink}>이용약관</Link>
+                    </p>
+                </footer>
             </div>
         </Router>
     );

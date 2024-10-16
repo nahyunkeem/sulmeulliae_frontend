@@ -79,6 +79,7 @@ function CreatePost() {
         input: {
             width: '100%',
             padding: '15px',
+            paddingRight: '20px',  // 오른쪽 여백 추가
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
@@ -87,9 +88,11 @@ function CreatePost() {
             width: '100%',
             height: '200px',
             padding: '15px',
+            paddingRight: '20px',  // 오른쪽 여백 추가
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
+            resize: 'none',  // 사용자가 크기 조절 불가능하게 설정
         },
         select: {
             width: '100%',
@@ -172,3 +175,4 @@ function CreatePost() {
 }
 
 export default CreatePost;
+

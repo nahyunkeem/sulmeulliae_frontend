@@ -20,6 +20,24 @@ function UserProfile() {
             });
     }, [username]); // username이 바뀔 때마다 API 요청
     
+    const handleUnblindUser = (blindUsername) => {
+        const confirmUnblind = window.confirm(`${blindUsername} 님의 블라인드를 해제하시겠습니까?`);
+        if (confirmUnblind) {
+            api.post(`/accounts/${blindUsername}/blind/`) // 블라인드 해제 API 호출
+                .then(() => {
+                    // 블라인드 해제 후 UI 업데이트
+                    setUserProfile(prevProfile => ({
+                        ...prevProfile,
+                        blind: prevProfile.blind.filter(user => user !== blindUsername), // 블라인드 리스트에서 제거
+                    }));
+                })
+                .catch(error => {
+                    console.error('블라인드 해제 중 에러 발생:', error);
+                });
+        }
+    };
+
+
     return (
         <div>
             <h2>회원 정보</h2>
@@ -33,6 +51,18 @@ function UserProfile() {
             <p>이메일: {userProfile.email}</p>
             <p>생년월일: {userProfile.birth}</p>
             <p>포인트: {userProfile.points}</p>
+            <p>팔로잉:{userProfile.followings_count}</p>
+            <p>팔로우:{userProfile.followers_count}</p>
+
+            <p>블라인드:{userProfile.followings}</p>
+            <ul>
+                {userProfile.blind && userProfile.blind.map((blindUser) => (
+                    <li key={blindUser}>
+                        {blindUser} 
+                        <button onClick={() => handleUnblindUser(blindUser)}>블라인드 해제</button>
+                    </li>
+                ))}
+            </ul>
             <Link to="/accounts/edit"><button>회원정보 수정</button></Link>
             <Link to="/accounts/password"><button>비밀번호 변경</button></Link>
             <Link to="/accounts/withdraw"><button>회원탈퇴</button></Link>

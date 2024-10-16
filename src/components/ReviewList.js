@@ -88,6 +88,38 @@ function ReviewList({ evaluationId, username, userId }) {
             });
     };  
 
+    const handleBlindUser = (author) => {
+        const confirmBlind = window.confirm(`${author} 님을 블라인드 하시겠습니까?`);
+        if (confirmBlind) {
+            api.post(`/accounts/${author}/blind/`)  // 블라인드 API 호출
+                .then(() => {
+                    // 블라인드 성공 후 UI 업데이트
+                    setReviews(reviews.filter(review => review.author !== author));  // 해당 리뷰 숨기기
+                })
+                .catch((error) => {
+                    console.error('블라인드 중 에러 발생:', error);
+                });
+        }
+    };
+
+    const toggleFollowUser = (author) => {
+        api.post(`/accounts/${author}/`)  // 팔로우 API 호출
+            .then(() => {
+                setReviews(reviews.map(review => {
+                    if (review.author === author) {
+                        return {
+                            ...review,
+                            isFollowing: !review.isFollowing  // 팔로우 상태 토글
+                        };
+                    }
+                    return review;
+                }));
+            })
+            .catch((error) => {
+                console.error('팔로우 상태 변경 중 에러 발생:', error);
+            });
+    };
+
     return (
         <div>
             <h2>리뷰</h2>
@@ -115,7 +147,14 @@ function ReviewList({ evaluationId, username, userId }) {
                             ) : (
                                 // 기본 리뷰 보기 모드
                                 <div>
-                                    <div>{review.author}</div>
+                                    <div>{review.author}{review.author !== username && (  
+                                            // 자신이 작성하지 않은 리뷰일 경우에만 블라인드, 팔로우 버튼 표시
+                                            <button onClick={() => handleBlindUser(review.author)}>블라인드</button>)}
+                                        {review.author !== username && (<button onClick={() => toggleFollowUser(review.author)}>
+                                            {review.isFollowing ? '언팔로우' : '팔로우'}
+                                        </button>)}
+                                        </div>
+
                                     <div>{review.content}</div>
                                     <div>{review.rating} / 5</div>
                                     <div>좋아요 | {review.like_count}</div>

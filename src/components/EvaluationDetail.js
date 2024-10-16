@@ -73,6 +73,7 @@ function EvaluationDetail({ username, userId }) {
             <p>{evaluation.content}</p>
             <p>좋아요 | {likeCount}</p>
             <p>조회수 | {evaluation.viewcounts}</p>
+            <p>Ai가 요약하는 리뷰 | {evaluation.summary}</p>
             <button onClick={toggleLike}>
                 {liked ? '좋아요 취소' : '좋아요'}
             </button>

@@ -5,6 +5,7 @@ function CommentList({ postId, username, userId }) {
     const [comments, setComments] = useState([]);
     const [editingCommentId, setEditingCommentId] = useState(null);  // 수정 중인 댓글 ID
     const [editContent, setEditContent] = useState('');  // 수정 중인 댓글 내용
+    const [isFollowing, setIsFollowing] = useState(false);  // 팔로우 상태
 
     useEffect(() => {
         // 댓글 목록을 가져오는 API 호출
@@ -20,6 +21,21 @@ function CommentList({ postId, username, userId }) {
                 console.error('리뷰 로드 중 에러 발생:', error);
             });
     }, [postId, userId]);
+
+    useEffect(() => {
+        if (username && comments) {
+            api.get(`/accounts/${username}/`)
+                .then((response) => {
+                    const followings = response.data.followings; // 사용자의 팔로잉 목록
+                    // 작성자가 팔로잉 목록에 있는지 확인
+                    const followingStatus = followings.includes(comments.author);
+                    setIsFollowing(followingStatus);
+                })
+                .catch((error) => {
+                    console.error('팔로우 상태 로드 중 에러 발생:', error);
+                });
+            }
+    }, [username, comments]);
 
     const handleEditClick = (comment) => {
         setEditingCommentId(comment.id);
@@ -85,6 +101,36 @@ function CommentList({ postId, username, userId }) {
                 console.error('좋아요 상태 변경 중 에러 발생:', error);
             });
     };  
+    
+    const handleBlindUser = (author) => {
+        const confirmBlind = window.confirm(`${author} 님을 블라인드 하시겠습니까?`);
+        if (confirmBlind) {
+            api.post(`/accounts/${author}/blind/`)  // 블라인드 API 호출
+                .then(() => {
+                    // 블라인드 성공 후 UI 업데이트
+                    setComments(comments.filter(comment => comment.author !== author));  // 해당 리뷰 숨기기
+                })
+                .catch((error) => {
+                    console.error('블라인드 중 에러 발생:', error);
+                });
+        }
+    };
+
+    const toggleFollowUser = (author) => {
+        api.post(`/accounts/${author}/`)  // 팔로우/언팔로우 API 호출
+            .then(() => {
+                setComments(comments.map(comment => {
+                    if (comment.author === author) {
+                        return { ...comment, isFollowing: !comment.isFollowing };  // 상태 토글
+                    }
+                    return comment;
+                }));
+            })
+            .catch((error) => {
+                console.error('팔로우 상태 변경 중 에러 발생:', error);
+            });
+    };
+
 
     return (
         <div>
@@ -106,7 +152,16 @@ function CommentList({ postId, username, userId }) {
                             ) : (
                                 // 기본 댓글 보기 모드
                                 <div>
-                                    <div>{comment.author} | {comment.content}</div>
+                                    <div>{comment.author}
+                                        {comment.author !== username && (  
+                                            // 자신이 작성하지 않은 댓글일 경우에만 블라인드, 팔로우 버튼 표시
+                                            <button onClick={() => handleBlindUser(comment.author)}>블라인드</button>
+                                            )}
+                                            {comment.author !== username && (
+                                                <button onClick={() => toggleFollowUser(comment.author)}>
+                                                {isFollowing ? '언팔로우' : '팔로우'}
+                                                </button>
+                                            )} | {comment.content}</div>
                                     <div>좋아요 | {comment.like_count}</div>
                                     {comment.author === username ? (
                                         <div>
@@ -116,7 +171,7 @@ function CommentList({ postId, username, userId }) {
                                         </div>
                                     ) :(
                                         <div>
-                                            {/* 본인이 작성하지 않은 리뷰일 경우 좋아요 버튼 */}
+                                            {/* 본인이 작성하지 않은 댓글일 경우 좋아요 버튼 */}
                                             <button onClick={() => toggleCommentLike(comment.id)}>
                                                 {comment.liked ? '좋아요 취소' : '좋아요'}
                                             </button>

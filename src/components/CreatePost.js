@@ -39,9 +39,9 @@ function CreatePost() {
             // 카테고리에 따라 해당 게시판으로 이동
             if (category === '3') {
                 navigate('/community/freeboard/');
-            } else if (category === '5') {
+            } else if (category === '3') {
                 navigate('/community/discussion/');
-            } else if (category === '4') {
+            } else if (category === '3') {
                 navigate('/community/question/');
             }
         })
@@ -83,6 +83,7 @@ function CreatePost() {
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
+            boxSizing: 'border-box',  // 패딩과 테두리가 너비에 포함되도록 설정
         },
         textarea: {
             width: '100%',
@@ -93,6 +94,7 @@ function CreatePost() {
             border: '1px solid #ddd',
             fontSize: '1rem',
             resize: 'none',  // 사용자가 크기 조절 불가능하게 설정
+            boxSizing: 'border-box',  // 패딩과 테두리가 너비에 포함되도록 설정
         },
         select: {
             width: '100%',

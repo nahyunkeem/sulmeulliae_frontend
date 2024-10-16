@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import EvaluationList from './components/EvaluationList';
-import EvaluationDetail from './components/EvaluationDetail';  // 평가 상세 페이지 컴포넌트
+import EvaluationDetail from './components/EvaluationDetail';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import FreeBoard from './components/FreeBoard';
@@ -24,14 +24,13 @@ function App() {
     const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        // localStorage에서 사용자명 불러오기
         const storedUsername = localStorage.getItem('username');
         const storedUserId = localStorage.getItem('userId');
         if (storedUsername) {
             setUsername(storedUsername);
         }
         if (storedUserId) {
-            setUserId(storedUserId);  // userId 상태 설정
+            setUserId(storedUserId);  
         }
     }, []);
 
@@ -47,11 +46,20 @@ function App() {
 
     // 인라인 스타일 정의
     const styles = {
+        body: {
+            margin: '0',
+            padding: '0',
+            minHeight: '100vh',
+            backgroundColor: '#3c6255',  // 전체 배경색 변경
+            color: '#f0e5d1',
+            display: 'flex',
+            flexDirection: 'column',
+        },
         app: {
             maxWidth: '1200px',
             margin: '0 auto',
             padding: '20px',
-            backgroundColor: '#3c6255',
+            flex: '1',
         },
         nav: {
             backgroundColor: '#3c6255',
@@ -89,15 +97,11 @@ function App() {
             color: '#f0e5d1',
             textAlign: 'center',
             padding: '15px',
-            marginTop: 'auto',
             borderTop: '1px solid #ffd700',
         },
         footerLink: {
             color: '#ffd700',
             textDecoration: 'none',
-        },
-        body: {
-            paddingTop: '20px',  // 네브바와의 간격 조정
         }
     };
 
@@ -128,25 +132,27 @@ function App() {
                     </nav>
                 </header>
 
-                <Routes>
-                    <Route path="/" element={<EvaluationList />} />
-                    <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />} />
-                    <Route path="/signup" element={<Signup />} />
-                    <Route path="/evaluations/:id" element={<EvaluationDetail username={username} userId={userId} />} />
-                    <Route path="/community/freeboard" element={<FreeBoard />} />
-                    <Route path="/community/question" element={<QuestionBoard />} />
-                    <Route path="/community/discussion" element={<DiscussionBoard />} />
-                    <Route path="/community/drinkmate" element={<DrinkMateBoard />} />
-                    <Route path="/community/:id" element={<CommunityDetail username={username} userId={userId} />} />
-                    <Route path="/community/create" element={<CreatePost />} />
-                    <Route path="/chatbot" element={<ChatBot />} />
-                    <Route path="/chat/:roomId" element={<ChatRoom username={username} userId={userId} />} /> 
-                    <Route path="/chat/createchat" element={<CreateChat />} />
-                    <Route path="/profile/:username" element={<UserProfile username={username} />} />
-                    <Route path="/accounts/edit" element={<UserProfileEdit />} />
-                    <Route path="/accounts/password" element={<UserPasswordChange />} />
-                    <Route path="/accounts/withdraw" element={<UserWithdraw />} />
-                </Routes>
+                <div style={styles.app}>
+                    <Routes>
+                        <Route path="/" element={<EvaluationList />} />
+                        <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />} />
+                        <Route path="/signup" element={<Signup />} />
+                        <Route path="/evaluations/:id" element={<EvaluationDetail username={username} userId={userId} />} />
+                        <Route path="/community/freeboard" element={<FreeBoard />} />
+                        <Route path="/community/question" element={<QuestionBoard />} />
+                        <Route path="/community/discussion" element={<DiscussionBoard />} />
+                        <Route path="/community/drinkmate" element={<DrinkMateBoard />} />
+                        <Route path="/community/:id" element={<CommunityDetail username={username} userId={userId} />} />
+                        <Route path="/community/create" element={<CreatePost />} />
+                        <Route path="/chatbot" element={<ChatBot />} />
+                        <Route path="/chat/:roomId" element={<ChatRoom username={username} userId={userId} />} /> 
+                        <Route path="/chat/createchat" element={<CreateChat />} />
+                        <Route path="/profile/:username" element={<UserProfile username={username} />} />
+                        <Route path="/accounts/edit" element={<UserProfileEdit />} />
+                        <Route path="/accounts/password" element={<UserPasswordChange />} />
+                        <Route path="/accounts/withdraw" element={<UserWithdraw />} />
+                    </Routes>
+                </div>
 
                 <footer style={styles.footer}>
                     <p>© 2024 Sulmeulliae. All rights reserved.</p>

@@ -51,6 +51,7 @@ function App() {
             maxWidth: '1200px',
             margin: '0 auto',
             padding: '20px',
+            backgroundColor: '#3c6255',
         },
         nav: {
             backgroundColor: '#3c6255',

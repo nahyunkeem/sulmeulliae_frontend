@@ -35,33 +35,87 @@ function Login({ setLoggedIn, setUsername }) {
             });
     };
 
+    // 스타일 정의
+    const styles = {
+        formContainer: {
+            maxWidth: '600px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#faf4e1',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        },
+        heading: {
+            textAlign: 'center',
+            fontSize: '2rem',
+            marginBottom: '20px',
+            color: '#333',
+        },
+        formGroup: {
+            marginBottom: '20px',
+        },
+        label: {
+            display: 'block',
+            fontSize: '1.2rem',
+            marginBottom: '10px',
+            color: '#333',
+        },
+        input: {
+            width: '100%',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ddd',
+            fontSize: '1rem',
+        },
+        button: {
+            width: '100%',
+            padding: '10px',
+            backgroundColor: '#ffd700',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            color: '#3c6255',
+        },
+        buttonHover: {
+            backgroundColor: '#e6c200',
+        },
+        errorMessage: {
+            color: 'red',
+            marginTop: '10px',
+        },
+    };
+
     return (
-        <div>
-            <h2>로그인</h2>
+        <div style={styles.formContainer}>
+            <h2 style={styles.heading}>로그인</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>아이디</label>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>아이디</label>
                     <input
                         type="text"
                         value={usernameInput}
                         onChange={(e) => setUsernameInput(e.target.value)}
                         required
+                        style={styles.input}
                     />
                 </div>
-                <div>
-                    <label>비밀번호</label>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>비밀번호</label>
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        style={styles.input}
                     />
                 </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">로그인</button>
+                {error && <p style={styles.errorMessage}>{error}</p>}
+                <button type="submit" style={styles.button}>로그인</button>
             </form>
         </div>
     );
 }
 
 export default Login;
+

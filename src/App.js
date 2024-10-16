@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import EvaluationList from './components/EvaluationList';
 import EvaluationDetail from './components/EvaluationDetail';  // 평가 상세 페이지 컴포넌트
 import Login from './components/Login';
@@ -23,6 +24,7 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
     const [username, setUsername] = useState('');
     const [userId, setUserId] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // localStorage에서 사용자명 불러오기

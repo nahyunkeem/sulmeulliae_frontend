@@ -46,11 +46,7 @@ function Signup() {
         }
 
         // 회원가입 API 호출
-        api.post('/accounts/', formDataToSend, {
-            headers: {
-                'Content-Type': 'multipart/form-data',  // FormData로 전송할 때 multipart 설정
-            },
-        })
+        api.post('/accounts/', formDataToSend)
         .then(() => {
             alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
             navigate('/login');

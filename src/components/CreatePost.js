@@ -37,11 +37,11 @@ function CreatePost() {
         .then(response => {
             console.log('게시글 작성 성공:', response.data);
             // 카테고리에 따라 해당 게시판으로 이동
-            if (category === '3') {
+            if (category === '1') {
                 navigate('/community/freeboard/');
             } else if (category === '3') {
                 navigate('/community/discussion/');
-            } else if (category === '3') {
+            } else if (category === '2') {
                 navigate('/community/question/');
             }
         })
@@ -164,9 +164,9 @@ function CreatePost() {
                     <label style={styles.label}>카테고리:</label>
                     <select value={category} onChange={(e) => setCategory(e.target.value)} required style={styles.select}>
                         <option value="">선택</option>
-                        <option value="3">자유 게시판</option>
+                        <option value="1">자유 게시판</option>
                         <option value="3">토론 게시판</option>
-                        <option value="3">질문 게시판</option>
+                        <option value="2">질문 게시판</option>
                     </select>
                 </div>
 

@@ -49,7 +49,7 @@ function EvaluationList() {
         image: {
             width: '150px', // 고정된 이미지 크기
             height: '150px',
-            objectFit: 'cover', // 이미지가 잘리지 않고 전체에 맞도록 설정
+            objectFit: 'contain', // 이미지가 잘리지 않고 전체가 보이도록 설정
             marginBottom: '10px',
             borderRadius: '10px',
             cursor: 'pointer',
@@ -89,3 +89,4 @@ function EvaluationList() {
 }
 
 export default EvaluationList;
+

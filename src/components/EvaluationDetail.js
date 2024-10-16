@@ -46,7 +46,7 @@ function EvaluationDetail({ username, userId }) {
     };
 
     if (!evaluation) {
-        return <p>게시물을 불러오는 중입니다...</p>;
+        return <p></p>;
     }
 
     // 스타일 정의

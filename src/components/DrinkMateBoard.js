@@ -80,7 +80,7 @@ function DrinkMateBoard() {
                         </li>
                     ))
                 ) : (
-                    <p>채팅방이 없습니다.</p>
+                    <p></p>
                 )}
             </ul>
         </div>

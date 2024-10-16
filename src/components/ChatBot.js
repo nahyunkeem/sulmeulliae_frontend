@@ -158,7 +158,7 @@ function ChatBot() {
                     type="text"
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    placeholder="추천을 위해 현재의 기분이나 최근에 맛있게 마신술을 입력해주세요..."
+                    placeholder="추천을 위해 현재의 기분이나 최근에 맛있게 마신술을 입력해주세요...(1포인트필요)"
                     disabled={loading}  // 로딩 중 입력 필드 비활성화
                     style={styles.chatInput}
                 />

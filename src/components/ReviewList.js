@@ -179,7 +179,7 @@ function ReviewList({ evaluationId, username, userId }) {
                     ))}
                 </ul>
             ) : (
-                <p>리뷰가 없습니다.</p>
+                <p></p>
             )}
         </div>
     );

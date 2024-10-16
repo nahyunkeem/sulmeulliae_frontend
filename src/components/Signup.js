@@ -159,6 +159,7 @@ function Signup() {
                 </div>
                 {error && <p style={styles.errorMessage}>{error}</p>}
                 <button type="submit" style={styles.button}>회원가입</button>
+                <p>회원가입을 누르고 잠시기다려주세요.</p>
             </form>
         </div>
     );

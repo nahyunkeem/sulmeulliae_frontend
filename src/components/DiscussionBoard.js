@@ -91,7 +91,7 @@ function DiscussionBoard() {
                         ))}
                 </ul>
             ) : (
-                <p>게시물이 없습니다.</p>
+                <p></p>
             )}
         </div>
     );

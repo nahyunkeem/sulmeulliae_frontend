@@ -71,37 +71,95 @@ function UserProfileEdit() {
         });
     };
 
+    // 스타일 정의
+    const styles = {
+        formContainer: {
+            maxWidth: '600px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#faf4e1',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        },
+        heading: {
+            textAlign: 'center',
+            fontSize: '2rem',
+            marginBottom: '20px',
+            color: '#333',
+        },
+        formGroup: {
+            marginBottom: '20px',
+        },
+        label: {
+            display: 'block',
+            fontSize: '1.2rem',
+            marginBottom: '10px',
+            color: '#333',
+        },
+        input: {
+            width: '100%',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ddd',
+            fontSize: '1rem',
+        },
+        fileInput: {
+            width: '100%',
+            padding: '10px 0',
+        },
+        profileImagePreview: {
+            width: '100px',
+            height: '100px',
+            borderRadius: '50%',
+            marginTop: '10px',
+        },
+        button: {
+            width: '100%',
+            padding: '10px',
+            backgroundColor: '#ffd700',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            color: '#3c6255',
+        },
+        buttonHover: {
+            backgroundColor: '#e6c200',
+        },
+    };
+
     return (
-        <div>
-            <h2>회원 정보 수정</h2>
+        <div style={styles.formContainer}>
+            <h2 style={styles.heading}>회원 정보 수정</h2>
             <form onSubmit={handleFormSubmit}>
-                <div>
-                    <label>이름: {userInfo.fullname}</label>  {/* 이름은 읽기만 가능 */}
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>이름: {userInfo.fullname}</label>  {/* 이름은 읽기만 가능 */}
                 </div>
-                <div>
-                    <label>닉네임:</label>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>닉네임:</label>
                     <input 
                         type="text" 
                         name="nickname" 
                         value={userInfo.nickname} 
                         onChange={handleInputChange} 
                         required 
+                        style={styles.input}
                     />
                 </div>
-                <div>
-                    <label>프로필 이미지:</label>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>프로필 이미지:</label>
                     <input 
                         type="file" 
                         name="profile_image" 
                         onChange={handleFileChange} 
+                        style={styles.fileInput}
                     />
-                    {previewImage && <img src={previewImage} alt="미리보기" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
+                    {previewImage && <img src={previewImage} alt="미리보기" style={styles.profileImagePreview} />}
                 </div>
-                <button type="submit">수정하기</button>
+                <button type="submit" style={styles.button}>수정하기</button>
             </form>
         </div>
     );
 }
 
 export default UserProfileEdit;
-

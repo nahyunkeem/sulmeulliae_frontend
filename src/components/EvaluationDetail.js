@@ -52,22 +52,29 @@ function EvaluationDetail({ username, userId }) {
     // 스타일 정의
     const styles = {
         container: {
-            maxWidth: '300px', // 고정된 너비 설정
-            margin: '0 auto',
+            width: '100%', // 너비를 전체 화면으로 설정
+            margin: '50px auto', // 네브바와 간격을 주기 위해 margin-top을 50px로 설정
             padding: '20px',
             border: '1px solid #ddd',
             borderRadius: '10px',
-            backgroundColor: '#f9f9f9',
+            backgroundColor: '#faf4e1', // EvaluationList와 동일한 배경색
         },
         title: {
-            fontSize: '1.5rem',
+            fontSize: '2rem',
             color: '#333',
             textAlign: 'center',
             marginBottom: '15px',
         },
+        imageContainer: {
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap', // 이미지가 여러 개일 때 줄바꿈
+            gap: '10px', // 이미지 간 간격
+        },
         image: {
-            width: '100%',
-            height: 'auto',
+            width: '200px', // 고정된 이미지 크기
+            height: '200px',
+            objectFit: 'contain', // 이미지가 짤리지 않도록
             marginBottom: '15px',
             borderRadius: '10px',
         },
@@ -100,7 +107,7 @@ function EvaluationDetail({ username, userId }) {
         <div style={styles.container}>
             <h3 style={styles.title}>{evaluation.title}</h3>
             {evaluation.images && evaluation.images.length > 0 && (
-                <div>
+                <div style={styles.imageContainer}>
                     {evaluation.images.map((imageObj, index) => (
                         <img 
                             key={index} 

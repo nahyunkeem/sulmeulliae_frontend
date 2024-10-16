@@ -58,7 +58,7 @@ function ChatBot() {
         setInputMessage('');
     };
 
-    // 스타일 정의 (채팅방과 동일한 스타일 적용, 네브바와 간격 조정, 스피너 수정)
+    // 스타일 정의 (채팅방과 동일한 스타일 적용, 네브바와 간격 조정)
     const styles = {
         chatContainer: {
             width: '100%',
@@ -121,18 +121,8 @@ function ChatBot() {
             justifyContent: 'center',
             alignItems: 'center',
             padding: '20px 0',
-        },
-        spinner: {
-            border: '4px solid rgba(0, 0, 0, 0.1)',
-            borderLeftColor: '#ffcd00',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            animation: 'spin 1s linear infinite',  // 애니메이션 적용
-        },
-        '@keyframes spin': {
-            from: { transform: 'rotate(0deg)' },
-            to: { transform: 'rotate(360deg)' },
+            fontSize: '1.2rem',
+            color: '#888',  // 로딩 텍스트 색상
         },
     };
 
@@ -152,10 +142,10 @@ function ChatBot() {
                     </div>
                 ))}
 
-                {/* 로딩 중일 때 스피너 표시 */}
+                {/* 로딩 중일 때 "Loading..." 텍스트 표시 */}
                 {loading && (
                     <div style={styles.chatLoading}>
-                        <div style={styles.spinner}></div>  {/* 스피너 애니메이션 */}
+                        <p>Loading...</p>
                     </div>
                 )}
 

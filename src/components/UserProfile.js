@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom'; // useParams로 username 받아오기
 import UserLikes from './UserLikes';
 
-
-
 function UserProfile() {
     const { username } = useParams(); // URL에서 username 받아오기
     const [userProfile, setUserProfile] = useState({});
@@ -20,23 +18,73 @@ function UserProfile() {
             });
     }, [username]); // username이 바뀔 때마다 API 요청
     
+    // 스타일 정의
+    const styles = {
+        profileContainer: {
+            maxWidth: '600px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#faf4e1',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+            textAlign: 'center',
+        },
+        profileImage: {
+            width: '150px',
+            height: '150px',
+            borderRadius: '50%',
+            marginBottom: '20px',
+        },
+        profileInfo: {
+            fontSize: '1.2rem',
+            marginBottom: '10px',
+            color: '#333',
+        },
+        buttonsContainer: {
+            marginTop: '20px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: '10px',
+        },
+        button: {
+            backgroundColor: '#ffd700',
+            border: 'none',
+            padding: '10px 20px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            color: '#3c6255',
+            width: '100%',
+        },
+        buttonHover: {
+            backgroundColor: '#e6c200',
+        },
+        likesSection: {
+            marginTop: '30px',
+        },
+    };
+
     return (
-        <div>
+        <div style={styles.profileContainer}>
             <h2>회원 정보</h2>
             <img
                 src={userProfile.profile_image ? `https://api.sulmeulliae.com${userProfile.profile_image}` : 'https://api.sulmeulliae.com/media/profile_images/default_profile.jpeg'}
                 alt="프로필 이미지"
-                style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+                style={styles.profileImage}
             />
-            <p>이름: {userProfile.fullname}</p>
-            <p>닉네임: {userProfile.nickname}</p>
-            <p>이메일: {userProfile.email}</p>
-            <p>생년월일: {userProfile.birth}</p>
-            <p>포인트: {userProfile.points}</p>
-            <Link to="/accounts/edit"><button>회원정보 수정</button></Link>
-            <Link to="/accounts/password"><button>비밀번호 변경</button></Link>
-            <Link to="/accounts/withdraw"><button>회원탈퇴</button></Link>
-            <div>
+            <p style={styles.profileInfo}>이름: {userProfile.fullname}</p>
+            <p style={styles.profileInfo}>닉네임: {userProfile.nickname}</p>
+            <p style={styles.profileInfo}>이메일: {userProfile.email}</p>
+            <p style={styles.profileInfo}>생년월일: {userProfile.birth}</p>
+            <p style={styles.profileInfo}>포인트: {userProfile.points}</p>
+            
+            <div style={styles.buttonsContainer}>
+                <Link to="/accounts/edit"><button style={styles.button}>회원정보 수정</button></Link>
+                <Link to="/accounts/password"><button style={styles.button}>비밀번호 변경</button></Link>
+                <Link to="/accounts/withdraw"><button style={styles.button}>회원탈퇴</button></Link>
+            </div>
+
+            <div style={styles.likesSection}>
                 <UserLikes username={username} />
             </div>
         </div>

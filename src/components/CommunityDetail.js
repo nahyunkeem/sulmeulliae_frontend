@@ -42,7 +42,7 @@ function CommunityDetail({ username, userId }) {
     };
 
     if (!post) {
-        return <p>로그인 후 이용해주세요</p>;
+        return <p></p>;
     }
 
     // 인라인 스타일 정의

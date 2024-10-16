@@ -58,12 +58,12 @@ function ChatBot() {
         setInputMessage('');
     };
 
-    // 스타일 정의 (카카오톡 스타일 적용)
+    // 스타일 정의 (채팅방과 동일한 스타일 적용, 네브바와 간격 조정, 스피너 수정)
     const styles = {
         chatContainer: {
             width: '100%',
             maxWidth: '600px',
-            margin: '0 auto',
+            margin: '50px auto',  // 네브바와 간격 조정
             backgroundColor: '#f7f7f7',
             border: '1px solid #ddd',
             borderRadius: '10px',
@@ -130,6 +130,10 @@ function ChatBot() {
             height: '40px',
             animation: 'spin 1s linear infinite',
         },
+        '@keyframes spin': {
+            from: { transform: 'rotate(0deg)' },
+            to: { transform: 'rotate(360deg)' },
+        },
     };
 
     return (
@@ -177,5 +181,4 @@ function ChatBot() {
 }
 
 export default ChatBot;
-
 

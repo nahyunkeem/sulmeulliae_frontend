@@ -5,14 +5,16 @@ import api from '../services/api';
 function CreatePost() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState([]);  // 여러 이미지를 위한 배열 상태
     const [category, setCategory] = useState('');
     const navigate = useNavigate();
 
+    // 여러 이미지 선택 처리
     const handleImageChange = (event) => {
         setImages(event.target.files);  // 여러 이미지 선택
     };
 
+    // 게시글 작성 처리
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -25,8 +27,10 @@ function CreatePost() {
         formData.append('title', title);
         formData.append('content', content);
         formData.append('category', category);
+
+        // 여러 이미지를 FormData에 추가
         for (let i = 0; i < images.length; i++) {
-            formData.append('images', images[i]);  // 여러 이미지 추가
+            formData.append('community_image', images[i]);  // 여러 이미지 추가
         }
 
         api.post('/community/', formData, {
@@ -34,8 +38,7 @@ function CreatePost() {
                 'Content-Type': 'multipart/form-data',
             },
         })
-        .then(response => {
-            console.log('게시글 작성 성공:', response.data);
+        .then(() => {
             // 카테고리에 따라 해당 게시판으로 이동
             if (category === '1') {
                 navigate('/community/freeboard/');
@@ -45,18 +48,17 @@ function CreatePost() {
                 navigate('/community/question/');
             }
         })
-        .catch(error => {
-            console.error('게시글 작성 중 에러 발생:', error);
+        .catch(() => {
         });
     };
 
-    // 인라인 스타일 정의 (자유게시판과 일관된 스타일)
+    // 인라인 스타일 정의
     const styles = {
         formContainer: {
-            maxWidth: '1200px',  // 컨테이너를 더 넓게 설정
+            maxWidth: '1200px',
             margin: '50px auto',
             padding: '30px',
-            backgroundColor: '#faf4e1',  // 자유게시판과 같은 배경색
+            backgroundColor: '#faf4e1',
             borderRadius: '10px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         },
@@ -68,6 +70,8 @@ function CreatePost() {
         },
         formGroup: {
             marginBottom: '20px',
+            paddingLeft: '10px',  // 입력 필드와 컨테이너 사이의 간격 추가
+            paddingRight: '10px',
         },
         label: {
             display: 'block',
@@ -79,22 +83,20 @@ function CreatePost() {
         input: {
             width: '100%',
             padding: '15px',
-            paddingRight: '20px',  // 오른쪽 여백 추가
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
-            boxSizing: 'border-box',  // 패딩과 테두리가 너비에 포함되도록 설정
+            boxSizing: 'border-box',  // 패딩을 포함하여 너비 계산
         },
         textarea: {
             width: '100%',
             height: '200px',
             padding: '15px',
-            paddingRight: '20px',  // 오른쪽 여백 추가
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
-            resize: 'none',  // 사용자가 크기 조절 불가능하게 설정
-            boxSizing: 'border-box',  // 패딩과 테두리가 너비에 포함되도록 설정
+            resize: 'none',
+            boxSizing: 'border-box',  // 패딩을 포함하여 너비 계산
         },
         select: {
             width: '100%',
@@ -102,6 +104,7 @@ function CreatePost() {
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
+            boxSizing: 'border-box',  // 패딩을 포함하여 너비 계산
         },
         fileInput: {
             width: '100%',
@@ -124,6 +127,7 @@ function CreatePost() {
             backgroundColor: '#d50000',
         },
     };
+    
 
     return (
         <div style={styles.formContainer}>
@@ -162,7 +166,12 @@ function CreatePost() {
 
                 <div style={styles.formGroup}>
                     <label style={styles.label}>카테고리:</label>
-                    <select value={category} onChange={(e) => setCategory(e.target.value)} required style={styles.select}>
+                    <select 
+                        value={category} 
+                        onChange={(e) => setCategory(e.target.value)} 
+                        required 
+                        style={styles.select}
+                    >
                         <option value="">선택</option>
                         <option value="1">자유 게시판</option>
                         <option value="3">토론 게시판</option>

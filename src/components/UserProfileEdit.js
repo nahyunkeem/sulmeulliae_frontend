@@ -76,7 +76,7 @@ function UserProfileEdit() {
         formContainer: {
             maxWidth: '600px',
             margin: '50px auto',
-            padding: '20px',
+            padding: '30px',
             backgroundColor: '#faf4e1',
             borderRadius: '10px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
@@ -84,24 +84,25 @@ function UserProfileEdit() {
         heading: {
             textAlign: 'center',
             fontSize: '2rem',
-            marginBottom: '20px',
+            marginBottom: '30px',
             color: '#333',
         },
         formGroup: {
-            marginBottom: '20px',
+            marginBottom: '25px',
         },
         label: {
             display: 'block',
             fontSize: '1.2rem',
-            marginBottom: '10px',
+            marginBottom: '15px',
             color: '#333',
         },
         input: {
             width: '100%',
-            padding: '10px',
+            padding: '15px',
             borderRadius: '5px',
             border: '1px solid #ddd',
             fontSize: '1rem',
+            boxSizing: 'border-box', // 패딩과 테두리를 포함한 너비 계산
         },
         fileInput: {
             width: '100%',
@@ -111,11 +112,11 @@ function UserProfileEdit() {
             width: '100px',
             height: '100px',
             borderRadius: '50%',
-            marginTop: '10px',
+            marginTop: '20px',
         },
         button: {
             width: '100%',
-            padding: '10px',
+            padding: '15px',
             backgroundColor: '#ffd700',
             border: 'none',
             borderRadius: '5px',
@@ -126,8 +127,8 @@ function UserProfileEdit() {
         buttonHover: {
             backgroundColor: '#e6c200',
         },
-    };
-
+    };    
+    
     return (
         <div style={styles.formContainer}>
             <h2 style={styles.heading}>회원 정보 수정</h2>

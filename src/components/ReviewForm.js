@@ -83,7 +83,7 @@ function ReviewForm({ evaluationId }) {
                     style={styles.input}
                     type="number"
                     value={rating}
-                    onChange={(e) => setRating(e.target.value)}
+                    onChange={(e) => Number(setRating(e.target.value))}
                     min="0"
                     max="5"
                     required

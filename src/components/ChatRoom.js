@@ -31,7 +31,6 @@ function ChatRoom() {
 
         // WebSocket 연결이 성공했을 때
         chatSocket.onopen = () => {
-            console.log("WebSocket 연결 완료");
             // 입장 메시지 전송
             chatSocket.send(JSON.stringify({
                 'message': `${currentUsername}님이 채팅방에 입장했습니다.`,
@@ -51,7 +50,6 @@ function ChatRoom() {
 
         // WebSocket 연결이 종료되었을 때
         chatSocket.onclose = (e) => {
-            console.log(`WebSocket 연결 종료. 코드: ${e.code}, 이유: ${e.reason}`);
         };
         // WebSocket 오류 처리
         chatSocket.onerror = (error) => {

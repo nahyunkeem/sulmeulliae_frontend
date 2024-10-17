@@ -11,7 +11,6 @@ function CreateChatRoom({ onRoomCreated }) {
     
         api.post('/chat/createchat/', { name: roomName })
             .then((response) => {
-                console.log('Chat room created:', response.data);
                 setRoomName('');
                 navigate(`/chat/${response.data.id}`);  // 채팅방 UUID로 이동
             })

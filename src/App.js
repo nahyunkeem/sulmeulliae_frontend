@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import EvaluationList from './components/EvaluationList';
 import EvaluationDetail from './components/EvaluationDetail'; 
-import EvaluationList from './components/EvaluationList';
-import EvaluationDetail from './components/EvaluationDetail';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import FreeBoard from './components/FreeBoard';
@@ -64,22 +62,15 @@ function App() {
             textAlign: 'center',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between', // 좌우 정렬
+            justifyContent: 'space-between',
         },
         logoContainer: {
             display: 'flex',
-            alignItems: 'center', // 로고와 텍스트를 상하 중앙 정렬
+            alignItems: 'center',
         },
         logo: {
-            height: '60px', // 로고 이미지 크기
-            marginRight: '10px', // 로고와 텍스트 사이 여백
-        },
-        logoText: {
-            color: '#f0e5d1',
-            fontSize: '24px', // 텍스트 크기
-            fontWeight: 'bold', // 텍스트 굵기
-            display: 'flex',
-            alignItems: 'center', // 텍스트 상하 중앙 정렬
+            height: '60px',
+            marginRight: '10px',
         },
         link: {
             margin: '0 10px',
@@ -115,6 +106,70 @@ function App() {
         },
         body: {
             paddingTop: '20px',
+        },
+        // 새로 추가된 페이지들에 대한 스타일 정의
+        productListContainer: {
+            maxWidth: '1200px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#faf4e1',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        },
+        productItem: {
+            padding: '20px',
+            border: '1px solid #ddd',
+            borderRadius: '10px',
+            marginBottom: '20px',
+        },
+        productTitle: {
+            fontSize: '1.5rem',
+            color: '#333',
+            marginBottom: '10px',
+        },
+        productPrice: {
+            fontSize: '1.2rem',
+            color: '#777',
+        },
+        productImage: {
+            width: '100%',
+            height: 'auto',
+            borderRadius: '10px',
+            marginBottom: '15px',
+        },
+        cartContainer: {
+            maxWidth: '1200px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#faf4e1',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        },
+        cartItem: {
+            padding: '20px',
+            border: '1px solid #ddd',
+            borderRadius: '10px',
+            marginBottom: '20px',
+        },
+        cartTitle: {
+            fontSize: '1.5rem',
+            color: '#333',
+            marginBottom: '10px',
+        },
+        cartTotal: {
+            fontSize: '1.5rem',
+            color: '#333',
+            marginTop: '20px',
+        },
+        cartButton: {
+            backgroundColor: '#ff1744',
+            color: '#fff',
+            padding: '10px 20px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            display: 'block',
+            marginTop: '10px',
         }
     };
 
@@ -126,24 +181,23 @@ function App() {
                         {/* 로고 이미지 추가 */}
                         <div style={styles.logoContainer}>
                             <Link to="/">
-                                <img src="/images/logo.png" alt="Sulmeulliae Logo" style={styles.logo} />
+                                <img src="/images/sulmeulliae.png" alt="Sulmeulliae Logo" style={styles.logo} />
                             </Link>
-                            <span style={styles.logoText}>Sulmeulliae</span> {/* 로고 옆에 텍스트 */}
                         </div>
                         <div>
                             <Link to="/" style={styles.link}>홈 |</Link>
+                            <Link to="/products" style={styles.link}>이달의 술 |</Link>
                             <Link to="/community/freeboard" style={styles.link}>자유 게시판 |</Link>
                             <Link to="/community/question" style={styles.link}>질문 게시판 |</Link>
                             <Link to="/community/discussion" style={styles.link}>토론 게시판 |</Link>
-                            <Link to="/community/drinkmate" style={styles.link}>술 메이트 게시판 |</Link>
-                            <Link to="/products/cart">장바구니 |</Link>
-                            <Link to="/products">제품 목록 |</Link>
+                            <Link to="/community/drinkmate" style={styles.link}>술친구 채팅방 |</Link>
                             {loggedIn ? (
                                 <>
                                     <Link to="/chatbot" style={styles.link}>술추천챗봇 |</Link>
                                     <Link to={`/profile/${username}`} style={styles.link}>
                                         <span style={styles.span}>{username}님</span>
                                     </Link>
+                                    <Link to="/products/cart" style={styles.link}>장바구니</Link>
                                     <LogoutButton handleLogout={handleLogout} />
                                 </>
                             ) : (
@@ -155,7 +209,7 @@ function App() {
                         </div>
                     </nav>
                 </header>
-
+                
                 <Routes>
                     <Route path="/" element={<EvaluationList />} />
                     <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />} />
@@ -175,7 +229,7 @@ function App() {
                     <Route path="/accounts/password" element={<UserPasswordChange />} />
                     <Route path="/accounts/withdraw" element={<UserWithdraw />} />
                     <Route path="/accounts/verify-email/:uidb64/:token" element={<EmailVerification />} />
-                    <Route path="products/cart" element={<Cart />} />
+                    <Route path="/products/cart" element={<Cart />} />
                     <Route path="/products/:product_id" element={<ProductDetail />} />
                     <Route path="/products" element={<ProductList />} />
                 </Routes>
@@ -183,8 +237,8 @@ function App() {
                 <footer style={styles.footer}>
                     <p>© 2024 Sulmeulliae. All rights reserved.</p>
                     <p>
-                        <Link to="/privacy-policy" style={styles.footerLink}>개인정보 처리방침</Link> |{' '}
-                        <Link to="/terms-of-service" style={styles.footerLink}>이용약관</Link>
+                        <span to="/privacy-policy" style={styles.footerLink}>개인정보 처리방침</span> {' '}
+                        <span to="/terms-of-service" style={styles.footerLink}>이용약관</span>
                     </p>
                 </footer>
             </div>
@@ -193,4 +247,3 @@ function App() {
 }
 
 export default App;
-

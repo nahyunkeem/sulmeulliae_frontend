@@ -14,7 +14,6 @@ function EmailVerification() {
             })
             .catch((error) => {
                 setMessage('메일 인증 중 에러가 발생했습니다.');
-                console.log('메일 인증 에러:', error);
             });
     }, [uidb64, token]);
 

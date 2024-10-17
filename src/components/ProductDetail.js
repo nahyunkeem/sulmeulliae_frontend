@@ -58,39 +58,106 @@ function ProductDetail() {
 
     if (!product) return <div>Loading...</div>;
 
+    // 인라인 스타일 정의
+    const styles = {
+        container: {
+            maxWidth: '1200px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#faf4e1',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+            textAlign: 'center',  // 중앙 정렬
+        },
+        heading: {
+            fontSize: '2.5rem',
+            marginBottom: '30px',
+            color: '#333',
+        },
+        price: {
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            marginBottom: '15px',
+            color: '#ff1744',
+        },
+        description: {
+            fontSize: '1.1rem',
+            marginBottom: '30px',
+            lineHeight: '1.6',
+            color: '#666',
+        },
+        image: {
+            width: '250px', // 이미지 크기를 고정하여 통일감 부여
+            height: '250px',
+            objectFit: 'contain',
+            marginBottom: '20px',
+        },
+        quantityContainer: {
+            marginBottom: '20px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        quantityLabel: {
+            fontSize: '1.1rem',
+            marginRight: '10px',
+        },
+        quantityInput: {
+            width: '80px',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ddd',
+            fontSize: '1rem',
+            textAlign: 'center',
+        },
+        button: {
+            padding: '10px 20px',
+            backgroundColor: '#ff1744',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '1.2rem',
+            fontWeight: 'bold',
+        },
+        error: {
+            color: 'red',
+            marginBottom: '20px',
+        },
+    };
+
     return (
-        <div>
-            <h2>{product.name}</h2>
-            <p>가격: {product.price}원</p>
-            <p>{product.description}</p>
+        <div style={styles.container}>
+            <h2 style={styles.heading}>{product.name}</h2>
             {product.image && (
                 <img
-                    src={`http://localhost:8000${product.image}`}
-                    alt={product.name}
-                    style={{ maxWidth: '70%', height: 'auto' }}
+                src={`https://api.sulmeulliae.com${product.image}`}
+                alt={product.name}
+                style={styles.image}
                 />
             )}
+            <p style={styles.description}>{product.description}</p>
+            <p style={styles.price}>가격: {Math.floor(product.price)}원</p>
 
-            <div>
-                <label>수량: </label>
+            <div style={styles.quantityContainer}>
+                <label style={styles.quantityLabel}>수량:</label>
                 <input
                     type="number"
                     value={quantity}
                     min="1"
                     onChange={handleQuantityChange}
+                    style={styles.quantityInput}
                 />
             </div>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={styles.error}>{error}</p>}
 
-            <button onClick={addToCart}>장바구니에 담기</button>
+            <button style={styles.button} onClick={addToCart}>장바구니에 담기</button>
         </div>
     );
 }
 
 export default ProductDetail;
-
-
 
 
 

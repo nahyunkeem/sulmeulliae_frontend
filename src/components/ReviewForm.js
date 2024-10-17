@@ -21,7 +21,7 @@ function ReviewForm({ evaluationId }) {
                 setContent('');
                 setRating(0);
                 setError('');
-                console.log('성공:', response.data);
+                window.location.reload();
             })
             .catch((error) => {
                 if (error.response && error.response.data) {

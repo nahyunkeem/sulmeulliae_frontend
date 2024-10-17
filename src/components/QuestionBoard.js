@@ -91,7 +91,7 @@ function QuestionBoard() {
                         ))}
                 </ul>
             ) : (
-                <p></p>
+                <p>로그인하셨다면 새로고침해주세요..</p>
             )}
         </div>
     );

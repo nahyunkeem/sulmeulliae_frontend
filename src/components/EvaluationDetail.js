@@ -46,7 +46,7 @@ function EvaluationDetail({ username, userId }) {
     };
 
     if (!evaluation) {
-        return <p></p>;
+        return <p>로그인하셨다면 새로고침해주세요..</p>;
     }
 
     // 인라인 스타일 정의

@@ -18,6 +18,18 @@ function EvaluationList() {
 
     // 인라인 스타일 정의
     const styles = {
+        largeImageContainer: {
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '30px', // 네비게이션 바와 이미지 사이 간격 추가
+            marginBottom: '20px', // 이미지와 아래 콘텐츠 간 간격
+        },
+        largeImage: {
+            width: '100%',
+            maxWidth: '1200px', 
+            height: 'auto',
+            borderRadius: '10px', // 둥근 모서리
+        },
         container: {
             maxWidth: '1200px',
             margin: '50px auto',
@@ -64,10 +76,21 @@ function EvaluationList() {
             textDecoration: 'none',
             fontWeight: 'bold',
             marginTop: '10px', // 제목을 이미지 아래에 배치
+        },
+        font: {
+            fontSize: '0.8rem',
         }
     };
 
     return (
+        <div>
+            <div style={styles.largeImageContainer}>
+                    <img
+                        src="/images/background.png" 
+                        alt="큰 이미지"
+                        style={styles.largeImage}
+                    />
+            </div>
         <div style={styles.container}>
             <h1 style={styles.heading}>주류평가목록</h1>
             <ul style={styles.grid}>
@@ -83,11 +106,16 @@ function EvaluationList() {
                             )}
                         </Link>
                         <Link to={`/evaluations/${evaluation.id}`} style={styles.link}>
-                            {evaluation.title}
-                        </Link>
+                            <div>{evaluation.title}</div>
+                            <div style={styles.font}>{evaluation.category}</div>
+                            <div style={styles.font}>{evaluation.origin}</div>
+                            <div style={styles.font}>♥ {evaluation.like_count}</div>
+                            <div style={styles.font}>{evaluation.avg_rating} / 5</div>
+                        </Link> 
                     </li>
                 ))}
             </ul>
+        </div>
         </div>
     );
 }

@@ -17,8 +17,25 @@ function UserProfile() {
                 console.error('Error fetching user information:', error);
             });
     }, [username]); // username이 바뀔 때마다 API 요청
-    
-    // 스타일 정의
+
+    const handleUnblindUser = (blindUsername) => {
+        const confirmUnblind = window.confirm(`${blindUsername} 님의 블라인드를 해제하시겠습니까?`);
+        if (confirmUnblind) {
+            api.post(`/accounts/${blindUsername}/blind/`) // 블라인드 해제 API 호출
+                .then(() => {
+                    // 블라인드 해제 후 UI 업데이트
+                    setUserProfile(prevProfile => ({
+                        ...prevProfile,
+                        blind: prevProfile.blind.filter(user => user !== blindUsername), // 블라인드 리스트에서 제거
+                    }));
+                })
+                .catch(error => {
+                    console.error('블라인드 해제 중 에러 발생:', error);
+                });
+        }
+    };
+
+    // 인라인 스타일 정의
     const styles = {
         profileContainer: {
             maxWidth: '600px',
@@ -61,6 +78,25 @@ function UserProfile() {
         buttonHover: {
             backgroundColor: '#e6c200',
         },
+        blindSection: {
+            marginTop: '20px',
+            textAlign: 'left',
+        },
+        blindList: {
+            listStyleType: 'none',
+            padding: 0,
+        },
+        blindItem: {
+            marginBottom: '10px',
+        },
+        blindButton: {
+            backgroundColor: '#ff1744',
+            color: '#fff',
+            border: 'none',
+            padding: '5px 10px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+        },
         likesSection: {
             marginTop: '30px',
         },
@@ -79,11 +115,31 @@ function UserProfile() {
             <p style={styles.profileInfo}>이메일: {userProfile.email}</p>
             <p style={styles.profileInfo}>생년월일: {userProfile.birth}</p>
             <p style={styles.profileInfo}>포인트: {userProfile.points}</p>
-            
+            <p style={styles.profileInfo}>팔로잉: {userProfile.followings_count}</p>
+            <p style={styles.profileInfo}>팔로워: {userProfile.followers_count}</p>
+
+            <div style={styles.blindSection}>
+                <h3>블라인드 목록</h3>
+                <ul style={styles.blindList}>
+                    {userProfile.blind && userProfile.blind.map((blindUser) => (
+                        <li key={blindUser} style={styles.blindItem}>
+                            {blindUser}
+                            <button style={styles.blindButton} onClick={() => handleUnblindUser(blindUser)}>블라인드 해제</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
             <div style={styles.buttonsContainer}>
-                <Link to="/accounts/edit"><button style={styles.button}>회원정보 수정</button></Link>
-                <Link to="/accounts/password"><button style={styles.button}>비밀번호 변경</button></Link>
-                <Link to="/accounts/withdraw"><button style={styles.button}>회원탈퇴</button></Link>
+                <Link to="/accounts/edit">
+                    <button style={styles.button}>회원정보 수정</button>
+                </Link>
+                <Link to="/accounts/password">
+                    <button style={styles.button}>비밀번호 변경</button>
+                </Link>
+                <Link to="/accounts/withdraw">
+                    <button style={styles.button}>회원탈퇴</button>
+                </Link>
             </div>
 
             <div style={styles.likesSection}>
@@ -94,4 +150,3 @@ function UserProfile() {
 }
 
 export default UserProfile;
-

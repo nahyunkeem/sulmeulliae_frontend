@@ -9,6 +9,7 @@ function CommunityDetail({ username, userId }) {
     const [post, setPost] = useState(null);
     const [liked, setLiked] = useState(false);  // 좋아요 상태
     const [likeCount, setLikeCount] = useState(0);  // 좋아요 수
+    const [isFollowing, setIsFollowing] = useState(false);  // 팔로우 상태
 
     useEffect(() => {
         if (userId) {
@@ -24,8 +25,21 @@ function CommunityDetail({ username, userId }) {
         }
     }, [id, userId]);
 
+    useEffect(() => {
+        if (username && post) {
+            api.get(`/accounts/${username}/`)
+                .then((response) => {
+                    const followings = response.data.followings; // 사용자의 팔로잉 목록
+                    const followingStatus = followings.includes(post.author);
+                    setIsFollowing(followingStatus);
+                })
+                .catch((error) => {
+                    console.error('팔로우 상태 로드 중 에러 발생:', error);
+                });
+        }
+    }, [username, post]);
+
     const toggleLike = () => {
-        // 좋아요 상태 토글을 위한 POST 요청
         api.post(`/community/${id}/like/`)
             .then((response) => {
                 if (response.status === 200) {
@@ -38,6 +52,31 @@ function CommunityDetail({ username, userId }) {
             })
             .catch((error) => {
                 console.error('좋아요 상태 변경 중 에러 발생:', error);
+            });
+    };
+
+    const handleBlindUser = (author) => {
+        const confirmBlind = window.confirm(`${author} 님을 블라인드 하시겠습니까?`);
+        if (confirmBlind) {
+            api.post(`/accounts/${author}/blind/`)
+                .then(() => {
+                    if (post.author === author) {
+                        setPost(null);  // 블라인드된 작성자가 작성한 글은 숨김
+                    }
+                })
+                .catch((error) => {
+                    console.error('블라인드 중 에러 발생:', error);
+                });
+        }
+    };
+
+    const toggleFollowUser = () => {
+        api.post(`/accounts/${post.author}/`)  // 팔로우/언팔로우 API 호출
+            .then(() => {
+                setIsFollowing(!isFollowing);  // 팔로우 상태 토글
+            })
+            .catch((error) => {
+                console.error('팔로우 상태 변경 중 에러 발생:', error);
             });
     };
 
@@ -103,6 +142,24 @@ function CommunityDetail({ username, userId }) {
             display: 'block',
             marginLeft: 'auto',
         },
+        followButton: {
+            backgroundColor: isFollowing ? '#ff1744' : '#4caf50',
+            color: '#fff',
+            border: 'none',
+            padding: '5px 10px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            marginLeft: '10px',
+        },
+        blindButton: {
+            backgroundColor: '#ffc107',
+            color: '#fff',
+            borderRadius: '5px',
+            padding: '5px 10px',
+            border: 'none',
+            cursor: 'pointer',
+            marginLeft: '10px',
+        },
     };
 
     return (
@@ -121,8 +178,19 @@ function CommunityDetail({ username, userId }) {
                 </div>
             )}
             <p style={styles.content}>{post.content}</p>
-            <p style={styles.author}>{post.author}</p>
-            <p style={styles.info}>조회수: {post.view_count} | 좋아요: {likeCount}</p>
+            <p style={styles.author}>
+                {post.author}
+                {post.author !== username && (  
+                    <button style={styles.blindButton} onClick={() => handleBlindUser(post.author)}>블라인드</button>
+                )}
+                {post.author !== username && (
+                    <button style={styles.followButton} onClick={toggleFollowUser}>
+                        {isFollowing ? '언팔로우' : '팔로우'}
+                    </button>
+                )}
+            </p>
+            <p style={styles.info}>조회수 | {post.view_count}</p>
+            <p style={styles.info}>좋아요 | {likeCount}</p>
             <button style={styles.likeButton} onClick={toggleLike}>
                 {liked ? '좋아요 취소' : '좋아요'}
             </button>

@@ -49,7 +49,7 @@ function EvaluationDetail({ username, userId }) {
         return <p></p>;
     }
 
-    // 스타일 정의
+    // 인라인 스타일 정의
     const styles = {
         container: {
             maxWidth: '1200px', // 적절한 최대 너비 설정
@@ -85,6 +85,12 @@ function EvaluationDetail({ username, userId }) {
             marginBottom: '10px',
             color: '#555',
         },
+        content: {
+            fontSize: '1.1rem',
+            lineHeight: '1.6',
+            marginBottom: '20px',
+            color: '#555',
+        },
         button: {
             display: 'block',
             width: '150px', // 버튼 크기 조절
@@ -103,6 +109,18 @@ function EvaluationDetail({ username, userId }) {
         likeInfo: {
             textAlign: 'center',
             marginBottom: '20px',
+        },
+        likeButton: {
+            backgroundColor: liked ? '#ff1744' : '#4caf50',
+            color: '#fff',
+            padding: '10px 20px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '1rem',
+            marginBottom: '15px',
+            textAlign: 'center',
+            display: 'block',
+            margin: '0 auto',
         }
     };
 
@@ -121,18 +139,23 @@ function EvaluationDetail({ username, userId }) {
                     ))}
                 </div>
             )}
-            <p style={styles.details}>주종 | {evaluation.category}</p>
-            <p style={styles.details}>규격 | {evaluation.size}</p>
-            <p style={styles.details}>ABV | {evaluation.ABV}%</p>
-            <p style={styles.details}>원산지 | {evaluation.origin}</p>
-            <p style={styles.details}>주재료 | {evaluation.ingredient}</p>
-            <p style={styles.details}>평점 | {evaluation.avg_rating}</p>
-            <p style={styles.details}>{evaluation.content}</p>
-            <div style={styles.likeInfo}>
-                <p>좋아요 | {likeCount}</p>
+            <div style={styles.details}>
+                <p>주종 | {evaluation.category}</p>
+                <p>규격 | {evaluation.size}</p>
+                <p>ABV | {evaluation.ABV}%</p>
+                <p>원산지 | {evaluation.origin}</p>
+                <p>주재료 | {evaluation.ingredient}</p>
+                <p>평점 | {evaluation.avg_rating}</p>
                 <p>조회수 | {evaluation.viewcounts}</p>
             </div>
-            <button style={styles.button} onClick={toggleLike}>
+            <div style={styles.content}>
+                <p>{evaluation.content}</p>
+            </div>
+            <div style={styles.likeInfo}>
+                <p>좋아요 | {likeCount}</p>
+                <p>Ai가 요약하는 리뷰 | {evaluation.summary}</p>
+            </div>
+            <button style={styles.likeButton} onClick={toggleLike}>
                 {liked ? '좋아요 취소' : '좋아요'}
             </button>
             <ReviewList evaluationId={id} username={username} userId={userId}/>

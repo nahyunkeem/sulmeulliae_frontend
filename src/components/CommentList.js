@@ -17,7 +17,7 @@ function CommentList({ postId, username, userId }) {
                 setComments(updatedComments);
             })
             .catch((error) => {
-                console.error('리뷰 로드 중 에러 발생:', error);
+                console.error('댓글 로드 중 에러 발생:', error);
             });
     }, [postId, userId]);
 
@@ -34,7 +34,6 @@ function CommentList({ postId, username, userId }) {
         // 댓글 수정 API 호출
         api.put(`/community/comment/${commentId}/`, updatedComment)
             .then((response) => {
-                // 댓글 수정 완료 후 업데이트
                 setComments(comments.map(comment => (comment.id === commentId ? response.data : comment)));
                 setEditingCommentId(null);  // 수정 모드 종료
             })
@@ -61,7 +60,6 @@ function CommentList({ postId, username, userId }) {
         // 댓글 좋아요 상태 토글을 위한 POST 요청
         api.post(`/community/comment/${commentId}/like/`)
             .then(() => {
-                // 좋아요 상태 변경 후 댓글 데이터를 다시 불러옴
                 if (userId) {
                     api.get(`/community/${postId}/comment/`)
                         .then((response) => {
@@ -86,6 +84,19 @@ function CommentList({ postId, username, userId }) {
             });
     };
 
+    const handleBlindUser = (author) => {
+        const confirmBlind = window.confirm(`${author} 님을 블라인드 하시겠습니까?`);
+        if (confirmBlind) {
+            api.post(`/accounts/${author}/blind/`)  // 블라인드 API 호출
+                .then(() => {
+                    setComments(comments.filter(comment => comment.author !== author));  // 해당 리뷰 숨기기
+                })
+                .catch((error) => {
+                    console.error('블라인드 중 에러 발생:', error);
+                });
+        }
+    };
+
     // 인라인 스타일 정의
     const styles = {
         commentContainer: {
@@ -93,6 +104,7 @@ function CommentList({ postId, username, userId }) {
             padding: '20px',
             backgroundColor: '#f9f9f9',
             borderRadius: '10px',
+            textAlign: 'left',
         },
         commentList: {
             listStyleType: 'none',
@@ -106,6 +118,11 @@ function CommentList({ postId, username, userId }) {
         author: {
             fontWeight: 'bold',
             marginBottom: '5px',
+        },
+        content: {
+            marginBottom: '10px',
+            fontSize: '16px',
+            lineHeight: '1.5',
         },
         likeCount: {
             fontWeight: 'bold',
@@ -124,6 +141,14 @@ function CommentList({ postId, username, userId }) {
             borderRadius: '5px',
             cursor: 'pointer',
         },
+        blindButton: {
+            backgroundColor: '#ffc107',
+            color: '#fff',
+            borderRadius: '5px',
+            padding: '5px 10px',
+            border: 'none',
+            cursor: 'pointer',
+        },
     };
 
     return (
@@ -134,33 +159,34 @@ function CommentList({ postId, username, userId }) {
                     {comments.map((comment) => (
                         <li key={comment.id} style={styles.commentItem}>
                             {editingCommentId === comment.id ? (
-                                // 수정 모드: 해당 댓글만 수정 폼을 표시
                                 <div>
                                     <textarea
                                         value={editContent}
                                         onChange={(e) => setEditContent(e.target.value)}
+                                        style={{ width: '100%', height: '100px' }}
                                     />
                                     <button style={styles.button} onClick={() => handleEditSubmit(comment.id)}>저장</button>
                                     <button style={styles.button} onClick={() => setEditingCommentId(null)}>취소</button>
                                 </div>
                             ) : (
-                                // 기본 댓글 보기 모드
                                 <div>
-                                    <div style={styles.author}>{comment.author} | {comment.content}</div>
+                                    <div style={styles.author}>
+                                        {comment.author}
+                                        {comment.author !== username && (
+                                            <button style={styles.blindButton} onClick={() => handleBlindUser(comment.author)}>블라인드</button>
+                                        )}
+                                        | {comment.content}
+                                    </div>
                                     <div style={styles.likeCount}>좋아요 | {comment.like_count}</div>
                                     {comment.author === username ? (
                                         <div style={styles.buttons}>
-                                            {/* 본인이 작성한 댓글일 경우 수정 및 삭제 버튼 */}
                                             <button style={styles.button} onClick={() => handleEditClick(comment)}>수정</button>
                                             <button style={styles.button} onClick={() => handleDelete(comment.id)}>삭제</button>
                                         </div>
-                                    ) :(
-                                        <div style={styles.buttons}>
-                                            {/* 본인이 작성하지 않은 댓글일 경우 좋아요 버튼 */}
-                                            <button style={styles.button} onClick={() => toggleCommentLike(comment.id)}>
-                                                {comment.liked ? '좋아요 취소' : '좋아요'}
-                                            </button>
-                                        </div>
+                                    ) : (
+                                        <button style={styles.button} onClick={() => toggleCommentLike(comment.id)}>
+                                            {comment.liked ? '좋아요 취소' : '좋아요'}
+                                        </button>
                                     )}
                                 </div>
                             )}

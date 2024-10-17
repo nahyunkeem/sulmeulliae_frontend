@@ -18,6 +18,7 @@ import UserProfileEdit from './components/UserProfileEdit';
 import UserPasswordChange from './components/UserPasswordChange';
 import UserWithdraw from './components/UserWithdraw';
 import LogoutButton from './components/LogoutButton';
+import EmailVerification from './components/EmailVerification';
 import './App.css';
 
 function App() {
@@ -166,6 +167,7 @@ function App() {
                     <Route path="/accounts/edit" element={<UserProfileEdit />} />
                     <Route path="/accounts/password" element={<UserPasswordChange />} />
                     <Route path="/accounts/withdraw" element={<UserWithdraw />} />
+                    <Route path="/accounts/verify-email/:uidb64/:token" element={<EmailVerification />} />
                 </Routes>
 
                 <footer style={styles.footer}>

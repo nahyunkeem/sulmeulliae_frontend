@@ -93,7 +93,7 @@ function ReviewList({ evaluationId, username, userId }) {
         reviewContainer: {
             marginTop: '30px',
             padding: '20px',
-            backgroundColor: '#f9f9f9',
+            backgroundColor: '#faf4e1',
             borderRadius: '10px',
         },
         reviewList: {
@@ -126,6 +126,33 @@ function ReviewList({ evaluationId, username, userId }) {
             borderRadius: '5px',
             cursor: 'pointer',
         },
+        textarea: {
+            width: '100%',
+            height: '100px',
+            marginBottom: '10px',
+            borderRadius: '5px',
+            padding: '10px',
+        },
+        input: {
+            width: '80px',
+            textAlign: 'center',
+            marginBottom: '10px',
+            padding: '8px',
+        },
+    };
+
+    const handleBlindUser = (author) => {
+        const confirmBlind = window.confirm(`${author} 님을 블라인드 하시겠습니까?`);
+        if (confirmBlind) {
+            api.post(`/accounts/${author}/blind/`)  // 블라인드 API 호출
+                .then(() => {
+                    // 블라인드 성공 후 UI 업데이트
+                    setReviews(reviews.filter(review => review.author !== author));  // 해당 리뷰 숨기기
+                })
+                .catch((error) => {
+                    console.error('블라인드 중 에러 발생:', error);
+                });
+        }
     };
 
     return (
@@ -139,10 +166,12 @@ function ReviewList({ evaluationId, username, userId }) {
                                 // 수정 모드
                                 <div>
                                     <textarea
+                                        style={styles.textarea}
                                         value={editContent}
                                         onChange={(e) => setEditContent(e.target.value)}
                                     />
                                     <input
+                                        style={styles.input}
                                         type="number"
                                         value={editRating}
                                         onChange={(e) => setEditRating(e.target.value)}
@@ -155,7 +184,12 @@ function ReviewList({ evaluationId, username, userId }) {
                             ) : (
                                 // 기본 리뷰 보기 모드
                                 <div>
-                                    <div style={styles.author}>{review.author}</div>
+                                    <div>{review.author}
+                                        {review.author !== username && (  
+                                            // 자신이 작성하지 않은 리뷰일 경우에만 블라인드 버튼 표시
+                                            <button style={styles.button} onClick={() => handleBlindUser(review.author)}>블라인드</button>
+                                        )}
+                                    </div>
                                     <div>{review.content}</div>
                                     <div style={styles.rating}>{review.rating} / 5</div>
                                     <div>좋아요 | {review.like_count}</div>
@@ -179,7 +213,7 @@ function ReviewList({ evaluationId, username, userId }) {
                     ))}
                 </ul>
             ) : (
-                <p></p>
+                <p>리뷰가 없습니다.</p>
             )}
         </div>
     );

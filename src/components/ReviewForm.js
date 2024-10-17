@@ -16,16 +16,21 @@ function ReviewForm({ evaluationId }) {
 
         // 리뷰 작성 API 호출
         api.post(`/evaluations/${evaluationId}/review/`, reviewData)
-            .then(() => {
+            .then((response) => {
                 setSuccess('리뷰가 성공적으로 작성되었습니다.');
                 setContent('');
                 setRating(0);
                 setError('');
-                window.location.reload();
+                console.log('성공:', response.data);
             })
             .catch((error) => {
-                setError('리뷰 작성 중 오류가 발생했습니다.');
-                console.error('리뷰 작성 오류:', error);
+                if (error.response && error.response.data) {
+                    setError(`리뷰 작성 중 오류가 발생했습니다: ${JSON.stringify(error.response.data)}`);
+                    console.error('서버 오류:', error.response.data);
+                } else {
+                    setError('리뷰 작성 중 오류가 발생했습니다.');
+                    console.error('리뷰 작성 오류:', error);
+                }
             });
     };
 
@@ -36,7 +41,7 @@ function ReviewForm({ evaluationId }) {
             padding: '20px',
             backgroundColor: '#f9f9f9',
             borderRadius: '10px',
-            textAlign: 'center',  // 폼 전체 가운데 정렬
+            textAlign: 'center',
         },
         textarea: {
             width: '100%',
@@ -49,7 +54,7 @@ function ReviewForm({ evaluationId }) {
             marginBottom: '5px',
         },
         input: {
-            width: '80px', // 평점 입력 칸 크기 조정
+            width: '80px',
             marginBottom: '10px',
             padding: '8px',
             textAlign: 'center',
@@ -64,7 +69,7 @@ function ReviewForm({ evaluationId }) {
             marginTop: '10px',
         },
         buttonContainer: {
-            textAlign: 'center',  // 버튼을 가운데로 배치
+            textAlign: 'center',
         },
     };
 
@@ -83,7 +88,7 @@ function ReviewForm({ evaluationId }) {
                     style={styles.input}
                     type="number"
                     value={rating}
-                    onChange={(e) => Number(setRating(e.target.value))}
+                    onChange={(e) => setRating(Number(e.target.value))}
                     min="0"
                     max="5"
                     required

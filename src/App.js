@@ -18,7 +18,7 @@ import UserProfile from './components/UserProfile';
 import UserProfileEdit from './components/UserProfileEdit';
 import UserPasswordChange from './components/UserPasswordChange';
 import UserWithdraw from './components/UserWithdraw';
-
+import EmailVerification from './components/EmailVerification';
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
     const [username, setUsername] = useState('');
@@ -91,6 +91,7 @@ function App() {
                     <Route path="/accounts/edit" element={<UserProfileEdit />} />
                     <Route path="/accounts/password" element={<UserPasswordChange />} />
                     <Route path="/accounts/withdraw" element={<UserWithdraw />} />
+                    <Route path="/accounts/verify-email/:uidb64/:token" element={<EmailVerification />} />
                 </Routes>
             </div>
         </Router>

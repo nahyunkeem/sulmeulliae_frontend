@@ -102,23 +102,23 @@ function ReviewList({ evaluationId, username, userId }) {
         }
     };
 
-    const toggleFollowUser = (author) => {
-        api.post(`/accounts/${author}/`)  // 팔로우 API 호출
-            .then(() => {
-                setReviews(reviews.map(review => {
-                    if (review.author === author) {
-                        return {
-                            ...review,
-                            isFollowing: !review.isFollowing  // 팔로우 상태 토글
-                        };
-                    }
-                    return review;
-                }));
-            })
-            .catch((error) => {
-                console.error('팔로우 상태 변경 중 에러 발생:', error);
-            });
-    };
+    // const toggleFollowUser = (author) => {
+    //     api.post(`/accounts/${author}/`)  // 팔로우 API 호출
+    //         .then(() => {
+    //             setReviews(reviews.map(review => {
+    //                 if (review.author === author) {
+    //                     return {
+    //                         ...review,
+    //                         isFollowing: !review.isFollowing  // 팔로우 상태 토글
+    //                     };
+    //                 }
+    //                 return review;
+    //             }));
+    //         })
+    //         .catch((error) => {
+    //             console.error('팔로우 상태 변경 중 에러 발생:', error);
+    //         });
+    // };
 
     return (
         <div>
@@ -150,9 +150,9 @@ function ReviewList({ evaluationId, username, userId }) {
                                     <div>{review.author}{review.author !== username && (  
                                             // 자신이 작성하지 않은 리뷰일 경우에만 블라인드, 팔로우 버튼 표시
                                             <button onClick={() => handleBlindUser(review.author)}>블라인드</button>)}
-                                        {review.author !== username && (<button onClick={() => toggleFollowUser(review.author)}>
+                                        {/* {review.author !== username && (<button onClick={() => toggleFollowUser(review.author)}>
                                             {review.isFollowing ? '언팔로우' : '팔로우'}
-                                        </button>)}
+                                        </button>)} */}
                                         </div>
 
                                     <div>{review.content}</div>

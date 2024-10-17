@@ -5,7 +5,7 @@ function CommentList({ postId, username, userId }) {
     const [comments, setComments] = useState([]);
     const [editingCommentId, setEditingCommentId] = useState(null);  // 수정 중인 댓글 ID
     const [editContent, setEditContent] = useState('');  // 수정 중인 댓글 내용
-    const [isFollowing, setIsFollowing] = useState(false);  // 팔로우 상태
+    // const [isFollowing, setIsFollowing] = useState(false);  // 팔로우 상태
 
     useEffect(() => {
         // 댓글 목록을 가져오는 API 호출
@@ -22,20 +22,20 @@ function CommentList({ postId, username, userId }) {
             });
     }, [postId, userId]);
 
-    useEffect(() => {
-        if (username && comments) {
-            api.get(`/accounts/${username}/`)
-                .then((response) => {
-                    const followings = response.data.followings; // 사용자의 팔로잉 목록
-                    // 작성자가 팔로잉 목록에 있는지 확인
-                    const followingStatus = followings.includes(comments.author);
-                    setIsFollowing(followingStatus);
-                })
-                .catch((error) => {
-                    console.error('팔로우 상태 로드 중 에러 발생:', error);
-                });
-            }
-    }, [username, comments]);
+    // useEffect(() => {
+    //     if (username && comments) {
+    //         api.get(`/accounts/${username}/`)
+    //             .then((response) => {
+    //                 const followings = response.data.followings; // 사용자의 팔로잉 목록
+    //                 // 작성자가 팔로잉 목록에 있는지 확인
+    //                 const followingStatus = followings.includes(comments.author);
+    //                 setIsFollowing(followingStatus);
+    //             })
+    //             .catch((error) => {
+    //                 console.error('팔로우 상태 로드 중 에러 발생:', error);
+    //             });
+    //         }
+    // }, [username, comments]);
 
     const handleEditClick = (comment) => {
         setEditingCommentId(comment.id);
@@ -116,20 +116,21 @@ function CommentList({ postId, username, userId }) {
         }
     };
 
-    const toggleFollowUser = (author) => {
-        api.post(`/accounts/${author}/`)  // 팔로우/언팔로우 API 호출
-            .then(() => {
-                setComments(comments.map(comment => {
-                    if (comment.author === author) {
-                        return { ...comment, isFollowing: !comment.isFollowing };  // 상태 토글
-                    }
-                    return comment;
-                }));
-            })
-            .catch((error) => {
-                console.error('팔로우 상태 변경 중 에러 발생:', error);
-            });
-    };
+    // const toggleFollowUser = (author) => {
+    //     api.post(`/accounts/${author}/`)  // 팔로우/언팔로우 API 호출
+    //         .then(() => {
+    //             setComments(comments.map(comment => {
+    //                 if (comment.author === author) {
+    //                     setIsFollowing(!isFollowing);  // 팔로우 상태 토글
+    //                     return { ...comment, isFollowing: !comment.isFollowing };  // 상태 토글
+    //                 }
+    //                 return comment;
+    //             }));
+    //         })
+    //         .catch((error) => {
+    //             console.error('팔로우 상태 변경 중 에러 발생:', error);
+    //         });
+    // };
 
 
     return (
@@ -153,15 +154,15 @@ function CommentList({ postId, username, userId }) {
                                 // 기본 댓글 보기 모드
                                 <div>
                                     <div>{comment.author}
-                                        {comment.author !== username && (  
+                                            {comment.author !== username && (  
                                             // 자신이 작성하지 않은 댓글일 경우에만 블라인드, 팔로우 버튼 표시
                                             <button onClick={() => handleBlindUser(comment.author)}>블라인드</button>
                                             )}
-                                            {comment.author !== username && (
+                                            {/* {comment.author !== username && (
                                                 <button onClick={() => toggleFollowUser(comment.author)}>
-                                                {isFollowing ? '언팔로우' : '팔로우'}
-                                                </button>
-                                            )} | {comment.content}</div>
+                                                {comment.isFollowing ? '언팔로우' : '팔로우'}
+                                                </button> */}
+                                            | {comment.content}</div>
                                     <div>좋아요 | {comment.like_count}</div>
                                     {comment.author === username ? (
                                         <div>

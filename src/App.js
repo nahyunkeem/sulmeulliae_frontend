@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';  // useState를 추가
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css'
+import './App.css';
 import EvaluationList from './components/EvaluationList';
-import EvaluationDetail from './components/EvaluationDetail';  // 평가 상세 페이지 컴포넌트
+import EvaluationDetail from './components/EvaluationDetail';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import FreeBoard from './components/FreeBoard';
 import QuestionBoard from './components/QuestionBoard';
 import DiscussionBoard from './components/DiscussionBoard';
 import DrinkMateBoard from './components/DrinkMateBoard';
-import CommunityDetail from './components/CommunityDetail'; 
+import CommunityDetail from './components/CommunityDetail';
 import CreatePost from './components/CreatePost';
+import Cart from './components/Cart';
+import ProductDetail from './components/ProductDetail';
+import ProductList from "./components/ProductList";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('accessToken'));
@@ -18,14 +21,13 @@ function App() {
     const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        // localStorage에서 사용자명 불러오기
         const storedUsername = localStorage.getItem('username');
         const storedUserId = localStorage.getItem('userId');
         if (storedUsername) {
             setUsername(storedUsername);
         }
         if (storedUserId) {
-            setUserId(storedUserId);  // userId 상태 설정
+            setUserId(storedUserId);
         }
     }, []);
 
@@ -46,6 +48,8 @@ function App() {
                         <Link to="/community/question">질문 게시판 |</Link>
                         <Link to="/community/discussion">토론 게시판 |</Link>
                         <Link to="/community/drinkmate">술 메이트 게시판 |</Link>
+                        <Link to="/products/cart">장바구니 |</Link>
+                        <Link to="/products">제품 목록 |</Link>
                         {loggedIn ? (
                             <>
                                 <span>{username}님</span>
@@ -71,10 +75,14 @@ function App() {
                     <Route path="/community/drinkmate" element={<DrinkMateBoard />} />
                     <Route path="/community/:id" element={<CommunityDetail username={username} userId={userId}/>} />
                     <Route path="/community/create" element={<CreatePost />} />
-                    </Routes>
+                    <Route path="products/cart" element={<Cart />} />
+                    <Route path="/products/:product_id" element={<ProductDetail />} />
+                    <Route path="/products" element={<ProductList />} />
+                </Routes>
             </div>
         </Router>
     );
 }
 
 export default App;
+

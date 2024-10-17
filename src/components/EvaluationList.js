@@ -38,12 +38,6 @@ function EvaluationList() {
             borderRadius: '10px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         },
-        heading: {
-            fontSize: '2rem',
-            color: '#3c6255',
-            textAlign: 'center',
-            marginBottom: '20px',
-        },
         grid: {
             display: 'grid',
             gridTemplateColumns: 'repeat(5, 1fr)', // 한 줄에 다섯 개씩
@@ -92,7 +86,6 @@ function EvaluationList() {
                     />
             </div>
         <div style={styles.container}>
-            <h1 style={styles.heading}>주류평가목록</h1>
             <ul style={styles.grid}>
                 {evaluations.map((evaluation, index) => (
                     <li key={evaluation.id} style={styles.listItem}>

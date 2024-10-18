@@ -10,7 +10,6 @@ function CommentList({ postId, username, userId }) {
         // 댓글 목록을 가져오는 API 호출
         api.get(`/community/${postId}/comment/`)
             .then((response) => {
-                console.log(response.data);
                 const updatedComments = response.data.map(comment => ({
                     ...comment,
                     liked: comment.likes.includes(Number(userId))  // likes 배열에 userId가 있는지 확인

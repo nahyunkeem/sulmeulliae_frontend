@@ -10,6 +10,7 @@ function FreeBoard() {
         api.get('/community/')
             .then((response) => {
                 setPosts(response.data);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.error('자유 게시판 로드 중 에러 발생:', error);
@@ -81,7 +82,7 @@ function FreeBoard() {
             {posts.length > 0 ? (
                 <ul style={styles.postList}>
                     {posts
-                        .filter((post) => post.category.id === 1) 
+                        .filter((post) => post.category === 1) 
                         .map((post) => (
                             <li key={post.id} style={styles.postItem}>
                                 <Link to={`/community/${post.id}`} style={styles.postLink}>

@@ -81,7 +81,7 @@ function FreeBoard() {
             {posts.length > 0 ? (
                 <ul style={styles.postList}>
                     {posts
-                        .filter((post) => post.category === '1') 
+                        .filter((post) => post.category === '자유게시판') 
                         .map((post) => (
                             <li key={post.id} style={styles.postItem}>
                                 <Link to={`/community/${post.id}`} style={styles.postLink}>

@@ -10,7 +10,7 @@ function EmailVerification() {
         // 이메일 인증 API 호출
         api.get(`/accounts/verify-email/${uidb64}/${token}/`)
             .then((response) => {
-                setMessage('메일이 인증되었습니다.');
+                setMessage('메일이 인증되었습니다. 로그인해주세요.');
             })
             .catch((error) => {
                 setMessage('메일 인증 중 에러가 발생했습니다.');

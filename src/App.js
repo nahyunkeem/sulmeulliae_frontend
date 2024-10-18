@@ -186,7 +186,7 @@ function App() {
                         </div>
                         <div>
                             <Link to="/" style={styles.link}>홈 |</Link>
-                            <Link to="/products" style={styles.link}>이달의 술 |</Link>
+                            <Link to="/products" style={styles.link}>이달의 술 Shop |</Link>
                             <Link to="/community/freeboard" style={styles.link}>자유 게시판 |</Link>
                             <Link to="/community/question" style={styles.link}>질문 게시판 |</Link>
                             <Link to="/community/discussion" style={styles.link}>토론 게시판 |</Link>

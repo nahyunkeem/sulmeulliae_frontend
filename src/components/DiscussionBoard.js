@@ -9,7 +9,7 @@ function DiscussionBoard() {
         // 토론 게시판 카테고리로 게시물 요청
         api.get('/community/')
             .then((response) => {
-                setPosts(response.data);
+                setPosts(response.data.results);
             })
             .catch((error) => {
                 console.error('토론 게시판 로드 중 에러 발생:', error);

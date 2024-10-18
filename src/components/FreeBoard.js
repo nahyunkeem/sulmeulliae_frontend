@@ -9,8 +9,7 @@ function FreeBoard() {
         // 자유 게시판 카테고리로 게시물 요청
         api.get('/community/')
             .then((response) => {
-                setPosts(response.data);
-                console.log(response.data);
+                setPosts(response.data.results);
             })
             .catch((error) => {
                 console.error('자유 게시판 로드 중 에러 발생:', error);

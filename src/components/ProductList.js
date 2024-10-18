@@ -65,6 +65,10 @@ function ProductList() {
             fontSize: '1.2rem',
             color: '#333',
         },
+        stock: {
+            fontSize: '1rem',
+            color: '#333',
+        },
     };
 
     return (
@@ -84,6 +88,7 @@ function ProductList() {
                                 />
                             )}
                             <div style={styles.price}>{Math.floor(product.price)}원</div> {/* 소수점 제거 */}
+                            <div style={styles.stock}>재고 | {product.stock}개</div>
                             </Link>
                         </li>
                     ))}

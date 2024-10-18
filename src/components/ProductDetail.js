@@ -80,6 +80,11 @@ function ProductDetail() {
             marginBottom: '15px',
             color: '#ff1744',
         },
+        stock: {
+            fontSize: '1.1rem',
+            fontWeight: 'bold',
+            marginBottom: '15px',
+        },
         description: {
             fontSize: '1.1rem',
             marginBottom: '30px',
@@ -138,6 +143,7 @@ function ProductDetail() {
             )}
             <p style={styles.description}>{product.description}</p>
             <p style={styles.price}>가격: {Math.floor(product.price)}원</p>
+            <p style={styles.stock}>재고: {product.stock}개</p>
 
             <div style={styles.quantityContainer}>
                 <label style={styles.quantityLabel}>수량:</label>

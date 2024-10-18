@@ -80,7 +80,7 @@ function DrinkMateBoard() {
                         </li>
                     ))
                 ) : (
-                    <p>로그인하셨다면 새로고침해주세요..</p>
+                    <p>채팅방을 생성해주세요..</p>
                 )}
             </ul>
         </div>

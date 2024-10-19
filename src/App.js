@@ -57,7 +57,7 @@ function App() {
             padding: '20px',
         },
         nav: {
-            backgroundColor: '#3c6255',
+            backgroundColor: '#150a0d',
             padding: '15px',
             textAlign: 'center',
             display: 'flex',

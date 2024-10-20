@@ -93,12 +93,11 @@ function App() {
             marginLeft: '10px',
         },
         footer: {
-            backgroundColor: '#3c6255',
+            backgroundColor: '#150a0d',
             color: '#f0e5d1',
             textAlign: 'center',
             padding: '15px',
             marginTop: 'auto',
-            borderTop: '1px solid #ffd700',
         },
         footerLink: {
             color: '#ffd700',

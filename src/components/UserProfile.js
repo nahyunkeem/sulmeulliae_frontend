@@ -3,6 +3,7 @@ import api from '../services/api';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom'; // useParams로 username 받아오기
 import UserLikes from './UserLikes';
+import UserOrderHistory from './UserOrderHistory';
 
 function UserProfile() {
     const { username } = useParams(); // URL에서 username 받아오기
@@ -124,7 +125,8 @@ function UserProfile() {
                     {userProfile.blind && userProfile.blind.map((blindUser) => (
                         <li key={blindUser} style={styles.blindItem}>
                             {blindUser}
-                            <button style={styles.blindButton} onClick={() => handleUnblindUser(blindUser)}>블라인드 해제</button>
+                            <button style={styles.blindButton} onClick={() => handleUnblindUser(blindUser)}>블라인드 해제
+                            </button>
                         </li>
                     ))}
                 </ul>
@@ -143,7 +145,10 @@ function UserProfile() {
             </div>
 
             <div style={styles.likesSection}>
-                <UserLikes username={username} />
+                <UserLikes username={username}/>
+            </div>
+            <div style={styles.orderHistorySection}>
+                <UserOrderHistory username={username}/>
             </div>
         </div>
     );

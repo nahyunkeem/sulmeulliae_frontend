@@ -8,6 +8,8 @@ function EvaluationList() {
     const [selectedCategory, setSelectedCategory] = useState(''); 
     const [sortType, setSortType] = useState('created_at');
     const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
+    const evaluationsPerPage = 20; // 페이지당 항목 수
 
     useEffect(() => {
         api.get('/evaluations/')
@@ -20,15 +22,16 @@ function EvaluationList() {
             });
     }, []);
 
-    // 카테고리 
+    // 카테고리 필터링
     const filterByCategory = (category) => {
         setSelectedCategory(category);
         const filtered = category ? evaluations.filter(evaluation => evaluation.category === category) : evaluations;
         setFilteredEvaluations(filtered);
         sortEvaluations(filtered, sortType); // 필터링 후 정렬 유지
+        setCurrentPage(1); // 카테고리 변경 시 첫 페이지로 이동
     };
 
-    // 정렬 
+    // 정렬
     const sortEvaluations = (list, type) => {
         const sortedList = [...list].sort((a, b) => {
             if (type === 'like_count' || type === 'viewcounts' || type === 'avg_rating') {
@@ -40,16 +43,17 @@ function EvaluationList() {
             return new Date(b.created_at) - new Date(a.created_at); // 기본값: 최신순
         });
         setFilteredEvaluations(sortedList);
+        setCurrentPage(1); // 정렬 변경 시 첫 페이지로 이동
     };
 
-    // 정렬 선택 
+    // 정렬 선택
     const handleSortChange = (event) => {
         const type = event.target.value;
         setSortType(type); 
         sortEvaluations(filteredEvaluations, type); 
     };
 
-    // 검색 
+    // 검색
     const handleSearch = () => {
         const term = searchTerm.toLowerCase();
 
@@ -61,9 +65,24 @@ function EvaluationList() {
 
         setFilteredEvaluations(filtered);
         sortEvaluations(filtered, sortType); // 검색 후 정렬 유지
+        setCurrentPage(1); // 검색 후 첫 페이지로 이동
     };
 
-    
+    // 페이지 변경 핸들러
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    // 현재 페이지에 맞는 평가 목록 계산
+    const indexOfLastEvaluation = currentPage * evaluationsPerPage;
+    const indexOfFirstEvaluation = indexOfLastEvaluation - evaluationsPerPage;
+    const currentEvaluations = filteredEvaluations.slice(indexOfFirstEvaluation, indexOfLastEvaluation);
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredEvaluations.length / evaluationsPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
     const styles = {
         largeImageContainer: {
             display: 'flex',
@@ -164,6 +183,28 @@ function EvaluationList() {
         },
         font: {
             fontSize: '0.8rem',
+        },
+        pagination: {
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '20px',
+        },
+        pageNumber: {
+            margin: '0 5px',
+            cursor: 'pointer',
+            padding: '10px',
+            border: '1px solid #ddd',
+            borderRadius: '5px',
+            backgroundColor: '#fff',
+        },
+        activePageNumber: {
+            margin: '0 5px',
+            cursor: 'pointer',
+            padding: '10px',
+            border: '1px solid #333',
+            borderRadius: '5px',
+            backgroundColor: '#333',
+            color: '#fff',
         }
     };
 
@@ -178,7 +219,6 @@ function EvaluationList() {
             </div>
             <div style={styles.container}>
                 <div style={styles.searchSection}>
-                    {/* 검색창과 검색 버튼 */}
                     <input
                         type="text"
                         placeholder="검색어를 입력하세요 (제목, 내용, 카테고리)"
@@ -188,7 +228,6 @@ function EvaluationList() {
                     />
                     <button style={styles.searchButton} onClick={handleSearch}>검색</button>
 
-                    {/* 정렬 선택 */}
                     <select value={sortType} onChange={handleSortChange} style={styles.sortSelect}>
                         <option value="created_at">최신순</option>
                         <option value="like_count">좋아요순</option>
@@ -198,7 +237,6 @@ function EvaluationList() {
                 </div>
 
                 <div style={styles.categoryButtons}>
-                    {/* 카테고리 버튼 */}
                     <button style={styles.button('')} onClick={() => filterByCategory('')}>전체</button>
                     <button style={styles.button('소주')} onClick={() => filterByCategory('소주')}>소주</button>
                     <button style={styles.button('맥주')} onClick={() => filterByCategory('맥주')}>맥주</button>
@@ -207,7 +245,7 @@ function EvaluationList() {
                 </div>
 
                 <ul style={styles.grid}>
-                    {filteredEvaluations.map((evaluation, index) => (
+                    {currentEvaluations.map((evaluation, index) => (
                         <li key={evaluation.id} style={styles.listItem}>
                             <Link to={`/evaluations/${evaluation.id}`}>
                                 {evaluation.images && evaluation.images[0] && (
@@ -229,6 +267,18 @@ function EvaluationList() {
                         </li>
                     ))}
                 </ul>
+
+                <div style={styles.pagination}>
+                    {pageNumbers.map((number) => (
+                        <span
+                            key={number}
+                            onClick={() => paginate(number)}
+                            style={number === currentPage ? styles.activePageNumber : styles.pageNumber}
+                        >
+                            {number}
+                        </span>
+                    ))}
+                </div>
             </div>
         </div>
     );

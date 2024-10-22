@@ -4,31 +4,78 @@ import api from '../services/api';
 
 function EvaluationList() {
     const [evaluations, setEvaluations] = useState([]);
+    const [filteredEvaluations, setFilteredEvaluations] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(''); 
+    const [sortType, setSortType] = useState('created_at');
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        // 평가 리스트 API 호출
         api.get('/evaluations/')
             .then((response) => {
                 setEvaluations(response.data);
+                setFilteredEvaluations(response.data); 
             })
             .catch((error) => {
                 console.error('에러 발생:', error);
             });
     }, []);
 
-    // 인라인 스타일 정의
+    // 카테고리 
+    const filterByCategory = (category) => {
+        setSelectedCategory(category);
+        const filtered = category ? evaluations.filter(evaluation => evaluation.category === category) : evaluations;
+        setFilteredEvaluations(filtered);
+        sortEvaluations(filtered, sortType); // 필터링 후 정렬 유지
+    };
+
+    // 정렬 
+    const sortEvaluations = (list, type) => {
+        const sortedList = [...list].sort((a, b) => {
+            if (type === 'like_count' || type === 'viewcounts' || type === 'avg_rating') {
+                if (b[type] === a[type]) {
+                    return new Date(b.created_at) - new Date(a.created_at); // 동일하면 최신순 정렬
+                }
+                return b[type] - a[type]; // 숫자 큰 순서대로 정렬
+            }
+            return new Date(b.created_at) - new Date(a.created_at); // 기본값: 최신순
+        });
+        setFilteredEvaluations(sortedList);
+    };
+
+    // 정렬 선택 
+    const handleSortChange = (event) => {
+        const type = event.target.value;
+        setSortType(type); 
+        sortEvaluations(filteredEvaluations, type); 
+    };
+
+    // 검색 
+    const handleSearch = () => {
+        const term = searchTerm.toLowerCase();
+
+        const filtered = evaluations.filter(evaluation =>
+            evaluation.title.toLowerCase().includes(term) ||
+            evaluation.content.toLowerCase().includes(term) ||
+            evaluation.category.toLowerCase().includes(term)
+        );
+
+        setFilteredEvaluations(filtered);
+        sortEvaluations(filtered, sortType); // 검색 후 정렬 유지
+    };
+
+    
     const styles = {
         largeImageContainer: {
             display: 'flex',
             justifyContent: 'center',
-            marginTop: '30px', // 네비게이션 바와 이미지 사이 간격 추가
-            marginBottom: '20px', // 이미지와 아래 콘텐츠 간 간격
+            marginTop: '30px',
+            marginBottom: '20px',
         },
         largeImage: {
             width: '100%',
-            maxWidth: '1200px', 
+            maxWidth: '1200px',
             height: 'auto',
-            borderRadius: '10px', // 둥근 모서리
+            borderRadius: '10px',
         },
         container: {
             maxWidth: '1200px',
@@ -38,9 +85,53 @@ function EvaluationList() {
             borderRadius: '10px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         },
+        categoryButtons: {
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '20px',
+        },
+        button: (category) => ({
+            margin: '0 10px',
+            padding: '10px 20px',
+            backgroundColor: selectedCategory === category ? '#ccc' : '#fff',
+            border: '1px solid #ddd',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            color: '#000',
+        }),
+        searchSection: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: '20px',
+        },
+        searchInput: {
+            width: '300px', 
+            padding: '10px',
+            fontSize: '16px',
+            borderRadius: '10px',
+            border: '1px solid #ddd',
+            marginRight: '10px',
+        },
+        searchButton: {
+            padding: '10px 20px',
+            backgroundColor: '#333',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '10px',
+            cursor: 'pointer',
+        },
+        sortSelect: {
+            padding: '10px',
+            borderRadius: '10px',
+            border: '1px solid #ddd',
+            fontSize: '16px',
+            marginLeft: '10px',
+        },
         grid: {
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)', // 한 줄에 다섯 개씩
+            gridTemplateColumns: 'repeat(5, 1fr)',
             gap: '20px',
             listStyleType: 'none',
             padding: 0,
@@ -53,23 +144,23 @@ function EvaluationList() {
             textAlign: 'center',
             padding: '10px',
             display: 'flex',
-            flexDirection: 'column', // 이미지와 제목을 세로로 배치
-            alignItems: 'center', // 수평 가운데 정렬
+            flexDirection: 'column',
+            alignItems: 'center',
         },
         image: {
-            width: '150px', // 고정된 이미지 크기
+            width: '150px',
             height: '150px',
-            objectFit: 'contain', // 이미지가 잘리지 않고 전체가 보이도록 설정
+            objectFit: 'contain',
             marginBottom: '10px',
             borderRadius: '10px',
             cursor: 'pointer',
         },
         link: {
             fontSize: '1.2rem',
-            color: '#000', // 제목을 검정색으로 변경
+            color: '#000',
             textDecoration: 'none',
             fontWeight: 'bold',
-            marginTop: '10px', // 제목을 이미지 아래에 배치
+            marginTop: '10px',
         },
         font: {
             fontSize: '0.8rem',
@@ -79,39 +170,68 @@ function EvaluationList() {
     return (
         <div>
             <div style={styles.largeImageContainer}>
-                    <img
-                        src="/images/background.png" 
-                        alt="큰 이미지"
-                        style={styles.largeImage}
-                    />
+                <img
+                    src="/images/background.png"
+                    alt="큰 이미지"
+                    style={styles.largeImage}
+                />
             </div>
-        <div style={styles.container}>
-            <ul style={styles.grid}>
-                {evaluations.map((evaluation, index) => (
-                    <li key={evaluation.id} style={styles.listItem}>
-                        <Link to={`/evaluations/${evaluation.id}`}>
-                            {evaluation.images && evaluation.images[0] && (
-                                <img
-                                    src={`https://api.sulmeulliae.com${evaluation.images[0].image}`}
-                                    alt={`evaluation ${index}`}
-                                    style={styles.image}
-                                />
-                            )}
-                        </Link>
-                        <Link to={`/evaluations/${evaluation.id}`} style={styles.link}>
-                            <div>{evaluation.title}</div>
-                            <div style={styles.font}>{evaluation.category}</div>
-                            <div style={styles.font}>{evaluation.origin}</div>
-                            <div style={styles.font}>♥ {evaluation.like_count}</div>
-                            <div style={styles.font}>{evaluation.avg_rating} / 5</div>
-                        </Link> 
-                    </li>
-                ))}
-            </ul>
-        </div>
+            <div style={styles.container}>
+                <div style={styles.searchSection}>
+                    {/* 검색창과 검색 버튼 */}
+                    <input
+                        type="text"
+                        placeholder="검색어를 입력하세요 (제목, 내용, 카테고리)"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        style={styles.searchInput}
+                    />
+                    <button style={styles.searchButton} onClick={handleSearch}>검색</button>
+
+                    {/* 정렬 선택 */}
+                    <select value={sortType} onChange={handleSortChange} style={styles.sortSelect}>
+                        <option value="created_at">최신순</option>
+                        <option value="like_count">좋아요순</option>
+                        <option value="viewcounts">조회순</option>
+                        <option value="avg_rating">평점순</option>
+                    </select>
+                </div>
+
+                <div style={styles.categoryButtons}>
+                    {/* 카테고리 버튼 */}
+                    <button style={styles.button('')} onClick={() => filterByCategory('')}>전체</button>
+                    <button style={styles.button('소주')} onClick={() => filterByCategory('소주')}>소주</button>
+                    <button style={styles.button('맥주')} onClick={() => filterByCategory('맥주')}>맥주</button>
+                    <button style={styles.button('와인')} onClick={() => filterByCategory('와인')}>와인</button>
+                    <button style={styles.button('위스키')} onClick={() => filterByCategory('위스키')}>위스키</button>
+                </div>
+
+                <ul style={styles.grid}>
+                    {filteredEvaluations.map((evaluation, index) => (
+                        <li key={evaluation.id} style={styles.listItem}>
+                            <Link to={`/evaluations/${evaluation.id}`}>
+                                {evaluation.images && evaluation.images[0] && (
+                                    <img
+                                        src={`https://api.sulmeulliae.com${evaluation.images[0].image}`}
+                                        alt={`evaluation ${index}`}
+                                        style={styles.image}
+                                    />
+                                )}
+                            </Link>
+                            <Link to={`/evaluations/${evaluation.id}`} style={styles.link}>
+                                <div>{evaluation.title}</div>
+                                <div style={styles.font}>{evaluation.category}</div>
+                                <div style={styles.font}>{evaluation.origin}</div>
+                                <div style={styles.font}>♥ {evaluation.like_count}</div>
+                                <div style={styles.font}>{evaluation.avg_rating} / 5</div>
+                                <div style={styles.font}>조회수: {evaluation.viewcounts}</div>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
 
 export default EvaluationList;
-

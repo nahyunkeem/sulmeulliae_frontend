@@ -32,15 +32,18 @@ function App() {
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         const storedUserId = localStorage.getItem('userId');
+        const accessToken = localStorage.getItem('accessToken');
         if (storedUsername) {
             setUsername(storedUsername);
         }
         if (storedUserId) {
             setUserId(storedUserId);
         }
-        alert('🔞연령 확인\n청소년보호법 제 28조에 따라,\nSulmeulliae을 방문하거나 상품을 구매하기 위해선,\n법적 성인(만 19세 이상)이어야 합니다.');
+        if (!accessToken) {
+            alert('청소년보호법 제 28조에 따라,\nWeeklywine을 방문하거나 상품을 구매하기 위해선, 법적 성인(만 19세 이상)이어야 합니다.');
+        }
 
-    }, []);
+    }, []);    
     
 
     const handleLogout = () => {

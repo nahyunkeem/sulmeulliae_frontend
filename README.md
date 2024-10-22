@@ -1,83 +1,65 @@
+# 술믈리愛 Frontend
 
-# Sulmeulliae Frontend
+술믈리愛의 프론트엔드 프로젝트는 전 세계의 다양한 술과 음주 문화를 사랑하는 사람들을 위한 커뮤니티 플랫폼입니다. 사용자들은 술에 대한 정보를 공유하고, 리뷰 및 평가를 남기며, 추천 주류를 탐색하고 커뮤니티를 통해 소통할 수 있습니다.
 
-This project is the frontend of the Sulmeulliae web application, built using React. It interacts with a Django REST Framework (DRF) backend to display evaluations, community posts, and related content. The frontend is responsible for user interaction, displaying data fetched from the API, and providing forms for user input.
+## 📜 프로젝트 개요
 
-## Project Structure
+- **프로젝트명**: 술믈리愛 (Sulmuliae)
+- **목표**: 사용자가 다양한 주류에 대한 정보를 탐색하고 리뷰 및 커뮤니티를 통해 소통할 수 있는 플랫폼 제공
 
-- **`src/index.js`**: Entry point of the React app.
-- **Components**:
-  - **Evaluation**:
-    - `EvaluationList.js`: Lists all evaluations.
-    - `EvaluationDetail.js`: Displays the details of a specific evaluation.
-    - `ReviewList.js`: Shows reviews associated with an evaluation.
-  - **Community**:
-    - `FreeBoard.js`, `DiscussionBoard.js`, `QuestionBoard.js`, `DrinkMateBoard.js`: Different boards for community interaction.
-    - `CommunityDetail.js`: Shows the details of a community post.
-    - `CommentList.js`: Lists comments related to a community post.
-    - `CreatePost.js`: Form for creating new community posts.
-  - **User Management**:
-    - `Signup.js`: Handles user signup.
-    - `Login.js`: Handles user login.
-  - **Forms**:
-    - `CommentForm.js`: Form for submitting comments.
-    - `ReviewForm.js`: Form for submitting reviews.
+## 🚀 주요 기능
 
-## Installation and Setup
+- **회원 기능**:
+  - 회원가입, 로그인, 로그아웃
+  - 프로필 수정 및 회원 탈퇴
+  - 좋아요한 평가, 리뷰, 커뮤니티 게시글 및 댓글 보기
+- **평가 기능**:
+  - 주류 리스트 및 상세 페이지 보기
+  - 리뷰 작성, 수정, 삭제
+  - 좋아요 기능
+- **커뮤니티 기능**:
+  - 커뮤니티 게시물 작성, 수정, 삭제
+  - 댓글 작성 및 좋아요 기능
+- **실시간 채팅 기능**:
+  - 술 친구 채팅방 생성 및 대화
+- **AI 챗봇**:
+  - 술 추천 챗봇을 통해 사용자가 기분이나 취향에 맞는 주류 추천
 
-1. Clone the repository:
+## 📂 프로젝트 구조
 
-   ```bash
-   git clone https://github.com/your-repo/sulmeulliae-frontend.git
-   cd sulmeulliae-frontend
-   ```
 
-2. Install the required dependencies:
+- **`public/`**: 정적 파일들을 포함하는 디렉토리 (HTML, 이미지 등)
+- **`src/`**: 모든 React 컴포넌트와 페이지가 위치한 디렉토리
+- **`App.js`**: 전체 애플리케이션의 루트 컴포넌트
+- **`index.js`**: React 애플리케이션의 진입점
 
-   ```bash
-   npm install
-   ```
+## 🛠 사용 기술
 
-3. Start the development server:
+- **Frontend**: React, JavaScript
+- **API**: Axios를 사용한 Django REST API 통신
+- **UI**: HTML, CSS
+- **상태 관리**: React Hooks
+- **실시간 통신**: WebSocket을 이용한 실시간 채팅
 
-   ```bash
-   npm start
-   ```
+## 🗂 Git 컨벤션
 
-   The app will be available at `http://localhost:3000`.
+1. **커밋 메시지 유형**:
+    - `feat`: 새로운 기능 추가
+    - `fix`: 버그 수정
+    - `docs`: 문서 변경
+    - `style`: 코드 포맷팅, 세미콜론 누락 등
+    - `refactor`: 코드 리팩토링
+    - `test`: 테스트 추가
+    - `chore`: 빌드 과정, 보조 도구 변경
 
-## Features
+2. **브랜치 네이밍 규칙**:
+    - `feature/{기능명}`
+    - 작은 단위로 자주 커밋할 것
 
-- **Evaluation List**: Users can browse evaluations without logging in.
-- **Evaluation Details**: View detailed information about a specific evaluation, including reviews.
-- **Community Boards**: Users can browse posts in different community boards (Free Board, Discussion Board, Question Board, Drink Mate Board).
-- **User Authentication**: Users can sign up and log in to access personalized features such as posting and commenting.
-- **Post Creation**: Logged-in users can create posts in different community boards.
-- **Comments and Reviews**: Users can leave comments on community posts and reviews on evaluations.
+3. **Merge 규칙**:
+    - `dev` 브랜치에 우선 merge, 배포 시 `main`에 merge
 
-## API Integration
+## 💻 개발 및 실행
 
-The frontend communicates with a Django DRF backend via REST APIs. All API calls are handled in `src/services/api.js`, which manages interaction with the backend endpoints.
-
-## Running Tests
-
-To run tests, use the following command:
-
-```bash
-npm test
-```
-
-## Build for Production
-
-To build the app for production, use the following command:
-
-```bash
-npm run build
-```
-
-The build artifacts will be stored in the `build/` directory.
-
-## License
-
-This project is licensed under the MIT License.
+### 프로젝트 설치
 

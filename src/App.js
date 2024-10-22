@@ -42,7 +42,6 @@ function App() {
 
     }, []);
     
-    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('accessToken');

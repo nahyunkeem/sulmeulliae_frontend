@@ -212,7 +212,7 @@ function EvaluationList() {
         <div>
             <div style={styles.largeImageContainer}>
                 <img
-                    src="/images/background.png"
+                    src="/images/background_new.png"
                     alt="큰 이미지"
                     style={styles.largeImage}
                 />

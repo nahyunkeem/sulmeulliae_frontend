@@ -186,7 +186,7 @@ function App() {
                         {/* 로고 이미지 추가 */}
                         <div style={styles.logoContainer}>
                             <Link to="/">
-                                <img src="/images/sulmeulliae.png" alt="Sulmeulliae Logo" style={styles.logo} />
+                                <img src="/images/sulmeulliae_logo.png" alt="Sulmeulliae Logo" style={styles.logo} />
                             </Link>
                         </div>
                         <div>

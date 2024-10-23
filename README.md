@@ -1,126 +1,225 @@
-# 술믈리愛 (Sulmuliae)
 
-**술믈리愛**는 전 세계 다양한 술과 음주 문화를 사랑하는 사람들을 위한 커뮤니티 플랫폼입니다. 이 플랫폼을 통해 사용자들은 술에 대한 정보 공유, 리뷰 및 평가, 추천 주류 탐색, 그리고 깊이 있는 대화를 나눌 수 있습니다. 또한 각자의 취향에 맞는 술을 발견하고, 애주가들과 소통하며 자신만의 음주 경험을 확장해 나갈 수 있는 공간을 제공합니다.
+<br>
 
-## 📜 프로젝트 개요
+# 👀 welcome to Sulmeulliae 👀
 
-- **프로젝트명**: 술믈리愛
-- **내용**: 술믈리愛는 전 세계 다양한 술과 음주 문화를 사랑하는 사람들을 위한 커뮤니티 플랫폼 입니다. 술에 대한 정보 공유, 리뷰 및 평가, 추천 주류 탐색, 그리고 술에 대한 깊이 있는 대화를 나눌 수 있습니다.사용자들은 각자의 취향에 맞는 술을 발견하고, 애주가들과 소통하며 자신만의 음주 경험을 확장해 나갈 수 있습니다. 술믈리愛는 술을 단순한 음료가 아닌, 문화와 예술로서 탐구하는 공간을 제공하고자 합니다.
+### [ 애주가들을 위한 주류평가 커뮤니티 'Sulmeulliae' ](https://sulmeulliae.com/)
 
-- **프로젝트 일정**:
-    - **24.09.23 ~ 24.09.26**: 기획 및 의사결정
-    - **24.09.26 ~ 24.10.01**: MVP 코드 작성
-    - **24.10.02 ~ 24.10.14**: 배포 및 추가 기능 코드 작성
-    - **24.10.15 ~ 24.10.23**: 디버깅, 유저 테스트, 코드 리팩토링
+![image](https://github.com/user-attachments/assets/96649e7f-e0b7-4193-ac42-4fa259b85fd4)
 
-- **주요 기능**:
-    - 회원 가입 및 로그인 기능
-    - 주류 평가 기능 (AI를 이용한 리뷰 요약 포함)
-    - 커뮤니티 게시판 (질문 게시판, 자유 게시판, 추천 게시판)
-    - 실시간 채팅 기능 (술친구 채팅방)
-    - AI 기반 술 추천 챗봇
-    - 이달의 술 판매 및 결제 기능
+<br><br>
 
-## 📜 ERDiagram
+## 👨‍👩‍👧‍👦 Our Team
 
-![image](https://github.com/user-attachments/assets/a783a808-ff8b-4859-9ace-110222fc0ea4)
+| 이세준 | 서동인 | 김영빈 | 김나현 |
+|:---:|:---:|:---:|:---:|
+| [@gr22nsky](https://github.com/gr22snky) | [@Drills-hub](https://github.com/Drills-hub) | [@feliciathebeen](https://github.com/feliciathebeen) | [@nahyunkeem](https://github.com/nahyunkeem) |
 
-## 📜 Process Flow
+<br>
 
-- **기본 기능**
-![image](https://github.com/user-attachments/assets/4430a14f-9417-4263-8f1c-e2e6c4b6f6f0)
+### [💜 SA문서 몰아보기](https://www.notion.so/teamsparta/SA-a2ca1a6c05784de8856690dbe1f4e423)
+### [💜 백엔드 깃허브 바로가기](https://github.com/gr22nsky/sulmeulliae)
 
-- **추가 기능**
-    - 술친구실시간채팅
-      
-      ![image](https://github.com/user-attachments/assets/cd125e15-1a35-4086-9fe1-98f2ab0dab84)
-      
-    - 술추천챗봇
-      
-      ![image](https://github.com/user-attachments/assets/b34733fc-a8b5-4d93-b6d7-04e04af340ba)
-      
-    - 이달의 술 판매
-      
-      ![image](https://github.com/user-attachments/assets/22e7500f-e556-46b8-a4f9-d3c5de5b2510)
-      
-    - 리뷰 요약
-      
-      ![image](https://github.com/user-attachments/assets/66f71a7b-ae93-4392-8d75-8aeb32a23599)
-      
-    - 팔로우/팔로잉
-      
-      ![image](https://github.com/user-attachments/assets/41018286-e2ec-4b75-becf-eb04acb463c5)
-      
-    - 블라인드
-      
-      ![image](https://github.com/user-attachments/assets/ac04560f-0183-4a57-8b49-dbc0c0f8ea16)
+<br><br>
 
 
-## 💭 기술적 의사결정
-
-- **Docker를 사용한 이유**
-
-  Docker는 환경 일관성을 유지하고 종속성 격리 및 관리가 가능하며, CI/CD 통합을 통해 빠르고 효율적인 배포를 지원합니다. 또한, 경량화된 컨테이너를 활용하여 확장성과 자원 효율성을 높일 수 있어, 마이크로서비스 아키텍처에 적합합니다. 개발, 테스트, 배포의 전 과정에서 안정성과 유연성을 제공하기 때문에 Docker를 사용하게 되었습니다.
-
-- **PostgreSQL을 사용한 이유**
-
-  PostgreSQL은 MySQL보다 Django와의 호환성이 뛰어나며 더 풍부한 데이터 타입과 고급 쿼리 기능을 지원해 유용합니다. 데이터 무결성을 더 잘 보장하며, 확장성 면에서도 다양한 확장 기능을 제공합니다. 이러한 이유로 PostgreSQL을 데이터베이스 관리 시스템(RDBMS)으로 선택했습니다.
-
-- **Django Admin Page(Back Office)를 사용한 이유**
-
-  저희 서비스에서 주류 평가 게시, 수정, 삭제 등과 AI로 요약한 리뷰는 사용자 페이지에 표시될 필요가 없습니다. 관리의 용이성을 위해 백오피스(Back Office)를 구축하기로 하였으며, Django Admin을 사용하여 관리 인터페이스를 제공합니다. 별도의 코드 작성 없이 데이터를 쉽게 관리할 수 있어 개발 기간이 짧은 프로젝트에 적합하며, 커스터마이징을 통해 각 프로젝트에 맞는 관리 도구를 구축할 수 있어 효율적인 데이터 관리와 운영 지원을 위해 Django Admin을 선택했습니다.
-
-- **GOOGLE SMTP을 사용한 이유**
-
-  구글 SMTP는 높은 안정성과 강력한 보안 프로토콜을 제공하며, 별도의 SMTP 서버 설정 없이 Google 계정을 통해 쉽게 이메일을 전송할 수 있기 때문에 이메일 인증 기술로 선택하였습니다.
-
-- **DeepL을 이용한 번역의 이유**
-
-  AI 기반 챗봇과 리뷰 요약 기능의 유지비를 절감하기 위해, DeepL API를 사용하여 번역을 처리했습니다. GPT-4의 경우 한글은 영어보다 4배 많은 토큰을 소모하므로, 번역을 DeepL API로 처리함으로써 서비스를 더 경제적으로 운영할 수 있다고 판단했습니다.
-
-- **AI 요약 기능**
-
-  AI 요약 기능 구현에는 두 가지 방법을 시도해 보았고, 최종적으로 View에 직접 AI 요약 기능을 구현하기로 결정했습니다. AI 봇을 별도의 앱으로 구현하는 방식에 비해 코드가 단순하고 직관적이어서 유지보수가 용이하다고 판단하였습니다. 또한, 이 기능에 대한 확장 계획이 없으므로 확장성보다는 편리성에 중점을 두어 선택했습니다.
 
 
-## 🌐 배포 및 데이터베이스
+## 프로젝트 기능
 
-- **배포 도구**: Docker, AWS (S3, Cloudfront, Route 53, EC2), Gunicorn, Nginx, Daphne
-- **데이터베이스**: PostgreSQL
-- **실시간 기능**: Redis, Django Channels
+### 📊 주류평가
 
-## 📂 기능 상세
+> * 관리자가 작성한 기본 주류 목록을 보고 회원은 주류를 평가할 수 있습니다.
+> * 주류를 평가 할 때는 리뷰 형식으로 평점과 내용이 들어갈 수 있습니다.
+> * 평과 별점을 추산하여 AI를 이용한 리뷰 요약이 제공됩니다.
 
-- **회원 기능**
-    - 회원가입, 로그인, 로그아웃
-    - 유저 정보 수정 및 삭제 (비밀번호 변경, 회원 탈퇴)
-    - 팔로우 및 블라인드 기능
-- **평가 기능**
-    - 평가 게시물 목록 및 상세 보기
-    - 주류 평가 및 리뷰 기능
-    - 좋아요 기능 (게시물, 리뷰)
-- **커뮤니티 기능**
-    - 커뮤니티 게시물 생성, 수정, 삭제
-    - 댓글 작성, 수정, 삭제
-    - 커뮤니티 게시물 및 댓글 좋아요 기능
-- **술친구 채팅방 기능**
-    - 채팅방 생성, 목록 조회, 삭제
-- **AI 챗봇 기능**
-    - GPT 기반 술 추천 챗봇
-- **이달의 술 판매**
-    - 장바구니 기능 및 결제 기능
+<details>
+<summary>미리보기</summary>
+<div markdown="1">
 
-## 🛠 사용 기술
+![주류평가](https://github.com/user-attachments/assets/98e40e25-61f3-410e-9af8-1ae73424d2f6)
 
-- **Backend**: Django, DRF, PostgreSQL, Redis, Django Channels, Nginx, Daphne, Gunicorn
-- **Frontend**: React, JavaScript
-- **Cloud**: AWS (EC2, S3, Cloudfront, Route 53)
-- **AI**: GPT (OpenAI API), Deepl API
-- **DevOps**: Docker, Docker Compose, GitHub Actions, Portone (결제 시스템)
+ <br>
+</div>
+</details>
 
-## 📦 기술 문서
 
-- [API 명세](https://www.notion.so/fff2dc3ef51481afabb9c8484b5e0fa4?pvs=21)
-- [트러블 슈팅](https://www.notion.so/f294f4a8c28243aab3860bf7bb2e929e?pvs=21)
-- [코드 리팩토링](https://www.notion.so/6b9bcc4c6e4d4fb0b004dffd9810e071?pvs=21)
+### 📊 커뮤니티
+ 
+> * 회원은 자유게시판에 술과 관련된 이야기들을 게시하고 다른 회원들과 소통할 수 있습니다.
+> * 커뮤니티의 게시판에는 자유게시판, 질문게시판, 토론게시판이 있습니다. 
 
+<details>
+<summary>미리보기</summary>
+<div markdown="1">
+
+![커뮤니티](https://github.com/user-attachments/assets/52d57159-2ea1-4161-a5ab-26b59782f66e)
+
+ <br>
+</div>
+</details>
+
+### 🗨 WebSocket방식의 술친구 채팅방
+ 
+> * 회원은 술친구를 구할 수 있는 실시간 채팅방을 이용할 수 있습니다.
+> * 직접 채팅방을 만들 수도 있고, 이미 개설된 채팅방에 입장할 수 있습니다.
+
+<details>
+<summary>미리보기</summary>
+<div markdown="1">
+
+![채팅방](https://github.com/user-attachments/assets/88b71bfa-2669-419a-b518-511215b1b126)
+
+ <br>
+</div>
+</details>
+
+### 🗨 술추천 챗봇
+
+> * 회원은 AI술추천 챗봇을 통해 술을 추천받을 수 있습니다.
+> * 기분이나 최근에 맛있게 마신 술을 입력하여 술을 추천받을 수 있습니다.
+
+<details>
+<summary>미리보기</summary>
+<div markdown="1">
+
+![챗봇](https://github.com/user-attachments/assets/e61353b3-015c-44c1-b1f2-de7c2b82931b)
+
+ <br>
+</div>
+</details>
+
+### 👨‍💻 이달의 술 판매
+ 
+> * 회원은 매달 지정된 이달의 술을 장바구니에 넣고 결제하여 구매할 수 있습니다.
+> * 이달의 술은 매달 3개씩 회원들의 평가를 기준으로 선정됩니다.
+
+<details>
+<summary>미리보기</summary>
+<div markdown="1">
+
+![이달의 술](https://github.com/user-attachments/assets/b03349cd-2b6b-4c83-9e09-c875ddc18673)
+
+ <br>
+</div>
+</details>
+
+### 👨‍💻 회원프로필기능
+ 
+> * 회원은 자신의 프로필을 수정하거나 비밀번호를 변경 및 회원탈퇴를 할 수 있는 프로필기능을 이용할 수 있습니다.
+> * 회원프로필페이지에서 자신이 좋아요한 게시글이나 리뷰 및 댓글을 확인 할 수 있습니다.
+> * 추가적으로 이달의 술에서 결제한 결제내역을 확인할 수 있습니다.
+
+<details>
+<summary>미리보기</summary>
+<div markdown="1">
+
+![프로필](https://github.com/user-attachments/assets/0a9eaac2-f2c4-49e2-8e67-1c1d62d3a1bc)
+
+ <br>
+</div>
+</details>
+
+
+## 적용 기술
+
+### ◻ Docker _ BE
+
+> Docker는 환경 일관성을 유지하고 종속성 격리 및 관리가 가능하며, CI/CD 통합을 통해 빠르고 효율적인 배포를 지원합니다. 또한, 경량화된 컨테이너를 활용하여 확장성과 자원 효율성을 높기 때문에, 마이크로서비스 아키텍처에 적합니다. 개발, 테스트, 배포의 전 과정에서 안정성과 유연성을 제공하기 때문에 사용하게 되었습니다.
+
+
+### ◻ PostgreSQL _ BE
+
+> PostgreSQL은 MySQL보다  Django와의 호환성이 뛰어나며 더 풍부한 데이터 타입과 고급 쿼리 기능을 지원해 유용합니다. 데이터 무결성을 더 잘 보장하며, 확장성 면에서도 다양한 확장 기능을 제공합니다. 이로 인해 PostgreSQL을 데이터베이스 관리 시스템(RDBMS)으로 사용했습니다.
+
+### ◻ Django Admin Page(Back Office) _ BE
+
+> 저희의 서비스에서 주류 평가 게시, 수정, 삭제 등과 AI로 요약한  리뷰 등은 서비스 페이지에 나와야 할 필요가 없으며, 관리의 용이성을 위해 백오피스(Back Office)가 필요하다고 느꼈습니다.         
+> Django Admin을 기반으로 제공되는 관리 인터페이스로, 개발자가 별도의 코드를 작성하지 않고도 데이터를 쉽게 관리할 수 있기 때문에 저희처럼 개발 기간이 짧은 프로젝트에 더 용이하다고 느꼈고, 커스터마이징을 통해 각 프로젝트에 맞는 관리 도구를 구축할 수 있으므로 효율적인 데이터 관리와 운영 지원을 위해 사용하게 되었습니다.
+
+
+### ◻ Github Actions & Code Deploy (CI/CD) _ BE
+
+> 자동 빌드/배포를 위하여 깃허브 액션과 코드디플로이를 활용하여 CI/CD 를 구축했습니다.         
+> [AWS CodeDeploy](https://github.com/HH9C4/BBBB-BE/wiki/%5BTech%5D-AWS-CodeDeploy)
+
+### ◻ Google SMTP _ BE
+
+> 이메일 인증 기술을 구글 SMTP를 사용한 이유는 구글의 서버를 이용하기 때문에 높은 안정성과 강력한 보안 프로토콜을 사용한다는 점, 그리고 Google 계정을 사용하면 별도의 SMTP 서버를 설정할 필요 없이 쉽게 이메일을 전송할 수 있기 때문에 선택하게 되었습니다.     
+
+
+### ◻ DeepL _ BE
+ 
+> 저희는 AI를 이용한 챗봇과 리뷰 요약에서 서비스의 유지비를 줄이기 위해, DeepL을 이용해서 번역을 사용 했습니다.  저희가 사용한 Gpt4의 경우 글자 수 마다 토큰이 사용되는데 한글이 영어의 4배 정도이므로 번역만 DeepL의 api를 이용해서 사용한다면, 서비스를 유지하는데 더 경제적일 것이라는 판단이였습니다.
+
+
+<br><br>
+
+
+## 🚨 Trouble Shooting
+
+#### [자세한내용](https://www.notion.so/teamsparta/f294f4a8c28243aab3860bf7bb2e929e?v=a69be81666584f2d829cda6dc7d4e254)
+
+#### urls.py패턴순서 이슈
+#### Authentication 이슈
+#### 커뮤니티 글 생성 및 수정시 이미지 이슈 
+#### Host 지정 오류 이슈
+#### 리뷰 생성시 body에 넣을 필요가 없는 항목 수정 이슈
+#### 회원가입 및 로그인시 lastlogin이 기록되지 않는 이슈
+#### 댓글 수정시 삭제된 댓글이 호출되는 이슈
+#### 배포과정중 docker 권한 이슈
+#### 회원가입시 로그인페이지로 넘어가지 않는 이슈
+#### 주류평가페이지를 열었을때 이미지가 로드되지 않는 이슈
+#### docker-compose up 명령어 실행 오류 이슈
+#### Route53 경로 지정 오류 이슈
+#### Nginx, Gunicorn 연결 이슈
+#### 주류상세페이지에서 좋아요를 반영하지 못하는 이슈
+#### SSL Protocol 오류 이슈
+#### Mixed Content 오류 이슈
+#### https header 오류 이슈
+#### 프론트연결 후 삭제기능 오류 이슈
+#### Import 오류 이슈
+#### 챗봇 사용시 적절하지 않은 답 이슈
+#### 리뷰 작성 및 수정시 500 에러 이슈
+#### 데이터베이스 완전 삭제 이슈
+#### 회원가입시 500에러 이슈
+
+<br><br>
+
+
+## 🌐 Architecture
+
+![architecture](https://github.com/user-attachments/assets/377e986d-a234-4b38-a67e-4f974bc9b50d)
+
+<br>
+
+## 📋 ERD Diagram
+
+![ERDiagram](https://github.com/user-attachments/assets/3cb58f82-36d8-4630-a707-483a557ec5a5)
+
+<br>
+
+## 📝 Technologies & Tools (FE) 📝
+
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/CreateReactApp-09D3AC?style=for-the-badge&logo=CreateReactApp&logoColor=white"/> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"/>
+<br><img src="https://img.shields.io/badge/VisualStudioCode-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white"/> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"/> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white"/>
+
+<br>
+
+## 📝 Technologies & Tools (BE) 📝
+
+<img src="https://img.shields.io/badge/JSONWebToken-000000?style=for-the-badge&logo=JSONWebTokens&logoColor=white"/> <img src="https://img.shields.io/badge/WebSocket-010101?style=for-the-badge&logo=&logoColor=white"/> <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=PostgreSQL&logoColor=white"/> <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white"/> <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=Ubuntu&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/AmazonEC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white"/> <img src="https://img.shields.io/badge/AmazonS3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=nginx&logoColor=white"/> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"/>  <img src="https://img.shields.io/badge/GithubActions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"/>  
+
+<img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"/> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
+
+<br><br><br><br>
+
+<div align=center>
+
+<br>
+
+◻ Copyright ©2024 Team Sparta Final : AI7 team8 all rights reserved.
